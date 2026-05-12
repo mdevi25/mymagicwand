@@ -4,9 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="My MagicWand — a little magic, every single day. For you and your little sunshine." />
-  <meta property="og:title" content="My MagicWand" />
-  <meta property="og:description" content="A little magic, every single day. For you and your little sunshine." />
-  <meta property="og:url" content="https://mdevi25.github.io/mymagicwand/" />
   <title>My MagicWand</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,13 +14,8 @@
 
     /* ─────────────────────────────────────
        FOUR THEME TOKENS
-       text-s  = previously too light — now
-                 darkened across all themes
-                 for comfortable reading
     ───────────────────────────────────── */
-
     :root {
-      /* 🍑 Peach — Bloom (default) */
       --bg:          #FFF4EE;
       --bg-band:     #FFE8DC;
       --bg-card:     #FFFFFF;
@@ -33,12 +25,10 @@
       --text-h:      #5C2000;
       --text-b:      #8B3A10;
       --text-m:      #C45C2A;
-      --text-s:      #C47A5A;   /* was #F0B899 — now readable */
-    --shadow:      0 2px 16px rgba(240,135,90,0.12);
+      --text-s:      #C47A5A;
+      --shadow:      0 2px 16px rgba(240,135,90,0.12);
     }
-
     [data-theme="purple"] {
-      /* 🌙 Purple — Celestial */
       --bg:          #F0EEFF;
       --bg-band:     #E8E2FC;
       --bg-card:     #FFFFFF;
@@ -48,12 +38,10 @@
       --text-h:      #26215C;
       --text-b:      #3D3880;
       --text-m:      #6B65A8;
-      --text-s:      #7A74BB;   /* was #AFA9EC — now readable */
+      --text-s:      #7A74BB;
       --shadow:      0 2px 16px rgba(127,119,221,0.12);
     }
-
     [data-theme="golden"] {
-      /* ☀️ Golden — Sunshine */
       --bg:          #FFF8EE;
       --bg-band:     #FFF3D6;
       --bg-card:     #FFFFFF;
@@ -63,12 +51,10 @@
       --text-h:      #3D2000;
       --text-b:      #6B4C2A;
       --text-m:      #9C7A50;
-      --text-s:      #A07840;   /* was #C4A882 — now readable */
+      --text-s:      #A07840;
       --shadow:      0 2px 16px rgba(212,144,10,0.10);
     }
-
     [data-theme="green"] {
-      /* 🌿 Green — Meadow */
       --bg:          #F2FAF5;
       --bg-band:     #D6F0E4;
       --bg-card:     #FFFFFF;
@@ -78,7 +64,7 @@
       --text-h:      #0D3D24;
       --text-b:      #1D6040;
       --text-m:      #2E8A5A;
-      --text-s:      #2A7A50;   /* was #9FD4B8 — now readable */
+      --text-s:      #2A7A50;
       --shadow:      0 2px 16px rgba(59,173,114,0.10);
     }
 
@@ -95,80 +81,77 @@
       transition: background 0.5s ease, color 0.5s ease;
     }
 
-    .page {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 32px 20px 56px;
-    }
-
     /* ─────────────────────────────────────
-       HEADER
+       STICKY TOP BAR
     ───────────────────────────────────── */
-    .header {
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--accent-line);
+      padding: 10px 20px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 28px;
-      animation: fadeUp 0.5s ease both;
+      transition: background 0.5s, border-color 0.5s;
     }
 
-    .header-text { flex: 1; }
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-    .app-name {
+    .top-bar-name {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(24px, 5vw, 32px);
+      font-size: 16px;
       font-weight: 500;
       color: var(--text-h);
       display: flex;
       align-items: center;
-      gap: 8px;
-      line-height: 1.2;
-      margin-bottom: 5px;
+      gap: 6px;
       transition: color 0.5s;
     }
 
-    .app-name .spark {
+    .top-bar-name .spark {
       color: var(--accent);
-      font-size: 0.5em;
-      opacity: 0.85;
-      flex-shrink: 0;
+      font-size: 0.6em;
       transition: color 0.5s;
     }
 
-    .tagline {
-      font-style: italic;
-      font-size: 13px;
+    .restart-btn {
+      background: none;
+      border: 1px solid var(--accent-line);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-family: 'Lato', sans-serif;
+      font-size: 10px;
+      color: var(--text-m);
+      cursor: pointer;
+      transition: border-color 0.3s, color 0.3s, background 0.3s;
+      letter-spacing: 0.02em;
+      display: none;
+    }
+
+    .restart-btn:hover {
+      border-color: var(--accent);
       color: var(--accent-deep);
-      margin-bottom: 4px;
-      font-weight: 300;
-      transition: color 0.5s;
+      background: var(--bg-band);
     }
 
-    .subtitle {
-      font-size: 12px;
-      color: var(--text-s);
-      font-weight: 400;      /* bumped from 300 — improves readability */
-      letter-spacing: 0.01em;
-      transition: color 0.5s;
-    }
-
-    /* ─────────────────────────────────────
-       THEME DOTS
-    ───────────────────────────────────── */
-    .theme-switcher {
+    .top-bar-right {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 5px;
-      flex-shrink: 0;
-      margin-top: 4px;
+      gap: 3px;
     }
 
-    .theme-dots { display: flex; gap: 7px; align-items: center; }
+    .theme-dots { display: flex; gap: 6px; align-items: center; }
 
     .theme-dot {
-      width: 15px;
-      height: 15px;
+      width: 14px;
+      height: 14px;
       border-radius: 50%;
       border: 2px solid rgba(255,255,255,0.6);
       cursor: pointer;
@@ -184,20 +167,138 @@
     .theme-dot.golden { background: #D4900A; }
     .theme-dot.green  { background: #3BAD72; }
 
-    .theme-hint {
+    .mood-label {
       font-size: 9px;
       color: var(--text-s);
+      font-style: italic;
       letter-spacing: 0.03em;
       transition: color 0.5s;
     }
 
-    .mood-label {
-      font-size: 9px;
-      color: var(--text-s);
-      letter-spacing: 0.04em;
-      text-align: right;
+    /* ─────────────────────────────────────
+       PAGE
+    ───────────────────────────────────── */
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 28px 20px 56px;
+    }
+
+    /* ─────────────────────────────────────
+       WELCOME PANEL — the landing
+    ───────────────────────────────────── */
+    #welcomePanel {
+      text-align: center;
+      padding: 32px 20px 28px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    #welcomePanel.hidden { display: none; }
+
+    .welcome-sparkle {
+      font-size: 40px;
+      display: block;
+      margin-bottom: 14px;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1);    }
+      50%      { transform: scale(1.12); }
+    }
+
+    .welcome-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 5vw, 36px);
+      font-weight: 500;
+      color: var(--text-h);
+      margin-bottom: 8px;
+      transition: color 0.5s;
+    }
+
+    .welcome-tagline {
       font-style: italic;
-      min-height: 12px;
+      font-size: 14px;
+      color: var(--accent-deep);
+      margin-bottom: 4px;
+      font-weight: 300;
+      transition: color 0.5s;
+    }
+
+    .welcome-subtitle {
+      font-size: 12px;
+      color: var(--text-s);
+      font-weight: 400;
+      margin-bottom: 36px;
+      transition: color 0.5s;
+    }
+
+    .welcome-desc {
+      font-size: 13px;
+      color: var(--text-m);
+      line-height: 1.8;
+      font-weight: 400;
+      max-width: 380px;
+      margin: 0 auto 32px;
+      transition: color 0.5s;
+    }
+
+    .begin-btn {
+      background: var(--accent);
+      border: none;
+      border-radius: 30px;
+      padding: 14px 48px;
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.3s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow);
+      letter-spacing: 0.03em;
+      display: inline-block;
+    }
+
+    .begin-btn:hover {
+      opacity: 0.88;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    }
+
+    .begin-hint {
+      display: block;
+      margin-top: 12px;
+      font-size: 10px;
+      color: var(--text-s);
+      font-style: italic;
+      transition: color 0.5s;
+    }
+
+    /* ─────────────────────────────────────
+       APP CONTENT — hidden until begin
+    ───────────────────────────────────── */
+    #appContent {
+      display: none;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    #appContent.visible { display: block; }
+
+    /* small greeting strip at top of content */
+    .greeting-strip {
+      background: var(--bg-band);
+      border-radius: 14px;
+      padding: 12px 20px;
+      margin-bottom: 16px;
+      text-align: center;
+      transition: background 0.5s;
+    }
+
+    .greeting-strip p {
+      font-size: 13px;
+      color: var(--text-h);
+      font-style: italic;
+      font-weight: 400;
       transition: color 0.5s;
     }
 
@@ -210,19 +311,15 @@
       padding: 16px 20px;
       text-align: center;
       margin-bottom: 12px;
-      color: var(--text-m);   /* was text-s — now text-m for readability */
-      font-size: 12px;        /* up from 11px */
+      color: var(--text-m);
+      font-size: 12px;
       font-style: italic;
-      font-weight: 400;       /* up from default light */
+      font-weight: 400;
       letter-spacing: 0.02em;
       transition: border-color 0.5s, color 0.5s;
-      animation: fadeUp 0.5s ease 0.05s both;
     }
 
-    .placeholder.tall {
-      padding: 28px 20px;
-      animation-delay: 0.10s;
-    }
+    .placeholder.tall { padding: 28px 20px; }
 
     /* ─────────────────────────────────────
        CARDS GRID
@@ -248,17 +345,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--text-m);   /* was text-s — now readable */
+      color: var(--text-m);
       font-size: 12px;
       font-style: italic;
       font-weight: 400;
       transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, color 0.5s;
-      animation: fadeUp 0.6s ease both;
     }
-
-    .card-placeholder:nth-child(1) { animation-delay: 0.10s; }
-    .card-placeholder:nth-child(2) { animation-delay: 0.15s; }
-    .card-placeholder:nth-child(3) { animation-delay: 0.20s; }
 
     /* ─────────────────────────────────────
        RE-ROLL GHOST
@@ -267,14 +359,13 @@
       display: flex;
       justify-content: center;
       margin-bottom: 24px;
-      animation: fadeUp 0.6s ease 0.22s both;
     }
 
     .reroll-ghost {
       border: 1.5px dashed var(--accent-line);
       border-radius: 30px;
       padding: 9px 28px;
-      color: var(--text-m);   /* readable */
+      color: var(--text-m);
       font-size: 12px;
       font-style: italic;
       font-weight: 400;
@@ -295,10 +386,7 @@
     /* ─────────────────────────────────────
        ABOUT
     ───────────────────────────────────── */
-    .about {
-      margin-bottom: 32px;
-      animation: fadeUp 0.5s ease 0.25s both;
-    }
+    .about { margin-bottom: 32px; }
 
     .about-heading {
       font-family: 'Playfair Display', serif;
@@ -321,7 +409,7 @@
 
     .about p {
       font-size: 13px;
-      color: var(--text-b);   /* bumped from text-m for better readability */
+      color: var(--text-b);
       line-height: 1.8;
       font-weight: 400;
       transition: color 0.5s;
@@ -334,13 +422,12 @@
       text-align: center;
       padding-top: 18px;
       border-top: 0.5px solid var(--accent-line);
-      animation: fadeUp 0.5s ease 0.3s both;
       transition: border-color 0.5s;
     }
 
     footer p {
       font-size: 11px;
-      color: var(--text-m);   /* was text-s — now readable */
+      color: var(--text-m);
       letter-spacing: 0.04em;
       transition: color 0.5s;
     }
@@ -365,78 +452,48 @@
 </head>
 <body>
 
+<!-- STICKY TOP BAR -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <div class="top-bar-name">
+      <span class="spark">✦</span> My MagicWand
+    </div>
+    <button class="restart-btn" id="restartBtn">↺ Restart the magic</button>
+  </div>
+  <div class="top-bar-right">
+    <div class="theme-dots">
+      <button class="theme-dot peach"  data-theme="peach"
+              title="Bloom"     aria-label="Bloom"></button>
+      <button class="theme-dot purple" data-theme="purple"
+              title="Celestial" aria-label="Celestial"></button>
+      <button class="theme-dot golden" data-theme="golden"
+              title="Sunshine"  aria-label="Sunshine"></button>
+      <button class="theme-dot green"  data-theme="green"
+              title="Meadow"    aria-label="Meadow"></button>
+    </div>
+    <span class="mood-label" id="moodLabel">🍑 Bloom</span>
+  </div>
+</div>
+
+<!-- MAIN PAGE -->
 <div class="page">
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="header-text">
-      <h1 class="app-name">
-        <span class="spark">✦</span> My MagicWand
-      </h1>
-      <p class="tagline">A little magic, every single day</p>
-      <p class="subtitle">For you and your little sunshine</p>
-    </div>
-
-    <div class="theme-switcher">
-      <div class="theme-dots">
-        <button class="theme-dot peach  active" data-theme="peach"
-                title="Bloom · peach"     aria-label="Bloom peach theme"></button>
-        <button class="theme-dot purple"        data-theme="purple"
-                title="Celestial · purple" aria-label="Celestial purple theme"></button>
-        <button class="theme-dot golden"        data-theme="golden"
-                title="Sunshine · golden"  aria-label="Sunshine golden theme"></button>
-        <button class="theme-dot green"         data-theme="green"
-                title="Meadow · green"     aria-label="Meadow green theme"></button>
-      </div>
-      <span class="theme-hint">choose your mood</span>
-      <span class="mood-label" id="moodLabel">🍑 Bloom</span>
-    </div>
-  </header>
-
-  <!-- PLACEHOLDERS -->
-  <div class="placeholder">
-    Onboarding — Step 2
-  </div>
-
-  <div class="placeholder tall">
-    Your fairy of the day — Step 3
-  </div>
-
-  <div class="placeholder">
-    For my baby &nbsp;·&nbsp; Just for me — Step 3
-  </div>
-
-  <div class="cards-grid">
-    <div class="card-placeholder">Card 1</div>
-    <div class="card-placeholder">Card 2</div>
-    <div class="card-placeholder">Card 3</div>
-  </div>
-
-  <div class="reroll-wrap">
-    <div class="reroll-ghost">✨ Show me something else — Step 4</div>
-  </div>
-
-  <div class="placeholder">
-    Fairy info — Step 5
-  </div>
-
-  <hr class="divider" />
-
-  <!-- ABOUT -->
-  <section class="about">
-    <h2 class="about-heading">
-      <span class="spark">✦</span> About
-    </h2>
-    <p>
-      My MagicWand is a daily magical companion for expecting moms.
+  <!-- WELCOME PANEL -->
+  <div id="welcomePanel">
+    <span class="welcome-sparkle">✨</span>
+    <h1 class="welcome-title">My MagicWand</h1>
+    <p class="welcome-tagline">A little magic, every single day</p>
+    <p class="welcome-subtitle">For you and your little sunshine</p>
+    <p class="welcome-desc">
       A fairy angel appears every day with three curated cards —
-      for you and your little sunshine.
-      Made with love for moms everywhere.
+      joyful discoveries for you and the little one on the way.
     </p>
-  </section>
+    <button class="begin-btn" id="beginBtn">Begin the magic ✦</button>
+    <span class="begin-hint">choose your mood colour above ✦ then tap to begin</span>
+  </div>
 
-  <!-- FOOTER -->
-  <footer>
+  <!-- PERSISTENT FOOTER — always visible -->
+  <footer style="margin-top: 40px;">
     <p>
       <span class="spark">✦</span>
       © 2026 Madhu Devi · mymagicwand.app
@@ -444,15 +501,57 @@
     </p>
   </footer>
 
+  <!-- APP CONTENT -->
+  <div id="appContent">
+
+    <div class="greeting-strip">
+      <p>Your fairy is waiting ✦ a little magic just for you</p>
+    </div>
+
+    <div class="placeholder tall">
+      Your fairy of the day — Step 3
+    </div>
+
+    <div class="placeholder">
+      For my baby &nbsp;·&nbsp; Just for me — Step 3
+    </div>
+
+    <div class="cards-grid">
+      <div class="card-placeholder">Card 1</div>
+      <div class="card-placeholder">Card 2</div>
+      <div class="card-placeholder">Card 3</div>
+    </div>
+
+    <div class="reroll-wrap">
+      <div class="reroll-ghost">✨ Show me something else — Step 4</div>
+    </div>
+
+    <div class="placeholder">
+      Fairy info — Step 5
+    </div>
+
+    <hr class="divider" />
+
+    <section class="about">
+      <h2 class="about-heading">
+        <span class="spark">✦</span> About
+      </h2>
+      <p>
+        My MagicWand is a daily magical companion for expecting moms.
+        A fairy angel appears every day with three curated cards —
+        for you and your little sunshine.
+        Made with love for moms everywhere.
+      </p>
+    </section>
+
+  </div>
 </div>
 
-<!-- THEME LOGIC -->
+<!-- JAVASCRIPT -->
 <script>
-  const dots  = document.querySelectorAll('.theme-dot');
-  const body  = document.body;
-  const label = document.getElementById('moodLabel');
 
-  const themes = {
+  /* ── THEME ENGINE ── */
+  const themeMeta = {
     peach:  { attr: null,     label: '🍑 Bloom'     },
     purple: { attr: 'purple', label: '🌙 Celestial' },
     golden: { attr: 'golden', label: '☀️ Sunshine'  },
@@ -460,19 +559,50 @@
   };
 
   function applyTheme(key) {
-    const t = themes[key];
+    const t = themeMeta[key] || themeMeta.peach;
     if (t.attr) {
-      body.setAttribute('data-theme', t.attr);
+      document.body.setAttribute('data-theme', t.attr);
     } else {
-      body.removeAttribute('data-theme');
+      document.body.removeAttribute('data-theme');
     }
-    dots.forEach(d => d.classList.toggle('active', d.dataset.theme === key));
-    label.textContent = t.label;
+    document.querySelectorAll('.theme-dot')
+      .forEach(d => d.classList.toggle('active', d.dataset.theme === key));
+    document.getElementById('moodLabel').textContent = t.label;
     localStorage.setItem('mmw-theme', key);
   }
 
-  applyTheme(localStorage.getItem('mmw-theme') || 'peach');
-  dots.forEach(dot => dot.addEventListener('click', () => applyTheme(dot.dataset.theme)));
+  document.querySelectorAll('.theme-dot')
+    .forEach(d => d.addEventListener('click', () => applyTheme(d.dataset.theme)));
+
+  /* ── SHOW APP ── */
+  function showApp() {
+    document.getElementById('welcomePanel').classList.add('hidden');
+    document.getElementById('appContent').classList.add('visible');
+    document.getElementById('restartBtn').style.display = 'inline-block';
+    localStorage.setItem('mmw-started', 'true');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── RESTART ── */
+  function restartMagic() {
+    localStorage.removeItem('mmw-started');
+    document.getElementById('appContent').classList.remove('visible');
+    document.getElementById('welcomePanel').classList.remove('hidden');
+    document.getElementById('restartBtn').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.getElementById('beginBtn').addEventListener('click', showApp);
+  document.getElementById('restartBtn').addEventListener('click', restartMagic);
+
+  /* ── INIT ── */
+  (function init() {
+    applyTheme(localStorage.getItem('mmw-theme') || 'peach');
+    if (localStorage.getItem('mmw-started') === 'true') {
+      showApp();
+    }
+  })();
+
 </script>
 
 </body>
