@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="My MagicWand — a little magic, every single day. For you and your little sunshine." />
+  <meta property="og:title" content="My MagicWand" />
+  <meta property="og:description" content="A little magic, every single day. For you and your little sunshine." />
+  <meta property="og:url" content="https://mdevi25.github.io/my-magic-wand/" />
+  <title>My MagicWand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lato:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─────────────────────────────────────
+       FOUR THEME TOKENS
+       Peach  = default (no data-theme attr)
+       Purple = data-theme="purple"
+       Golden = data-theme="golden"
+       Green  = data-theme="green"
+    ───────────────────────────────────── */
+
+    :root {
+      /* 🍑 Peach — Bloom (default) */
+      --bg:          #FFF4EE;
+      --bg-band:     #FFE8DC;
+      --bg-card:     #FFFFFF;
+      --accent:      #F0875A;
+      --accent-deep: #C45C2A;
+      --accent-line: rgba(240,135,90,0.22);
+      --text-h:      #5C2000;
+      --text-b:      #8B3A10;
+      --text-m:      #C45C2A;
+      --text-s:      #F0B899;
+      --shadow:      0 2px 16px rgba(240,135,90,0.12);
+    }
+
+    [data-theme="purple"] {
+      /* 🌙 Purple — Celestial */
+      --bg:          #F0EEFF;
+      --bg-band:     #E8E2FC;
+      --bg-card:     #FFFFFF;
+      --accent:      #7F77DD;
+      --accent-deep: #534AB7;
+      --accent-line: rgba(127,119,221,0.22);
+      --text-h:      #26215C;
+      --text-b:      #3D3880;
+      --text-m:      #6B65A8;
+      --text-s:      #AFA9EC;
+      --shadow:      0 2px 16px rgba(127,119,221,0.12);
+    }
+
+    [data-theme="golden"] {
+      /* ☀️ Golden — Sunshine */
+      --bg:          #FFF8EE;
+      --bg-band:     #FFF3D6;
+      --bg-card:     #FFFFFF;
+      --accent:      #D4900A;
+      --accent-deep: #B07208;
+      --accent-line: rgba(212,144,10,0.22);
+      --text-h:      #3D2000;
+      --text-b:      #6B4C2A;
+      --text-m:      #9C7A50;
+      --text-s:      #C4A882;
+      --shadow:      0 2px 16px rgba(212,144,10,0.10);
+    }
+
+    [data-theme="green"] {
+      /* 🌿 Green — Meadow */
+      --bg:          #F2FAF5;
+      --bg-band:     #D6F0E4;
+      --bg-card:     #FFFFFF;
+      --accent:      #3BAD72;
+      --accent-deep: #1D8A52;
+      --accent-line: rgba(59,173,114,0.22);
+      --text-h:      #0D3D24;
+      --text-b:      #1D6040;
+      --text-m:      #2E8A5A;
+      --text-s:      #9FD4B8;
+      --shadow:      0 2px 16px rgba(59,173,114,0.10);
+    }
+
+    /* ─────────────────────────────────────
+       BASE
+    ───────────────────────────────────── */
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      font-family: 'Lato', sans-serif;
+      color: var(--text-b);
+      min-height: 100vh;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+
+    /* ─────────────────────────────────────
+       HEADER
+    ───────────────────────────────────── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 28px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .header-text { flex: 1; }
+
+    .app-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 500;
+      color: var(--text-h);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.2;
+      margin-bottom: 5px;
+      transition: color 0.5s;
+    }
+
+    .app-name .spark {
+      color: var(--accent);
+      font-size: 0.5em;
+      opacity: 0.85;
+      flex-shrink: 0;
+      transition: color 0.5s;
+    }
+
+    .tagline {
+      font-style: italic;
+      font-size: 13px;
+      color: var(--accent-deep);
+      margin-bottom: 3px;
+      font-weight: 300;
+      transition: color 0.5s;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: var(--text-s);
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      transition: color 0.5s;
+    }
+
+    /* ─────────────────────────────────────
+       THEME DOTS
+    ───────────────────────────────────── */
+    .theme-switcher {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .theme-dots { display: flex; gap: 7px; align-items: center; }
+
+    .theme-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      outline: none;
+      padding: 0;
+      position: relative;
+    }
+
+    .theme-dot:hover     { transform: scale(1.35); }
+    .theme-dot.active    { box-shadow: 0 0 0 2.5px var(--accent); transform: scale(1.2); }
+
+    .theme-dot.peach     { background: #F0875A; }
+    .theme-dot.purple    { background: #7F77DD; }
+    .theme-dot.golden    { background: #D4900A; }
+    .theme-dot.green     { background: #3BAD72; }
+
+    .theme-hint {
+      font-size: 9px;
+      color: var(--text-s);
+      letter-spacing: 0.03em;
+      transition: color 0.5s;
+    }
+
+    /* ─────────────────────────────────────
+       PLACEHOLDER BANDS
+    ───────────────────────────────────── */
+    .placeholder {
+      border: 1.5px dashed var(--accent-line);
+      border-radius: 14px;
+      padding: 16px 20px;
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--text-s);
+      font-size: 11px;
+      font-style: italic;
+      letter-spacing: 0.02em;
+      transition: border-color 0.5s, color 0.5s;
+      animation: fadeUp 0.5s ease 0.05s both;
+    }
+
+    .placeholder.tall {
+      padding: 28px 20px;
+      animation-delay: 0.10s;
+    }
+
+    /* ─────────────────────────────────────
+       CARDS GRID
+    ───────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+    .card-placeholder {
+      background: var(--bg-card);
+      border-radius: 18px;
+      border: 0.5px solid var(--accent-line);
+      box-shadow: var(--shadow);
+      padding: 22px 14px;
+      min-height: 148px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-s);
+      font-size: 11px;
+      font-style: italic;
+      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, color 0.5s;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .card-placeholder:nth-child(1) { animation-delay: 0.10s; }
+    .card-placeholder:nth-child(2) { animation-delay: 0.15s; }
+    .card-placeholder:nth-child(3) { animation-delay: 0.20s; }
+
+    /* ─────────────────────────────────────
+       RE-ROLL GHOST
+    ───────────────────────────────────── */
+    .reroll-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease 0.22s both;
+    }
+
+    .reroll-ghost {
+      border: 1.5px dashed var(--accent-line);
+      border-radius: 30px;
+      padding: 9px 28px;
+      color: var(--text-s);
+      font-size: 11px;
+      font-style: italic;
+      background: none;
+      transition: border-color 0.5s, color 0.5s;
+    }
+
+    /* ─────────────────────────────────────
+       DIVIDER
+    ───────────────────────────────────── */
+    .divider {
+      border: none;
+      border-top: 0.5px solid var(--accent-line);
+      margin: 24px 0;
+      transition: border-color 0.5s;
+    }
+
+    /* ─────────────────────────────────────
+       ABOUT
+    ───────────────────────────────────── */
+    .about {
+      margin-bottom: 32px;
+      animation: fadeUp 0.5s ease 0.25s both;
+    }
+
+    .about-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--text-h);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color 0.5s;
+    }
+
+    .about-heading .spark {
+      color: var(--accent);
+      font-size: 0.65em;
+      opacity: 0.7;
+      transition: color 0.5s;
+    }
+
+    .about p {
+      font-size: 13px;
+      color: var(--text-m);
+      line-height: 1.8;
+      font-weight: 300;
+      transition: color 0.5s;
+    }
+
+    /* ─────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding-top: 18px;
+      border-top: 0.5px solid var(--accent-line);
+      animation: fadeUp 0.5s ease 0.3s both;
+      transition: border-color 0.5s;
+    }
+
+    footer p {
+      font-size: 10px;
+      color: var(--text-s);
+      letter-spacing: 0.04em;
+      transition: color 0.5s;
+    }
+
+    footer .spark {
+      color: var(--accent);
+      opacity: 0.55;
+      margin: 0 6px;
+      font-size: 0.8em;
+      transition: color 0.5s;
+    }
+
+    /* ─────────────────────────────────────
+       MOOD LABEL — shows active theme name
+    ───────────────────────────────────── */
+    .mood-label {
+      font-size: 9px;
+      color: var(--text-s);
+      letter-spacing: 0.04em;
+      text-align: right;
+      margin-top: 3px;
+      min-height: 12px;
+      transition: color 0.5s;
+      font-style: italic;
+    }
+
+    /* ─────────────────────────────────────
+       ANIMATIONS
+    ───────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="header-text">
+      <h1 class="app-name">
+        <span class="spark">✦</span> My MagicWand
+      </h1>
+      <p class="tagline">A little magic, every single day</p>
+      <p class="subtitle">For you and your little sunshine</p>
+    </div>
+
+    <div class="theme-switcher">
+      <div class="theme-dots">
+        <button class="theme-dot peach  active" data-theme="peach"
+                title="Bloom · peach"      aria-label="Bloom peach theme"></button>
+        <button class="theme-dot purple"        data-theme="purple"
+                title="Celestial · purple"  aria-label="Celestial purple theme"></button>
+        <button class="theme-dot golden"        data-theme="golden"
+                title="Sunshine · golden"   aria-label="Sunshine golden theme"></button>
+        <button class="theme-dot green"         data-theme="green"
+                title="Meadow · green"      aria-label="Meadow green theme"></button>
+      </div>
+      <span class="theme-hint">choose your mood</span>
+      <span class="mood-label" id="moodLabel">🍑 Bloom</span>
+    </div>
+  </header>
+
+  <!-- ── PLACEHOLDERS ── -->
+  <div class="placeholder">
+    Onboarding — Step 2
+  </div>
+
+  <div class="placeholder tall">
+    Your fairy of the day — Step 3
+  </div>
+
+  <div class="placeholder">
+    For my baby &nbsp;·&nbsp; Just for me — Step 3
+  </div>
+
+  <div class="cards-grid">
+    <div class="card-placeholder">Card 1</div>
+    <div class="card-placeholder">Card 2</div>
+    <div class="card-placeholder">Card 3</div>
+  </div>
+
+  <div class="reroll-wrap">
+    <div class="reroll-ghost">✨ Show me something else — Step 4</div>
+  </div>
+
+  <div class="placeholder">
+    Fairy info — Step 5
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ── ABOUT ── -->
+  <section class="about">
+    <h2 class="about-heading">
+      <span class="spark">✦</span> About
+    </h2>
+    <p>
+      My MagicWand is a daily magical companion for expecting moms.
+      A fairy angel appears every day with three curated cards —
+      for you and your little sunshine.
+      Made with love for moms everywhere.
+    </p>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>
+      <span class="spark">✦</span>
+      © 2026 Madhu Devi · mymagicwand.app
+      <span class="spark">✦</span>
+    </p>
+  </footer>
+
+</div>
+
+<!-- ── THEME LOGIC ── -->
+<script>
+  const dots  = document.querySelectorAll('.theme-dot');
+  const body  = document.body;
+  const label = document.getElementById('moodLabel');
+
+  const themes = {
+    peach:  { attr: null,      label: '🍑 Bloom'     },
+    purple: { attr: 'purple',  label: '🌙 Celestial' },
+    golden: { attr: 'golden',  label: '☀️ Sunshine'  },
+    green:  { attr: 'green',   label: '🌿 Meadow'    }
+  };
+
+  function applyTheme(key) {
+    const t = themes[key];
+    if (t.attr) {
+      body.setAttribute('data-theme', t.attr);
+    } else {
+      body.removeAttribute('data-theme');
+    }
+    dots.forEach(d => d.classList.toggle('active', d.dataset.theme === key));
+    label.textContent = t.label;
+    localStorage.setItem('mmw-theme', key);
+  }
+
+  // Restore saved or default to peach
+  const saved = localStorage.getItem('mmw-theme') || 'peach';
+  applyTheme(saved);
+
+  dots.forEach(dot => dot.addEventListener('click', () => applyTheme(dot.dataset.theme)));
+</script>
+
+</body>
+</html>
