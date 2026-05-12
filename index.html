@@ -492,15 +492,6 @@
     <span class="begin-hint">choose your mood colour above ✦ then tap to begin</span>
   </div>
 
-  <!-- PERSISTENT FOOTER — always visible -->
-  <footer style="margin-top: 40px;">
-    <p>
-      <span class="spark">✦</span>
-      © 2026 Madhu Devi · mymagicwand.app
-      <span class="spark">✦</span>
-    </p>
-  </footer>
-
   <!-- APP CONTENT -->
   <div id="appContent">
 
@@ -544,7 +535,25 @@
       </p>
     </section>
 
+    <footer>
+      <p>
+        <span class="spark">✦</span>
+        © 2026 Madhu Devi · mymagicwand.app
+        <span class="spark">✦</span>
+      </p>
+    </footer>
+
   </div>
+
+  <!-- WELCOME FOOTER — visible on landing page only -->
+  <footer id="welcomeFooter">
+    <p>
+      <span class="spark">✦</span>
+      © 2026 Madhu Devi · mymagicwand.app
+      <span class="spark">✦</span>
+    </p>
+  </footer>
+
 </div>
 
 <!-- JAVASCRIPT -->
@@ -577,6 +586,7 @@
   /* ── SHOW APP ── */
   function showApp() {
     document.getElementById('welcomePanel').classList.add('hidden');
+    document.getElementById('welcomeFooter').style.display = 'none';
     document.getElementById('appContent').classList.add('visible');
     document.getElementById('restartBtn').style.display = 'inline-block';
     localStorage.setItem('mmw-started', 'true');
@@ -588,6 +598,7 @@
     localStorage.removeItem('mmw-started');
     document.getElementById('appContent').classList.remove('visible');
     document.getElementById('welcomePanel').classList.remove('hidden');
+    document.getElementById('welcomeFooter').style.display = 'block';
     document.getElementById('restartBtn').style.display = 'none';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
