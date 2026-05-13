@@ -320,10 +320,15 @@
     }
 
     .welcome-subtitle {
-      font-size: 12px;
-      color: var(--text-s);
+      font-size: 13px;
+      color: var(--text-m);
       font-weight: 400;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
+      font-style: italic;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
       transition: color 0.5s;
     }
 
@@ -903,6 +908,200 @@
       transform: translateY(-1px);
     }
 
+    /* ─────────────────────────────────────
+       CARD 1 — TODAY'S GIFT
+    ───────────────────────────────────── */
+    .mood-question {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-h);
+      margin-bottom: 12px;
+      transition: color 0.5s;
+    }
+
+    .mood-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 4px;
+    }
+
+    .mood-btn {
+      background: var(--bg);
+      border: 1.5px solid var(--accent-line);
+      border-radius: 24px;
+      padding: 7px 14px;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-b);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s,
+                  color 0.2s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .mood-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-band);
+      transform: translateY(-1px);
+    }
+
+    .mood-btn.selected {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .gift-wrap-box {
+      text-align: center;
+      padding: 12px 0 8px;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .gift-wrap-icon {
+      font-size: 52px;
+      display: block;
+      margin-bottom: 10px;
+      animation: float 3s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0);   }
+      50%      { transform: translateY(-6px); }
+    }
+
+    .gift-hint-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--text-m);
+      margin-bottom: 14px;
+      line-height: 1.5;
+      transition: color 0.5s;
+    }
+
+    .unwrap-btn {
+      background: var(--accent);
+      border: none;
+      border-radius: 24px;
+      padding: 10px 28px;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      color: #fff;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: var(--shadow);
+      animation: pulse-glow 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%,100% { box-shadow: var(--shadow); }
+      50%      { box-shadow: 0 0 0 6px var(--accent-line); }
+    }
+
+    .unwrap-btn:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    .gift-badge-row {
+      margin-bottom: 8px;
+    }
+
+    .gift-type-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--bg-band);
+      color: var(--accent-deep);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    .gift-content {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-h);
+      line-height: 1.65;
+      text-align: center;
+      padding: 6px 4px 8px;
+      transition: color 0.5s;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .gift-punchline {
+      font-size: 12px;
+      color: var(--text-b);
+      text-align: center;
+      line-height: 1.65;
+      margin-bottom: 14px;
+      font-weight: 400;
+      transition: color 0.5s;
+      animation: fadeUp 0.5s ease 0.1s both;
+    }
+
+    .gift-actions {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .gift-keep-btn {
+      background: none;
+      border: 1.5px solid var(--accent-line);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      color: var(--accent-deep);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .gift-keep-btn:hover,
+    .gift-keep-btn.saved {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .gift-another-btn {
+      background: none;
+      border: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      color: var(--text-s);
+      cursor: pointer;
+      padding: 6px 8px;
+      transition: color 0.2s;
+    }
+
+    .gift-another-btn:hover { color: var(--accent-deep); }
+
+    .gift-tomorrow {
+      font-size: 10px;
+      color: var(--text-s);
+      text-align: center;
+      font-style: italic;
+      transition: color 0.5s;
+    }
+
   </style>
 </head>
 <body>
@@ -917,12 +1116,10 @@
       <span class="spark">✦</span> About
     </h2>
     <p>
-      My MagicWand is a daily magical companion for expecting moms.
-      An angel appears every day with three curated cards —
-      for you and your little sunshine.
-      Each angel is named after a real star or celestial wonder,
-      bringing a little magic to your day, every single day.
-      Made with love for moms everywhere.
+      My MagicWand is a peaceful corner for your thoughts, dreams,
+      and little moments of wonder. A new angel arrives every day —
+      named after a real star — bringing something to feel, discover,
+      or dream about. Made with love for expecting moms everywhere.
     </p>
   </div>
 </div>
@@ -963,10 +1160,10 @@
     <span class="welcome-sparkle">✨</span>
     <h1 class="welcome-title">My MagicWand</h1>
     <p class="welcome-tagline">A little magic, every single day</p>
-    <p class="welcome-subtitle">For you and your little sunshine</p>
+    <p class="welcome-subtitle">A peaceful corner for your thoughts, dreams, and little moments of wonder</p>
     <p class="welcome-desc">
-      An angel appears every day with three curated cards —
-      joyful discoveries for you and the little one on the way.
+      A new angel arrives every day with something to feel,
+      discover, or dream about — just for you.
     </p>
     <button class="begin-btn" id="beginBtn">Begin the magic ✦</button>
     <span class="begin-hint">choose your mood color above ✦ then tap to begin</span>
@@ -1009,39 +1206,46 @@
               data-mode="angel">✦ For Angel</button>
     </div>
 
-    <!-- CARD 1 — PLAYLIST -->
+    <!-- CARD 1 — TODAY'S GIFT -->
     <div class="card" id="card1">
 
       <!-- CARD HEADER -->
       <div class="card-header">
-        <span class="card-emoji">🎶</span>
+        <span class="card-emoji" id="card1Emoji">🎁</span>
         <div class="card-header-text">
-          <div class="card-category">Playlist</div>
-          <div class="card-title" id="card1Title">Your music, your mood</div>
+          <div class="card-category">Today's Gift</div>
+          <div class="card-title" id="card1Title">—</div>
         </div>
       </div>
 
-      <!-- ANGEL INTRO -->
-      <div class="card-intro" id="card1Intro">—</div>
-
-      <!-- GENRE PICKER -->
-      <div class="genre-label">Pick your mood</div>
-      <div class="genre-grid" id="genreGrid">
-        <!-- filled by JS based on active mode -->
+      <!-- STATE 1: MOOD SELECTION -->
+      <div id="moodState">
+        <div class="mood-question" id="moodQuestion">How are you feeling right now?</div>
+        <div class="mood-grid" id="moodGrid"></div>
       </div>
 
-      <!-- OPEN IN LINKS — shown after genre selected -->
-      <div class="open-in" id="openIn" style="display:none;">
-        <a class="open-btn spotify" id="spotifyLink" href="#" target="_blank" rel="noopener">
-          🎵 Open in Spotify
-        </a>
-        <a class="open-btn apple" id="appleLink" href="#" target="_blank" rel="noopener">
-          🍎 Open in Apple Music
-        </a>
+      <!-- STATE 2: WRAPPED GIFT -->
+      <div id="giftState" style="display:none;">
+        <div class="gift-wrap-box">
+          <div class="gift-wrap-icon" id="giftIcon">🎁</div>
+          <div class="gift-hint-text" id="giftHintText">—</div>
+          <button class="unwrap-btn" id="unwrapBtn">Open your gift ✦</button>
+        </div>
       </div>
 
-      <!-- SELECTED GENRE HINT -->
-      <div class="genre-hint" id="genreHint"></div>
+      <!-- STATE 3: REVEALED GIFT -->
+      <div id="revealState" style="display:none;">
+        <div class="gift-badge-row">
+          <span class="gift-type-badge" id="giftBadge">—</span>
+        </div>
+        <div class="gift-content" id="giftContent">—</div>
+        <div class="gift-punchline" id="giftPunchline">—</div>
+        <div class="gift-actions">
+          <button class="gift-keep-btn" id="keepBtn">🤍 Keep this gift</button>
+          <button class="gift-another-btn" id="anotherBtn">↺ Start over</button>
+        </div>
+        <div class="gift-tomorrow" id="giftTomorrow">—</div>
+      </div>
 
     </div>
 
@@ -1222,173 +1426,234 @@
   });
 
   /* ─────────────────────────────────────
-     CARD 1 — PLAYLIST GENRE DATA
+     CARD 1 — TODAY'S GIFT
   ───────────────────────────────────── */
-  const GENRES = {
-    mom: [
-      { emoji:'🎹', label:'Soft Piano',
-        spotify:'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO',
-        apple:'https://music.apple.com/us/playlist/peaceful-piano/pl.f4d106fed2bd41149ecdac57774e4af',
-        hint:'Gentle piano, no words — perfect for a quiet moment' },
-      { emoji:'🌊', label:'Ambient',
-        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWTwnEm1IYyoj',
-        apple:'https://music.apple.com/us/playlist/pure-focus/pl.f906f6c9b44c4c318e5e3ef0ec3c0b1b',
-        hint:'Soft soundscapes that fill the room with calm' },
-      { emoji:'🎷', label:'Jazz',
-        spotify:'https://open.spotify.com/playlist/37i9dQZF1DXbITWG1ZJKYt',
-        apple:'https://music.apple.com/us/playlist/jazz-classics/pl.f90d0d5a2cb549028038fb20cfe25ffe',
-        hint:'Warm, unhurried jazz for a gentle afternoon' },
-      { emoji:'🪕', label:'Indian Classical',
-        spotify:'https://open.spotify.com/playlist/37i9dQZF1DXdLEN7aqioXM',
-        apple:'https://music.apple.com/us/playlist/indian-classical/pl.6bf4415b83ce4f3789e2ac602a80b2af',
-        hint:'Ragas that carry centuries of calm and beauty' },
-      { emoji:'🌿', label:'Lo-Fi Chill',
-        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn',
-        apple:'https://music.apple.com/us/playlist/lofi-beats/pl.d3d10ea5b5d64d23b4279c7a5c14b4c1',
-        hint:'Soft lo-fi beats — cozy and unhurried' },
-      { emoji:'🎻', label:'Neoclassical',
-        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWVFeEut75IAL',
-        apple:'https://music.apple.com/us/playlist/calming-classical/pl.f4d106fed2bd41149ecdac57774e4af',
-        hint:'Modern classical — Ólafur Arnalds, Max Richter, Einaudi' }
-    ],
-    angel: [
-      { emoji:'🎵', label:'Lullabies',
-        spotify:'https://open.spotify.com/playlist/37i9dQZF1DXbADqT0j1Cxt',
-        apple:'https://music.apple.com/us/playlist/lullabies/pl.d3d10ea5b5d64d23b4279c7a5c14b4c1',
-        hint:'The most beloved lullabies from around the world' },
-      { emoji:'🌍', label:'World Songs',
-        spotify:'https://open.spotify.com/playlist/62n7TtrAWY1BeNg54yigFe',
-        apple:'https://music.apple.com/us/playlist/world-lullabies/pl.6bf4415b83ce4f3789e2ac602a80b2af',
-        hint:'Lullabies from every corner of the world — Māori, Swedish, Indian, French' },
-      { emoji:'🎹', label:'Piano Dreams',
-        spotify:'https://open.spotify.com/playlist/0L9fxWT1x3902wyRH9YfML',
-        apple:'https://music.apple.com/us/playlist/piano-lullabies/pl.f4d106fed2bd41149ecdac57774e4af',
-        hint:'Soft piano melodies and music box — gentle and dreamy' },
-      { emoji:'🌿', label:'Nature Sounds',
-        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWTwnEm1IYyoj',
-        apple:'https://music.apple.com/us/playlist/nature-sounds/pl.f906f6c9b44c4c318e5e3ef0ec3c0b1b',
-        hint:'Rain, ocean waves, gentle wind — nature as a lullaby' },
-      { emoji:'🎻', label:'Classical',
-        spotify:'https://open.spotify.com/playlist/76KISV91ZXzaHdLi3GQoix',
-        apple:'https://music.apple.com/us/playlist/classical-lullaby/pl.f4d106fed2bd41149ecdac57774e4af',
-        hint:'Brahms, Mozart, Chopin — timeless and pure' },
-      { emoji:'🎶', label:'Folk & Gentle',
-        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWTl4y3vgJOXW',
-        apple:'https://music.apple.com/us/playlist/acoustic-morning/pl.d3d10ea5b5d64d23b4279c7a5c14b4c1',
-        hint:'Acoustic folk songs — warm, simple, and full of heart' }
-    ]
-  };
 
-  /* angel intros for playlist card */
-  const PLAYLIST_INTROS = {
+  const MOODS = [
+    { key:'gentle', emoji:'🌤️', label:'Gentle'         },
+    { key:'tired',  emoji:'🌿', label:'Tired'           },
+    { key:'hopeful',emoji:'✨', label:'Hopeful'         },
+    { key:'calm',   emoji:'🌊', label:'Calm'            },
+    { key:'heavy',  emoji:'☁️', label:'A little heavy'  }
+  ];
+
+  /* gifts[mode][angelDay][mood] */
+  const GIFTS = {
     mom: {
-      1: 'Neel found music that feels like the sky at dusk…',
-      2: 'Nova brought something that sparks and glows…',
-      3: 'Stella curated the most radiant sounds for you…',
-      4: 'Lyra — the harp angel — has music in her soul…',
-      5: 'Zara found something blooming and beautiful…',
-      6: 'Aura wrapped the warmest sounds around you…',
-      0: 'Mira chose something wonderful, just for you…'
+      1: { // Neel · Mon
+        gentle: { badge:'Beautiful fact',     content:'"Otters hold hands while sleeping so they don\'t drift apart."',           punchline:'You are already doing something just as tender — holding on, gently, every single day. 🦦' },
+        tired:  { badge:'Something to smile', content:'"A group of flamingos is called a flamboyance."',                          punchline:'Today you are not tired. You are a flamboyance, resting with great style. 🦩' },
+        hopeful:{ badge:'A wonder',           content:'"Babies in the womb can taste what their mother eats."',                   punchline:'Right now, your little one is discovering the world through you — one flavor at a time. 🌟' },
+        calm:   { badge:'A beautiful word',   content:'"Komorebi"',                                                               punchline:'Japanese · the interplay of sunlight through leaves. You are someone\'s Komorebi — warmth arriving before they even see you. 🌿' },
+        heavy:  { badge:'Unexpected delight', content:'"A day octopus once stole an underwater camera and filmed itself swimming away."', punchline:'Scientists had to chase it. You are absolutely having a better day than those scientists. 🐙' }
+      },
+      2: { // Nova · Tue
+        gentle: { badge:'Beautiful fact',     content:'"Cows have best friends and become stressed when separated."',             punchline:'Somewhere right now, two cows are side by side, perfectly content. You deserve that same gentle company. 🐄' },
+        tired:  { badge:'Something to smile', content:'"A snail can sleep for three years."',                                    punchline:'Three years. You are not tired — you are simply a snail between adventures. 🐌' },
+        hopeful:{ badge:'A wonder',           content:'"Your baby\'s heart begins beating just 22 days after conception."',      punchline:'Twenty-two days. That tiny, miraculous, determined little heartbeat. Already going. 💫' },
+        calm:   { badge:'A beautiful word',   content:'"Mamihlapinatapai"',                                                      punchline:'Yaghan · a look shared between two people, each wishing the other would start something. Every great thing begins with this look. 🌊' },
+        heavy:  { badge:'Unexpected delight', content:'"Wombats produce cube-shaped droppings to mark their territory."',       punchline:'Cube-shaped. Scientists studied this for years. You are doing fine. You really are. 🟫' }
+      },
+      3: { // Stella · Wed
+        gentle: { badge:'Beautiful fact',     content:'"The light you see from stars left them thousands of years ago."',        punchline:'Right now you are looking at ancient light. You are connected to something vast and old and beautiful. ✨' },
+        tired:  { badge:'Something to smile', content:'"Puffins use sticks as tools to scratch themselves."',                    punchline:'Actual scientists discovered this. A puffin, with a stick, just scratching away. Today you are a puffin and that is perfectly okay. 🐦' },
+        hopeful:{ badge:'A wonder',           content:'"Newborns recognize their mother\'s voice from inside the womb."',       punchline:'She has been listening to you all along. She already knows you. She is already yours. 🌟' },
+        calm:   { badge:'A beautiful word',   content:'"Meraki"',                                                               punchline:'Greek · to do something with soul, creativity, and love — to leave a piece of yourself in your work. You are doing this every single day. 🌸' },
+        heavy:  { badge:'Unexpected delight', content:'"Sea horses are the only animals where the male carries the pregnancy."', punchline:'The male sea horse goes through labor. He does this willingly. You are doing something extraordinary. He knows it too. 🐠' }
+      },
+      4: { // Lyra · Thu
+        gentle: { badge:'Beautiful fact',     content:'"Elephants hum to their babies — a sound too low for humans to fully hear."', punchline:'There is a love so deep it operates below the frequency of words. You already know this feeling. 🐘' },
+        tired:  { badge:'Something to smile', content:'"A blind man helped design one of Japan\'s most beautiful gardens."',    punchline:'Mirei Shigemori. He said he didn\'t need to see it — he could feel it. Some things you just know. 🌿' },
+        hopeful:{ badge:'A wonder',           content:'"Babies are born with 270 bones. Adults have 206. They fuse together in the first years of life."', punchline:'She arrives soft and flexible, built to become. Just like you. 💛' },
+        calm:   { badge:'A beautiful word',   content:'"Hiraeth"',                                                              punchline:'Welsh · a longing for home that may not exist, or may never have been. The homesickness for a place you are still building. 🏡' },
+        heavy:  { badge:'Unexpected delight', content:'"A cat has been elected mayor of a town in Alaska for 20 years."',      punchline:'Stubbs the cat. Mayor of Talkeetna from 1997 to 2017. Won by write-in vote. You are doing far better than the human candidates. 🐱' }
+      },
+      5: { // Zara · Fri
+        gentle: { badge:'Beautiful fact',     content:'"Flowers grow faster when music is played near them."',                  punchline:'Everything blooms better with a little beauty around it. Including you. Including today. 🌸' },
+        tired:  { badge:'Something to smile', content:'"A group of pugs is called a grumble."',                                 punchline:'A grumble of pugs. All wrinkled, slightly disgruntled, deeply lovable. You are the president of the grumble today. 🐾' },
+        hopeful:{ badge:'A wonder',           content:'"The first sense a baby develops in the womb is touch — around 8 weeks."', punchline:'Before sight, before sound, she knew the feeling of warmth and safety. You gave her that first. 🌟' },
+        calm:   { badge:'A beautiful word',   content:'"Saudade"',                                                             punchline:'Portuguese · a melancholic longing for something or someone beloved. But also — the happiness of having had it. 💛' },
+        heavy:  { badge:'Unexpected delight', content:'"Penguins propose to their partner with a pebble."',                    punchline:'They search the entire beach for the best pebble and present it formally. Someone once did that for you too — in their own way. 🐧' }
+      },
+      6: { // Aura · Sat
+        gentle: { badge:'Beautiful fact',     content:'"Dogs\' nose prints are as unique as human fingerprints."',              punchline:'Every creature arrives with something no one else has. So did you. So does the one on the way. 🐾' },
+        tired:  { badge:'Something to smile', content:'"Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid."', punchline:'History is much stranger and more layered than anyone told us. Just like Saturdays. 🌙' },
+        hopeful:{ badge:'A wonder',           content:'"A baby\'s skin is completely replaced every two weeks in the womb."',  punchline:'She is continuously renewing herself, preparing for arrival. She is working very hard. So are you. 🌟' },
+        calm:   { badge:'A beautiful word',   content:'"Ubuntu"',                                                              punchline:'Zulu · I am because we are. A philosophy of shared humanity. Right now, two of you are becoming we. 🌍' },
+        heavy:  { badge:'Unexpected delight', content:'"Squirrels forget where they hid about half their nuts — and accidentally plant thousands of trees."', punchline:'The greatest forests in the world were planted by forgetting. Your imperfections are growing something beautiful too. 🌳' }
+      },
+      0: { // Mira · Sun
+        gentle: { badge:'Beautiful fact',     content:'"Honeybees make decisions collectively by dancing."',                    punchline:'They dance to communicate direction and distance. Every important thing in nature is expressed through movement and feeling, not words. 🐝' },
+        tired:  { badge:'Something to smile', content:'"A group of butterflies is called a kaleidoscope."',                    punchline:'A kaleidoscope of butterflies. You are tired, yes. But you contain multitudes of color. 🦋' },
+        hopeful:{ badge:'A wonder',           content:'"The human body creates 3.8 million cells every single second."',       punchline:'Right now, in this moment, you are building an entire person at 3.8 million cells per second. Nothing you have ever done is more extraordinary. 🌟' },
+        calm:   { badge:'A beautiful word',   content:'"Mono no aware"',                                                       punchline:'Japanese · the bittersweet awareness of impermanence. The gentle sadness of things passing. Sunday holds all of this. 🍂' },
+        heavy:  { badge:'Unexpected delight', content:'"A shrimp\'s heart is in its head."',                                  punchline:'Its heart is literally in its head. You are having a completely reasonable day by comparison. 🦐' }
+      }
     },
     angel: {
-      1: 'Neel found the softest sounds for your little one…',
-      2: 'Nova brought bright and gentle melodies…',
-      3: 'Stella gathered the most beautiful lullabies…',
-      4: 'Lyra — the harp angel — sings for your little sunshine…',
-      5: 'Zara found the sweetest songs from around the world…',
-      6: 'Aura wrapped your little one in glowing sound…',
-      0: 'Mira chose something wonderful for your angel…'
+      1: {
+        gentle: { badge:'A wonder',           content:'"Your baby can hear your heartbeat from inside — it is the first sound she will know."', punchline:'Before music, before voices, before the world — she knows the rhythm of you. 💙' },
+        tired:  { badge:'Something to smile', content:'"Unborn babies hiccup in the womb — usually from about 9 weeks."',   punchline:'Tiny, silent hiccups. The smallest, most endearing protest. She is practicing for the world already. 🌿' },
+        hopeful:{ badge:'Beautiful fact',     content:'"Babies smile for the first time in the womb — usually at 26 weeks."', punchline:'She has already smiled. Before she has ever seen anything. Joy is her very first response to being alive. ✨' },
+        calm:   { badge:'A beautiful word',   content:'"Koi no yokan"',                                                       punchline:'Japanese · the feeling upon meeting someone that falling in love is inevitable. You felt this already, didn\'t you. 💛' },
+        heavy:  { badge:'Something to smile', content:'"Babies are born with no kneecaps — they develop over the first few years."', punchline:'She will arrive soft and kneecap-free, completely unbothered, ready to be held. You are ready to hold her. 💙' }
+      },
+      2: {
+        gentle: { badge:'A wonder',           content:'"By 18 weeks, your baby has developed her own unique fingerprints."',  punchline:'No one in the history of the world has ever had those exact lines. She is already one of a kind. 🌟' },
+        tired:  { badge:'Something to smile', content:'"Babies prefer the smell of their mother above all other scents."',   punchline:'To her, you are the most beautiful smell in the world. You always will be. 🌿' },
+        hopeful:{ badge:'Beautiful fact',     content:'"The womb is thought to be the warmest, most consistently comfortable environment a human will ever experience."', punchline:'You made that for her. The most comfortable place she will ever be. 💫' },
+        calm:   { badge:'A beautiful word',   content:'"Forelsket"',                                                          punchline:'Norwegian · the indescribable euphoria of falling in love for the first time. You are in it right now. 🌸' },
+        heavy:  { badge:'Something to smile', content:'"Newborns see in soft focus — their vision is perfectly suited to see a human face at the distance of being held."', punchline:'Her first clear image will be you. She is built to find you beautiful. 💙' }
+      },
+      3: {
+        gentle: { badge:'A wonder',           content:'"Your baby begins developing taste buds at just 7 weeks."',            punchline:'Everything you have eaten, she has gently tasted. Every meal was shared. Every flavor was an introduction. 🌸' },
+        tired:  { badge:'Something to smile', content:'"Babies in the womb yawn — scientists think it may be a sign of healthy brain development."', punchline:'She is tired too, sometimes. And still growing magnificently. Just like you. 🌿' },
+        hopeful:{ badge:'Beautiful fact',     content:'"A baby\'s first laugh is one of the most studied sounds in human science."', punchline:'Researchers travel the world to record it. The whole of science agrees — it is the best sound. 💛' },
+        calm:   { badge:'A beautiful word',   content:'"Gezelligheid"',                                                       punchline:'Dutch · the warm feeling of togetherness, coziness, and belonging. You are already creating this for her. 🏡' },
+        heavy:  { badge:'Something to smile', content:'"Babies are born with an instinct to walk — if held upright on a surface, they will make stepping motions."', punchline:'She arrives already knowing how to move toward the world. She inherited that from you. 💙' }
+      },
+      4: {
+        gentle: { badge:'A wonder',           content:'"The cells a baby leaves in her mother\'s body can remain there for decades — sometimes her whole life."', punchline:'She will always be a part of you, even after she leaves your arms. The science confirms what you already knew. 💛' },
+        tired:  { badge:'Something to smile', content:'"Newborns have no tears when they cry — tear ducts don\'t fully develop until around 3 weeks after birth."', punchline:'She will arrive with the full drama of crying and none of the tears. Already theatrical. Already wonderful. 🌿' },
+        hopeful:{ badge:'Beautiful fact',     content:'"Babies can recognize faces in the womb using light filtering through the skin."', punchline:'She has already been watching for you, in her way. She has been turning toward the light you carry. 🌟' },
+        calm:   { badge:'A beautiful word',   content:'"Sehnsucht"',                                                          punchline:'German · a deep longing for something you cannot quite name. An ache for something beautiful, not yet arrived. She is that something. 🍂' },
+        heavy:  { badge:'Something to smile', content:'"Babies are natural swimmers — they have an instinctive reflex to hold their breath and paddle in water."', punchline:'She arrives already knowing the water. She has been swimming her whole life so far. 🌊' }
+      },
+      5: {
+        gentle: { badge:'A wonder',           content:'"Babies begin dreaming in the womb from about 28 weeks."',             punchline:'She is already dreaming. We don\'t know what of — but she is already somewhere wonderful in her mind. 🌙' },
+        tired:  { badge:'Something to smile', content:'"A newborn\'s stomach is about the size of a cherry."',               punchline:'A cherry. Perfectly tiny. Every enormous thing in this world began very small. Including her. 🍒' },
+        hopeful:{ badge:'Beautiful fact',     content:'"The sound of a mother\'s voice releases oxytocin in a baby — the same hormone as a hug."', punchline:'Every time you speak, she receives a hug. You have been holding her, in your way, all along. 💛' },
+        calm:   { badge:'A beautiful word',   content:'"Aware"',                                                              punchline:'Japanese · the bittersweet feeling of things passing. Of beauty that does not last. Of this moment, right now, that will become a memory. 🌸' },
+        heavy:  { badge:'Something to smile', content:'"Babies have three times more taste buds than adults."',              punchline:'She arrives as a connoisseur. Everything will taste extraordinary to her. Including life. 🌟' }
+      },
+      6: {
+        gentle: { badge:'A wonder',           content:'"A newborn baby\'s head accounts for about one quarter of her total body length."', punchline:'All that brain. All that potential. All that future — already here, already growing, already hers. 💙' },
+        tired:  { badge:'Something to smile', content:'"Babies are born without a fully formed kneecap — they use cartilage instead."', punchline:'Soft, flexible, ready to become. She arrives prepared to adapt to whatever world she meets. Just like you. 🌿' },
+        hopeful:{ badge:'Beautiful fact',     content:'"Research shows babies can distinguish their mother\'s language from others at birth."', punchline:'She already knows the music of your voice. She arrived knowing your language. 🌍' },
+        calm:   { badge:'A beautiful word',   content:'"Lykke"',                                                              punchline:'Danish · happiness, but specifically the kind that comes from simplicity — warmth, togetherness, enough. You are building a life of enough. 🏡' },
+        heavy:  { badge:'Something to smile', content:'"Babies grip things so tightly at birth they can support their own weight."', punchline:'That tiny fist will hold your finger with her whole strength. And you will never want to let go. 💙' }
+      },
+      0: {
+        gentle: { badge:'A wonder',           content:'"The human brain has roughly 86 billion neurons — most already present at birth."', punchline:'She arrives with almost everything she will ever need already inside her. You gave her that beginning. 🌟' },
+        tired:  { badge:'Something to smile', content:'"Newborns sleep up to 17 hours a day."',                               punchline:'Seventeen hours. She is arriving well-rested, ready for you. You will be a wonderful surprise. 🌿' },
+        hopeful:{ badge:'Beautiful fact',     content:'"A baby\'s first word is usually said between 10 and 14 months — but she understands words from about 6 months."', punchline:'She will understand your love long before she can say it back. That\'s the most important thing to know. 💛' },
+        calm:   { badge:'A beautiful word',   content:'"Coddiwomple"',                                                        punchline:'English slang · to travel purposefully toward a vague destination. You are coddiwompling, beautifully, every day. 🗺️' },
+        heavy:  { badge:'Something to smile', content:'"Babies have been found to laugh in their sleep."',                    punchline:'She is laughing, right now, at something only she knows. She arrived with her own secret joy. 🌙' }
+      }
     }
   };
 
-  /* ─────────────────────────────────────
-     RENDER CARD 1
-  ───────────────────────────────────── */
-  function renderCard1(mode) {
-    const day     = new Date().getDay();
-    const genres  = GENRES[mode];
-    const intros  = PLAYLIST_INTROS[mode];
-    const saved   = localStorage.getItem('mmw-genre-' + mode);
+  const TOMORROW_ANGELS = ['Mira','Neel','Nova','Stella','Lyra','Zara','Aura'];
 
-    // angel intro
-    document.getElementById('card1Intro').textContent =
-      intros[day] || intros[0];
+  let selectedMood = null;
+
+  function renderCard1(mode) {
+    const day = new Date().getDay();
+    const angel = ANGELS[day];
+    if (!angel) return;
 
     // card title
     document.getElementById('card1Title').textContent =
-      mode === 'mom' ? 'Your music, your mood' : 'Music for your angel';
+      angel.name + ' has a gift for you';
 
-    // build genre buttons
-    const grid = document.getElementById('genreGrid');
+    // mood question
+    document.getElementById('moodQuestion').textContent =
+      'How are you feeling right now?';
+
+    // reset to mood state
+    document.getElementById('moodState').style.display   = 'block';
+    document.getElementById('giftState').style.display   = 'none';
+    document.getElementById('revealState').style.display = 'none';
+    selectedMood = null;
+
+    // build mood buttons
+    const grid = document.getElementById('moodGrid');
     grid.innerHTML = '';
-    genres.forEach((g, i) => {
+    MOODS.forEach(m => {
       const btn = document.createElement('button');
-      btn.className = 'genre-btn' + (saved === String(i) ? ' selected' : '');
-      btn.innerHTML = `${g.emoji} ${g.label}`;
-      btn.addEventListener('click', () => selectGenre(i, mode));
+      btn.className = 'mood-btn';
+      btn.innerHTML = `${m.emoji} ${m.label}`;
+      btn.addEventListener('click', () => selectMood(m.key, angel, mode));
       grid.appendChild(btn);
     });
-
-    // restore saved selection
-    if (saved !== null) {
-      showOpenIn(parseInt(saved), mode);
-    } else {
-      document.getElementById('openIn').style.display = 'none';
-      document.getElementById('genreHint').textContent = '';
-    }
   }
 
-  function selectGenre(index, mode) {
-    const genres = GENRES[mode];
-    const g = genres[index];
+  function selectMood(moodKey, angel, mode) {
+    selectedMood = moodKey;
+    const day  = new Date().getDay();
+    const data = GIFTS[mode]?.[day]?.[moodKey];
+    if (!data) return;
 
-    // highlight selected
-    document.querySelectorAll('.genre-btn').forEach((b, i) => {
-      b.classList.toggle('selected', i === index);
+    // highlight button
+    document.querySelectorAll('.mood-btn').forEach(b => {
+      b.classList.toggle('selected',
+        b.textContent.trim().includes(MOODS.find(m => m.key === moodKey)?.label || ''));
     });
 
-    // save choice
-    localStorage.setItem('mmw-genre-' + mode, String(index));
-
-    showOpenIn(index, mode);
-  }
-
-  function showOpenIn(index, mode) {
-    const g = GENRES[mode][index];
-    if (!g) return;
-
-    document.getElementById('spotifyLink').href = g.spotify;
-    document.getElementById('appleLink').href   = g.apple;
-    document.getElementById('openIn').style.display = 'flex';
-    document.getElementById('genreHint').textContent = g.hint;
-  }
-
-  /* ─────────────────────────────────────
-     RE-ROLL — refreshes card intro & clears genre
-  ───────────────────────────────────── */
-  document.getElementById('rerollBtn').addEventListener('click', () => {
-    const mode  = localStorage.getItem('mmw-mode') || 'mom';
-    const place = localStorage.getItem('mmw-place-' + mode);
-
-    // re-roll Card 1 — clear genre
-    localStorage.removeItem('mmw-genre-' + mode);
-    renderCard1(mode);
-    const card1 = document.getElementById('card1');
-    card1.style.opacity = '0';
-    card1.style.transform = 'translateY(8px)';
+    // show wrapped gift
     setTimeout(() => {
-      card1.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      card1.style.opacity = '1';
-      card1.style.transform = 'translateY(0)';
-    }, 50);
+      document.getElementById('moodState').style.display = 'none';
+      document.getElementById('giftHintText').textContent = data.badge + ' · sealed just for today';
+      document.getElementById('giftState').style.display = 'block';
+    }, 180);
+  }
 
-    // re-roll Card 2 — next destination
-    if (place) {
-      const season = getSeason().name.split(' ')[0];
-      const key    = mode + place;
-      currentDestIndex[key] = ((currentDestIndex[key] || 0) + 1);
-      showDestination(place, mode, season, currentDestIndex[key]);
+  // unwrap
+  document.getElementById('unwrapBtn').addEventListener('click', () => {
+    if (!selectedMood) return;
+    const day  = new Date().getDay();
+    const mode = localStorage.getItem('mmw-mode') || 'mom';
+    const data = GIFTS[mode]?.[day]?.[selectedMood];
+    if (!data) return;
+
+    document.getElementById('giftState').style.display = 'none';
+    document.getElementById('giftBadge').textContent     = data.badge;
+    document.getElementById('giftContent').textContent   = data.content;
+    document.getElementById('giftPunchline').textContent = data.punchline;
+
+    // tomorrow line
+    const tomorrow = TOMORROW_ANGELS[day];
+    document.getElementById('giftTomorrow').textContent =
+      'A new gift arrives tomorrow with ' + tomorrow + ' ✦';
+
+    document.getElementById('revealState').style.display = 'block';
+  });
+
+  // keep
+  document.getElementById('keepBtn').addEventListener('click', () => {
+    const btn = document.getElementById('keepBtn');
+    if (btn.classList.contains('saved')) {
+      btn.classList.remove('saved');
+      btn.textContent = '🤍 Keep this gift';
+    } else {
+      btn.classList.add('saved');
+      btn.textContent = '🧡 Kept ✦';
+      // save to localStorage
+      const day  = new Date().getDay();
+      const mode = localStorage.getItem('mmw-mode') || 'mom';
+      const data = GIFTS[mode]?.[day]?.[selectedMood];
+      if (data) {
+        const saved = JSON.parse(localStorage.getItem('mmw-kept') || '[]');
+        const angel = ANGELS[day];
+        saved.unshift({
+          date:    new Date().toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' }),
+          angel:   angel?.name || '',
+          badge:   data.badge,
+          content: data.content,
+          mood:    selectedMood
+        });
+        localStorage.setItem('mmw-kept', JSON.stringify(saved.slice(0, 50)));
+      }
     }
+  });
+
+  // start over
+  document.getElementById('anotherBtn').addEventListener('click', () => {
+    const mode = localStorage.getItem('mmw-mode') || 'mom';
+    document.getElementById('keepBtn').classList.remove('saved');
+    document.getElementById('keepBtn').textContent = '🤍 Keep this gift';
+    selectedMood = null;
+    renderCard1(mode);
   });
 
   /* ─────────────────────────────────────
@@ -1727,6 +1992,28 @@
     document.getElementById('placeHint').textContent =
       'Tap ✨ Show me something else for another destination';
   }
+
+  /* ─────────────────────────────────────
+     RE-ROLL BUTTON
+  ───────────────────────────────────── */
+  document.getElementById('rerollBtn').addEventListener('click', () => {
+    const mode  = localStorage.getItem('mmw-mode') || 'mom';
+    const place = localStorage.getItem('mmw-place-' + mode);
+
+    // re-roll Card 1 — reset to mood selection
+    selectedMood = null;
+    document.getElementById('keepBtn').classList.remove('saved');
+    document.getElementById('keepBtn').textContent = '🤍 Keep this gift';
+    renderCard1(mode);
+
+    // re-roll Card 2 — next destination
+    if (place) {
+      const season = getSeason().name.split(' ')[0];
+      const key    = mode + place;
+      currentDestIndex[key] = ((currentDestIndex[key] || 0) + 1);
+      showDestination(place, mode, season, currentDestIndex[key]);
+    }
+  });
 
   /* ─────────────────────────────────────
      THEME ENGINE
