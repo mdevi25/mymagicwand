@@ -1439,108 +1439,136 @@
 
   /* gifts[mode][angelDay][mood] */
   const GIFTS = {
-    mom: {
-      1: { // Neel · Mon
-        gentle: { badge:'Beautiful fact',     content:'"Otters hold hands while sleeping so they don\'t drift apart."',           punchline:'You are already doing something just as tender — holding on, gently, every single day. 🦦' },
-        tired:  { badge:'Something to smile', content:'"A group of flamingos is called a flamboyance."',                          punchline:'Today you are not tired. You are a flamboyance, resting with great style. 🦩' },
-        hopeful:{ badge:'A wonder',           content:'"Babies in the womb can taste what their mother eats."',                   punchline:'Right now, your little one is discovering the world through you — one flavor at a time. 🌟' },
-        calm:   { badge:'A beautiful word',   content:'"Komorebi"',                                                               punchline:'Japanese · the interplay of sunlight through leaves. You are someone\'s Komorebi — warmth arriving before they even see you. 🌿' },
-        heavy:  { badge:'Unexpected delight', content:'"A day octopus once stole an underwater camera and filmed itself swimming away."', punchline:'Scientists had to chase it. You are absolutely having a better day than those scientists. 🐙' }
-      },
-      2: { // Nova · Tue
-        gentle: { badge:'Beautiful fact',     content:'"Cows have best friends and become stressed when separated."',             punchline:'Somewhere right now, two cows are side by side, perfectly content. You deserve that same gentle company. 🐄' },
-        tired:  { badge:'Something to smile', content:'"A snail can sleep for three years."',                                    punchline:'Three years. You are not tired — you are simply a snail between adventures. 🐌' },
-        hopeful:{ badge:'A wonder',           content:'"Your baby\'s heart begins beating just 22 days after conception."',      punchline:'Twenty-two days. That tiny, miraculous, determined little heartbeat. Already going. 💫' },
-        calm:   { badge:'A beautiful word',   content:'"Mamihlapinatapai"',                                                      punchline:'Yaghan · a look shared between two people, each wishing the other would start something. Every great thing begins with this look. 🌊' },
-        heavy:  { badge:'Unexpected delight', content:'"Wombats produce cube-shaped droppings to mark their territory."',       punchline:'Cube-shaped. Scientists studied this for years. You are doing fine. You really are. 🟫' }
-      },
-      3: { // Stella · Wed
-        gentle: { badge:'Beautiful fact',     content:'"The light you see from stars left them thousands of years ago."',        punchline:'Right now you are looking at ancient light. You are connected to something vast and old and beautiful. ✨' },
-        tired:  { badge:'Something to smile', content:'"Puffins use sticks as tools to scratch themselves."',                    punchline:'Actual scientists discovered this. A puffin, with a stick, just scratching away. Today you are a puffin and that is perfectly okay. 🐦' },
-        hopeful:{ badge:'A wonder',           content:'"Newborns recognize their mother\'s voice from inside the womb."',       punchline:'She has been listening to you all along. She already knows you. She is already yours. 🌟' },
-        calm:   { badge:'A beautiful word',   content:'"Meraki"',                                                               punchline:'Greek · to do something with soul, creativity, and love — to leave a piece of yourself in your work. You are doing this every single day. 🌸' },
-        heavy:  { badge:'Unexpected delight', content:'"Sea horses are the only animals where the male carries the pregnancy."', punchline:'The male sea horse goes through labor. He does this willingly. You are doing something extraordinary. He knows it too. 🐠' }
-      },
-      4: { // Lyra · Thu
-        gentle: { badge:'Beautiful fact',     content:'"Elephants hum to their babies — a sound too low for humans to fully hear."', punchline:'There is a love so deep it operates below the frequency of words. You already know this feeling. 🐘' },
-        tired:  { badge:'Something to smile', content:'"A blind man helped design one of Japan\'s most beautiful gardens."',    punchline:'Mirei Shigemori. He said he didn\'t need to see it — he could feel it. Some things you just know. 🌿' },
-        hopeful:{ badge:'A wonder',           content:'"Babies are born with 270 bones. Adults have 206. They fuse together in the first years of life."', punchline:'She arrives soft and flexible, built to become. Just like you. 💛' },
-        calm:   { badge:'A beautiful word',   content:'"Hiraeth"',                                                              punchline:'Welsh · a longing for home that may not exist, or may never have been. The homesickness for a place you are still building. 🏡' },
-        heavy:  { badge:'Unexpected delight', content:'"A cat has been elected mayor of a town in Alaska for 20 years."',      punchline:'Stubbs the cat. Mayor of Talkeetna from 1997 to 2017. Won by write-in vote. You are doing far better than the human candidates. 🐱' }
-      },
-      5: { // Zara · Fri
-        gentle: { badge:'Beautiful fact',     content:'"Flowers grow faster when music is played near them."',                  punchline:'Everything blooms better with a little beauty around it. Including you. Including today. 🌸' },
-        tired:  { badge:'Something to smile', content:'"A group of pugs is called a grumble."',                                 punchline:'A grumble of pugs. All wrinkled, slightly disgruntled, deeply lovable. You are the president of the grumble today. 🐾' },
-        hopeful:{ badge:'A wonder',           content:'"The first sense a baby develops in the womb is touch — around 8 weeks."', punchline:'Before sight, before sound, she knew the feeling of warmth and safety. You gave her that first. 🌟' },
-        calm:   { badge:'A beautiful word',   content:'"Saudade"',                                                             punchline:'Portuguese · a melancholic longing for something or someone beloved. But also — the happiness of having had it. 💛' },
-        heavy:  { badge:'Unexpected delight', content:'"Penguins propose to their partner with a pebble."',                    punchline:'They search the entire beach for the best pebble and present it formally. Someone once did that for you too — in their own way. 🐧' }
-      },
-      6: { // Aura · Sat
-        gentle: { badge:'Beautiful fact',     content:'"Dogs\' nose prints are as unique as human fingerprints."',              punchline:'Every creature arrives with something no one else has. So did you. So does the one on the way. 🐾' },
-        tired:  { badge:'Something to smile', content:'"Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid."', punchline:'History is much stranger and more layered than anyone told us. Just like Saturdays. 🌙' },
-        hopeful:{ badge:'A wonder',           content:'"A baby\'s skin is completely replaced every two weeks in the womb."',  punchline:'She is continuously renewing herself, preparing for arrival. She is working very hard. So are you. 🌟' },
-        calm:   { badge:'A beautiful word',   content:'"Ubuntu"',                                                              punchline:'Zulu · I am because we are. A philosophy of shared humanity. Right now, two of you are becoming we. 🌍' },
-        heavy:  { badge:'Unexpected delight', content:'"Squirrels forget where they hid about half their nuts — and accidentally plant thousands of trees."', punchline:'The greatest forests in the world were planted by forgetting. Your imperfections are growing something beautiful too. 🌳' }
-      },
-      0: { // Mira · Sun
-        gentle: { badge:'Beautiful fact',     content:'"Honeybees make decisions collectively by dancing."',                    punchline:'They dance to communicate direction and distance. Every important thing in nature is expressed through movement and feeling, not words. 🐝' },
-        tired:  { badge:'Something to smile', content:'"A group of butterflies is called a kaleidoscope."',                    punchline:'A kaleidoscope of butterflies. You are tired, yes. But you contain multitudes of color. 🦋' },
-        hopeful:{ badge:'A wonder',           content:'"The human body creates 3.8 million cells every single second."',       punchline:'Right now, in this moment, you are building an entire person at 3.8 million cells per second. Nothing you have ever done is more extraordinary. 🌟' },
-        calm:   { badge:'A beautiful word',   content:'"Mono no aware"',                                                       punchline:'Japanese · the bittersweet awareness of impermanence. The gentle sadness of things passing. Sunday holds all of this. 🍂' },
-        heavy:  { badge:'Unexpected delight', content:'"A shrimp\'s heart is in its head."',                                  punchline:'Its heart is literally in its head. You are having a completely reasonable day by comparison. 🦐' }
-      }
+  mom: {
+    1: { // Neel · Mon
+      gentle: { content:'"You are doing more than you realize, even in quiet ways."', punchline:'Small effort still counts.' },
+      tired:  { content:'"Rest is part of how you stay steady through everything."', punchline:'You don\'t need to earn it.' },
+      hopeful:{ content:'"Things often work out step by step, not all at once."', punchline:'You are already on your way.' },
+      calm:   { content:'"This moment doesn\'t need fixing, only your presence."', punchline:'You can stay here as you are.' },
+      heavy:  { content:'"Hard days are real, but they don\'t define you."', punchline:'This will shift with time.' }
     },
-    angel: {
-      1: {
-        gentle: { badge:'A wonder',           content:'"Your baby can hear your heartbeat from inside — it is the first sound she will know."', punchline:'Before music, before voices, before the world — she knows the rhythm of you. 💙' },
-        tired:  { badge:'Something to smile', content:'"Unborn babies hiccup in the womb — usually from about 9 weeks."',   punchline:'Tiny, silent hiccups. The smallest, most endearing protest. She is practicing for the world already. 🌿' },
-        hopeful:{ badge:'Beautiful fact',     content:'"Babies smile for the first time in the womb — usually at 26 weeks."', punchline:'She has already smiled. Before she has ever seen anything. Joy is her very first response to being alive. ✨' },
-        calm:   { badge:'A beautiful word',   content:'"Koi no yokan"',                                                       punchline:'Japanese · the feeling upon meeting someone that falling in love is inevitable. You felt this already, didn\'t you. 💛' },
-        heavy:  { badge:'Something to smile', content:'"Babies are born with no kneecaps — they develop over the first few years."', punchline:'She will arrive soft and kneecap-free, completely unbothered, ready to be held. You are ready to hold her. 💙' }
-      },
-      2: {
-        gentle: { badge:'A wonder',           content:'"By 18 weeks, your baby has developed her own unique fingerprints."',  punchline:'No one in the history of the world has ever had those exact lines. She is already one of a kind. 🌟' },
-        tired:  { badge:'Something to smile', content:'"Babies prefer the smell of their mother above all other scents."',   punchline:'To her, you are the most beautiful smell in the world. You always will be. 🌿' },
-        hopeful:{ badge:'Beautiful fact',     content:'"The womb is thought to be the warmest, most consistently comfortable environment a human will ever experience."', punchline:'You made that for her. The most comfortable place she will ever be. 💫' },
-        calm:   { badge:'A beautiful word',   content:'"Forelsket"',                                                          punchline:'Norwegian · the indescribable euphoria of falling in love for the first time. You are in it right now. 🌸' },
-        heavy:  { badge:'Something to smile', content:'"Newborns see in soft focus — their vision is perfectly suited to see a human face at the distance of being held."', punchline:'Her first clear image will be you. She is built to find you beautiful. 💙' }
-      },
-      3: {
-        gentle: { badge:'A wonder',           content:'"Your baby begins developing taste buds at just 7 weeks."',            punchline:'Everything you have eaten, she has gently tasted. Every meal was shared. Every flavor was an introduction. 🌸' },
-        tired:  { badge:'Something to smile', content:'"Babies in the womb yawn — scientists think it may be a sign of healthy brain development."', punchline:'She is tired too, sometimes. And still growing magnificently. Just like you. 🌿' },
-        hopeful:{ badge:'Beautiful fact',     content:'"A baby\'s first laugh is one of the most studied sounds in human science."', punchline:'Researchers travel the world to record it. The whole of science agrees — it is the best sound. 💛' },
-        calm:   { badge:'A beautiful word',   content:'"Gezelligheid"',                                                       punchline:'Dutch · the warm feeling of togetherness, coziness, and belonging. You are already creating this for her. 🏡' },
-        heavy:  { badge:'Something to smile', content:'"Babies are born with an instinct to walk — if held upright on a surface, they will make stepping motions."', punchline:'She arrives already knowing how to move toward the world. She inherited that from you. 💙' }
-      },
-      4: {
-        gentle: { badge:'A wonder',           content:'"The cells a baby leaves in her mother\'s body can remain there for decades — sometimes her whole life."', punchline:'She will always be a part of you, even after she leaves your arms. The science confirms what you already knew. 💛' },
-        tired:  { badge:'Something to smile', content:'"Newborns have no tears when they cry — tear ducts don\'t fully develop until around 3 weeks after birth."', punchline:'She will arrive with the full drama of crying and none of the tears. Already theatrical. Already wonderful. 🌿' },
-        hopeful:{ badge:'Beautiful fact',     content:'"Babies can recognize faces in the womb using light filtering through the skin."', punchline:'She has already been watching for you, in her way. She has been turning toward the light you carry. 🌟' },
-        calm:   { badge:'A beautiful word',   content:'"Sehnsucht"',                                                          punchline:'German · a deep longing for something you cannot quite name. An ache for something beautiful, not yet arrived. She is that something. 🍂' },
-        heavy:  { badge:'Something to smile', content:'"Babies are natural swimmers — they have an instinctive reflex to hold their breath and paddle in water."', punchline:'She arrives already knowing the water. She has been swimming her whole life so far. 🌊' }
-      },
-      5: {
-        gentle: { badge:'A wonder',           content:'"Babies begin dreaming in the womb from about 28 weeks."',             punchline:'She is already dreaming. We don\'t know what of — but she is already somewhere wonderful in her mind. 🌙' },
-        tired:  { badge:'Something to smile', content:'"A newborn\'s stomach is about the size of a cherry."',               punchline:'A cherry. Perfectly tiny. Every enormous thing in this world began very small. Including her. 🍒' },
-        hopeful:{ badge:'Beautiful fact',     content:'"The sound of a mother\'s voice releases oxytocin in a baby — the same hormone as a hug."', punchline:'Every time you speak, she receives a hug. You have been holding her, in your way, all along. 💛' },
-        calm:   { badge:'A beautiful word',   content:'"Aware"',                                                              punchline:'Japanese · the bittersweet feeling of things passing. Of beauty that does not last. Of this moment, right now, that will become a memory. 🌸' },
-        heavy:  { badge:'Something to smile', content:'"Babies have three times more taste buds than adults."',              punchline:'She arrives as a connoisseur. Everything will taste extraordinary to her. Including life. 🌟' }
-      },
-      6: {
-        gentle: { badge:'A wonder',           content:'"A newborn baby\'s head accounts for about one quarter of her total body length."', punchline:'All that brain. All that potential. All that future — already here, already growing, already hers. 💙' },
-        tired:  { badge:'Something to smile', content:'"Babies are born without a fully formed kneecap — they use cartilage instead."', punchline:'Soft, flexible, ready to become. She arrives prepared to adapt to whatever world she meets. Just like you. 🌿' },
-        hopeful:{ badge:'Beautiful fact',     content:'"Research shows babies can distinguish their mother\'s language from others at birth."', punchline:'She already knows the music of your voice. She arrived knowing your language. 🌍' },
-        calm:   { badge:'A beautiful word',   content:'"Lykke"',                                                              punchline:'Danish · happiness, but specifically the kind that comes from simplicity — warmth, togetherness, enough. You are building a life of enough. 🏡' },
-        heavy:  { badge:'Something to smile', content:'"Babies grip things so tightly at birth they can support their own weight."', punchline:'That tiny fist will hold your finger with her whole strength. And you will never want to let go. 💙' }
-      },
-      0: {
-        gentle: { badge:'A wonder',           content:'"The human brain has roughly 86 billion neurons — most already present at birth."', punchline:'She arrives with almost everything she will ever need already inside her. You gave her that beginning. 🌟' },
-        tired:  { badge:'Something to smile', content:'"Newborns sleep up to 17 hours a day."',                               punchline:'Seventeen hours. She is arriving well-rested, ready for you. You will be a wonderful surprise. 🌿' },
-        hopeful:{ badge:'Beautiful fact',     content:'"A baby\'s first word is usually said between 10 and 14 months — but she understands words from about 6 months."', punchline:'She will understand your love long before she can say it back. That\'s the most important thing to know. 💛' },
-        calm:   { badge:'A beautiful word',   content:'"Coddiwomple"',                                                        punchline:'English slang · to travel purposefully toward a vague destination. You are coddiwompling, beautifully, every day. 🗺️' },
-        heavy:  { badge:'Something to smile', content:'"Babies have been found to laugh in their sleep."',                    punchline:'She is laughing, right now, at something only she knows. She arrived with her own secret joy. 🌙' }
-      }
+    2: { // Nova · Tue
+      gentle: { content:'"You are still yourself, even as life changes around you."', punchline:'That part of you remains steady.' },
+      tired:  { content:'"You are allowed to move slowly and still be enough."', punchline:'Nothing is falling behind.' },
+      hopeful:{ content:'"Even small hopes are strong enough to carry you forward."', punchline:'They matter more than they seem.' },
+      calm:   { content:'"There is nothing urgent about this moment."', punchline:'You can breathe into it.' },
+      heavy:  { content:'"Some days are heavier without clear reason."', punchline:'You don\'t have to solve it today.' }
+    },
+    3: { // Stella · Wed
+      gentle: { content:'"You are showing up in your own quiet, meaningful way."', punchline:'That is already enough.' },
+      tired:  { content:'"Tiredness is not failure, it is a signal to pause."', punchline:'You are allowed to listen to it.' },
+      hopeful:{ content:'"What you hope for is already being shaped in small ways."', punchline:'Keep going gently.' },
+      calm:   { content:'"Peace often looks like not needing to rush anything."', punchline:'This is one of those moments.' },
+      heavy:  { content:'"Even when things feel heavy, you are still moving through them."', punchline:'This will not stay forever.' }
+    },
+    4: { // Lyra · Thu
+      gentle: { content:'"You don\'t need to do everything to be doing enough."', punchline:'What you\'ve done already matters.' },
+      tired:  { content:'"Your body and mind are asking for softness today."', punchline:'It\'s okay to respond gently.' },
+      hopeful:{ content:'"Better days are built quietly, one small step at a time."', punchline:'You are already building them.' },
+      calm:   { content:'"There is nothing to prove in this moment."', punchline:'You can simply be here.' },
+      heavy:  { content:'"Even heavy feelings can be carried one small moment at a time."', punchline:'You are not stuck in them.' }
+    },
+    5: { // Zara · Fri
+      gentle: { content:'"You are allowed to take care of yourself without explanation."', punchline:'That is enough reason.' },
+      tired:  { content:'"Even slow days are still part of your life moving forward."', punchline:'You are not behind.' },
+      hopeful:{ content:'"Good things tend to arrive quietly, not loudly."', punchline:'Stay open in your own way.' },
+      calm:   { content:'"You don\'t have to fill every silence with doing."', punchline:'Stillness is also full.' },
+      heavy:  { content:'"This feeling is real, but it is not permanent."', punchline:'It will ease in time.' }
+    },
+    6: { // Aura · Sat
+      gentle: { content:'"You are doing your best, and that is already meaningful."', punchline:'Nothing extra is required.' },
+      tired:  { content:'"Rest is not a reward, it is part of living well."', punchline:'You are allowed to pause.' },
+      hopeful:{ content:'"Even uncertain days still hold quiet possibility."', punchline:'Something is still unfolding.' },
+      calm:   { content:'"You don\'t need to change anything about this moment."', punchline:'It is already enough.' },
+      heavy:  { content:'"You are not meant to carry everything alone."', punchline:'Support exists around you.' }
+    },
+    0: { // Mira · Sun
+      gentle: { content:'"You made it through another week in your own way."', punchline:'That matters more than it seems.' },
+      tired:  { content:'"Exhaustion is not weakness, it is human."', punchline:'You can rest without guilt.' },
+      hopeful:{ content:'"Even slow progress is still real progress."', punchline:'You are moving forward.' },
+      calm:   { content:'"There is nothing unfinished about who you are right now."', punchline:'This moment is complete.' },
+      heavy:  { content:'"Even difficult weeks pass, even when they feel stuck."', punchline:'This will loosen with time.' }
     }
+  },
+  angel: {
+    1: { // Neel · Mon
+      gentle: { content:'"Little one, you are already deeply cared for in simple ways."', punchline:'You are safe in that care.' },
+      tired:  { content:'"Even in stillness, growth is quietly happening."', punchline:'You are held through it.' },
+      hopeful:{ content:'"A gentle arrival is already making space for you."', punchline:'You are warmly expected.' },
+      calm:   { content:'"There is nothing rushing your becoming."', punchline:'Everything is unfolding gently.' },
+      heavy:  { content:'"Even quiet days hold you with care and steadiness."', punchline:'You are not alone in this.' }
+    },
+    2: { // Nova · Tue
+      gentle: { content:'"Something new is already forming a place for you."', punchline:'You are part of it already.' },
+      tired:  { content:'"Even beginnings take time before they feel bright."', punchline:'You are safe in this in-between.' },
+      hopeful:{ content:'"You are already welcomed by life in quiet ways."', punchline:'That welcome is real.' },
+      calm:   { content:'"You are resting inside a steady unfolding."', punchline:'Nothing is being forced.' },
+      heavy:  { content:'"Even dim moments still hold your presence completely."', punchline:'You are fully held.' }
+    },
+    3: { // Stella · Wed
+      gentle: { content:'"Little star, you are already part of something bright and kind."', punchline:'You belong here.' },
+      tired:  { content:'"Even light rests before it fully shines."', punchline:'You are safe in forming.' },
+      hopeful:{ content:'"Your arrival is already part of a hopeful beginning."', punchline:'You are awaited with care.' },
+      calm:   { content:'"You are resting in steady quiet light."', punchline:'Everything around you is calm.' },
+      heavy:  { content:'"Even covered skies cannot remove your place in this world."', punchline:'You remain held in light.' }
+    },
+    4: { // Lyra · Thu
+      gentle: { content:'"There is a soft harmony already forming around you."', punchline:'You are part of it.' },
+      tired:  { content:'"Even silence carries you gently forward."', punchline:'You are always supported.' },
+      hopeful:{ content:'"Something beautiful is quietly preparing for you."', punchline:'You are part of its arrival.' },
+      calm:   { content:'"You are resting in a steady, gentle flow."', punchline:'Nothing is rushed.' },
+      heavy:  { content:'"Even quiet moments are still part of your story."', punchline:'You are not outside of it.' }
+    },
+    5: { // Zara · Fri
+      gentle: { content:'"Little one, growth is already happening around you gently."', punchline:'You are safe in it.' },
+      tired:  { content:'"Even seeds take their time before they rise."', punchline:'You are protected in this stage.' },
+      hopeful:{ content:'"Joy is already making space for your arrival."', punchline:'You are warmly awaited.' },
+      calm:   { content:'"You are resting in a quiet field of care."', punchline:'Everything is soft around you.' },
+      heavy:  { content:'"Even unseen roots hold strong in quiet places."', punchline:'You are deeply supported.' }
+    },
+    6: { // Aura · Sat
+      gentle: { content:'"You are surrounded by care that does not need effort from you."', punchline:'You are already held.' },
+      tired:  { content:'"Even stillness carries a soft protection around you."', punchline:'You are not alone.' },
+      hopeful:{ content:'"A welcoming world is already forming around your arrival."', punchline:'You are expected.' },
+      calm:   { content:'"You are floating in a gentle field of presence."', punchline:'Everything is calm here.' },
+      heavy:  { content:'"Even when things feel heavy outside, you remain protected inside it."', punchline:'You are safe.' }
+    },
+    0: { // Mira · Sun
+      gentle: { content:'"Little one, your story is already unfolding with care."', punchline:'You are part of something whole.' },
+      tired:  { content:'"Even quiet days are part of your journey toward life."', punchline:'You are always carried forward.' },
+      hopeful:{ content:'"What is coming toward you is already preparing gently."', punchline:'You are deeply awaited.' },
+      calm:   { content:'"You are resting inside a steady, wise beginning."', punchline:'Everything is aligned.' },
+      heavy:  { content:'"Even heavy skies cannot touch your gentle becoming."', punchline:'You are protected.' }
+    }
+  }
+}
+
+  const SEALED_COPY = {
+    gentle: [
+      'Something wonderful is quietly on its way to you.',
+      'A little joy has been wrapped just for you.',
+      'Because someone thought you deserved a moment of joy.'
+    ],
+    tired: [
+      'Open when you need a smile — you\'ll find one inside.',
+      'A pleasant interruption to your ordinary day.',
+      'Not everything good is planned. This is one of them.'
+    ],
+    hopeful: [
+      'Good things are closer than they appear.',
+      'A tiny bit of magic has been assigned to you.',
+      'Expect delight in 3… 2… 1…'
+    ],
+    calm: [
+      'Inside this moment is something meant just for you.',
+      'The universe left you a small package — this is it.',
+      'A small surprise is waiting just beyond today.'
+    ],
+    heavy: [
+      'A surprise chose you today.',
+      'You didn\'t know you needed this, but you do.',
+      'A simple gift for someone not-so-simple.'
+    ]
   };
 
   const TOMORROW_ANGELS = ['Mira','Neel','Nova','Stella','Lyra','Zara','Aura'];
@@ -1593,7 +1621,10 @@
     // show wrapped gift
     setTimeout(() => {
       document.getElementById('moodState').style.display = 'none';
-      document.getElementById('giftHintText').textContent = data.badge + ' · sealed just for today';
+      const day   = new Date().getDay();
+      const lines = SEALED_COPY[moodKey] || SEALED_COPY.gentle;
+      const hint  = lines[day % lines.length];
+      document.getElementById('giftHintText').textContent = hint;
       document.getElementById('giftState').style.display = 'block';
     }, 180);
   }
