@@ -1571,6 +1571,7 @@
     ]
   };
 
+  /* Angel for each day: index = day (0=Sun...6=Sat) */
   const TOMORROW_ANGELS = ['Mira','Neel','Nova','Stella','Lyra','Zara','Aura'];
 
   let selectedMood = null;
@@ -1643,7 +1644,7 @@
     document.getElementById('giftPunchline').textContent = data.punchline;
 
     // tomorrow line
-    const tomorrow = TOMORROW_ANGELS[day];
+    const tomorrow = TOMORROW_ANGELS[(day + 1) % 7];
     document.getElementById('giftTomorrow').textContent =
       'A new gift arrives tomorrow with ' + tomorrow + ' ✦';
 
