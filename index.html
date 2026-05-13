@@ -804,14 +804,10 @@
 
     /* remaining cards placeholder */
     .cards-grid-remaining {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 12px;
       margin-bottom: 12px;
-    }
-
-    @media (max-width: 520px) {
-      .cards-grid-remaining { grid-template-columns: 1fr; }
     }
 
     /* re-roll button — now real */
@@ -1270,21 +1266,33 @@
           <div class="dest-links" id="destLinks"></div>
         </div>
         <div class="genre-hint" id="placeHint"></div>
+
+        <!-- CARD 2 RESET -->
+        <div class="card2-reset-wrap" id="card2ResetWrap" style="display:none;">
+          <button class="gift-another-btn" id="card2ResetBtn">↺ Choose a different place</button>
+        </div>
+
       </div>
 
-      <!-- CARD 3 PLACEHOLDER -->
-      <div class="card-placeholder">Card 3 — coming soon</div>
+      <!-- CARD 3 — CLASSIC STORIES (placeholder) -->
+      <div class="card" id="card3">
+        <div class="card-header">
+          <span class="card-emoji">📖</span>
+          <div class="card-header-text">
+            <div class="card-category">Classic Stories</div>
+            <div class="card-title" id="card3Title">Something to read or listen to</div>
+          </div>
+        </div>
+        <div class="card-intro" style="font-size:12px; font-style:italic; color:var(--text-m); margin-top:8px; line-height:1.6;">
+          A story, a poem, or a moment of quiet reading — coming soon.
+        </div>
+      </div>
 
     </div>
 
     <!-- RE-ROLL -->
     <div class="reroll-wrap">
-      <button class="reroll-btn" id="rerollBtn">✨ Show me something else</button>
-    </div>
-
-    <!-- ANGEL INFO PLACEHOLDER — Step 5 -->
-    <div class="placeholder">
-      Angel info — Step 5
+      <button class="reroll-btn" id="rerollBtn">✨ Something else</button>
     </div>
 
     <!-- FOOTER -->
@@ -1990,6 +1998,7 @@
       showDestination(saved, mode, season.name.split(' ')[0], 0);
     } else {
       document.getElementById('destinationBox').style.display = 'none';
+      document.getElementById('card2ResetWrap').style.display = 'none';
       document.getElementById('placeHint').textContent = '';
     }
   }
@@ -2021,9 +2030,21 @@
       <a class="dest-link" href="${dest.ao}" target="_blank" rel="noopener">🔭 Atlas Obscura</a>`;
 
     document.getElementById('destinationBox').style.display = 'block';
+    document.getElementById('card2ResetWrap').style.display = 'block';
     document.getElementById('placeHint').textContent =
-      'Tap ✨ Show me something else for another destination';
+      'Tap ✨ Something else for another destination';
   }
+
+  /* Card 2 reset button */
+  document.getElementById('card2ResetBtn').addEventListener('click', () => {
+    const mode = localStorage.getItem('mmw-mode') || 'mom';
+    localStorage.removeItem('mmw-place-' + mode);
+    document.getElementById('destinationBox').style.display = 'none';
+    document.getElementById('card2ResetWrap').style.display = 'none';
+    document.getElementById('placeHint').textContent = '';
+    document.querySelectorAll('#placeGrid .genre-btn')
+      .forEach(b => b.classList.remove('selected'));
+  });
 
   /* ─────────────────────────────────────
      RE-ROLL BUTTON
