@@ -28,18 +28,18 @@
       --text-s:      #C47A5A;
       --shadow:      0 2px 16px rgba(240,135,90,0.12);
     }
-    [data-theme="purple"] {
-      --bg:          #F0EEFF;
-      --bg-band:     #E8E2FC;
+    [data-theme="blue"] {
+      --bg:          #EDF6FF;
+      --bg-band:     #D6ECFA;
       --bg-card:     #FFFFFF;
-      --accent:      #7F77DD;
-      --accent-deep: #534AB7;
-      --accent-line: rgba(127,119,221,0.22);
-      --text-h:      #26215C;
-      --text-b:      #3D3880;
-      --text-m:      #6B65A8;
-      --text-s:      #7A74BB;
-      --shadow:      0 2px 16px rgba(127,119,221,0.12);
+      --accent:      #4A9FD4;
+      --accent-deep: #2B7BAD;
+      --accent-line: rgba(74,159,212,0.22);
+      --text-h:      #0D2E42;
+      --text-b:      #1A5272;
+      --text-m:      #2B7BAD;
+      --text-s:      #5A9EC0;
+      --shadow:      0 2px 16px rgba(74,159,212,0.12);
     }
     [data-theme="golden"] {
       --bg:          #FFF8EE;
@@ -90,7 +90,7 @@
       z-index: 100;
       background: var(--bg);
       border-bottom: 0.5px solid var(--accent-line);
-      padding: 10px 20px;
+      padding: 9px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -101,36 +101,52 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     .top-bar-name {
       font-family: 'Playfair Display', serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 500;
       color: var(--text-h);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: color 0.5s;
     }
 
     .top-bar-name .spark {
       color: var(--accent);
-      font-size: 0.6em;
+      font-size: 0.55em;
       transition: color 0.5s;
     }
+
+    /* About link in top bar */
+    .about-link {
+      background: none;
+      border: none;
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      color: var(--text-m);
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      padding: 0;
+      transition: color 0.3s;
+    }
+
+    .about-link:hover { color: var(--accent-deep); }
 
     .restart-btn {
       background: none;
       border: 1px solid var(--accent-line);
       border-radius: 20px;
-      padding: 4px 12px;
+      padding: 3px 10px;
       font-family: 'Lato', sans-serif;
       font-size: 10px;
       color: var(--text-m);
       cursor: pointer;
       transition: border-color 0.3s, color 0.3s, background 0.3s;
-      letter-spacing: 0.02em;
       display: none;
     }
 
@@ -145,9 +161,10 @@
       flex-direction: column;
       align-items: flex-end;
       gap: 3px;
+      flex-shrink: 0;
     }
 
-    .theme-dots { display: flex; gap: 6px; align-items: center; }
+    .theme-dots { display: flex; gap: 6px; }
 
     .theme-dot {
       width: 14px;
@@ -163,7 +180,7 @@
     .theme-dot:hover  { transform: scale(1.35); }
     .theme-dot.active { box-shadow: 0 0 0 2.5px var(--accent); transform: scale(1.2); }
     .theme-dot.peach  { background: #F0875A; }
-    .theme-dot.purple { background: #7F77DD; }
+    .theme-dot.blue   { background: #4A9FD4; }
     .theme-dot.golden { background: #D4900A; }
     .theme-dot.green  { background: #3BAD72; }
 
@@ -176,29 +193,106 @@
     }
 
     /* ─────────────────────────────────────
+       ABOUT MODAL OVERLAY
+    ───────────────────────────────────── */
+    .about-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      animation: fadeIn 0.25s ease both;
+    }
+
+    .about-overlay.open { display: flex; }
+
+    .about-modal {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 28px 24px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+      position: relative;
+      animation: slideUp 0.3s ease both;
+      transition: background 0.5s;
+    }
+
+    .about-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: var(--text-s);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      transition: color 0.2s;
+    }
+
+    .about-modal-close:hover { color: var(--accent-deep); }
+
+    .about-modal h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text-h);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color 0.5s;
+    }
+
+    .about-modal h2 .spark {
+      color: var(--accent);
+      font-size: 0.6em;
+      opacity: 0.8;
+      transition: color 0.5s;
+    }
+
+    .about-modal p {
+      font-size: 13px;
+      color: var(--text-b);
+      line-height: 1.85;
+      font-weight: 400;
+      transition: color 0.5s;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────
        PAGE
     ───────────────────────────────────── */
     .page {
       max-width: 680px;
       margin: 0 auto;
-      padding: 28px 20px 56px;
+      padding: 24px 20px 48px;
     }
 
     /* ─────────────────────────────────────
-       WELCOME PANEL — the landing
+       WELCOME PANEL
     ───────────────────────────────────── */
     #welcomePanel {
       text-align: center;
-      padding: 32px 20px 28px;
+      padding: 28px 20px 24px;
       animation: fadeUp 0.6s ease both;
     }
 
     #welcomePanel.hidden { display: none; }
 
     .welcome-sparkle {
-      font-size: 40px;
+      font-size: 36px;
       display: block;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       animation: pulse 3s ease-in-out infinite;
     }
 
@@ -209,18 +303,18 @@
 
     .welcome-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(26px, 5vw, 36px);
+      font-size: clamp(24px, 5vw, 34px);
       font-weight: 500;
       color: var(--text-h);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       transition: color 0.5s;
     }
 
     .welcome-tagline {
       font-style: italic;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--accent-deep);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       font-weight: 300;
       transition: color 0.5s;
     }
@@ -229,7 +323,7 @@
       font-size: 12px;
       color: var(--text-s);
       font-weight: 400;
-      margin-bottom: 36px;
+      margin-bottom: 28px;
       transition: color 0.5s;
     }
 
@@ -238,8 +332,8 @@
       color: var(--text-m);
       line-height: 1.8;
       font-weight: 400;
-      max-width: 380px;
-      margin: 0 auto 32px;
+      max-width: 360px;
+      margin: 0 auto 28px;
       transition: color 0.5s;
     }
 
@@ -247,27 +341,25 @@
       background: var(--accent);
       border: none;
       border-radius: 30px;
-      padding: 14px 48px;
+      padding: 13px 44px;
       font-family: 'Playfair Display', serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 400;
       color: #fff;
       cursor: pointer;
-      transition: opacity 0.3s, transform 0.2s, box-shadow 0.2s;
+      transition: opacity 0.3s, transform 0.2s;
       box-shadow: var(--shadow);
       letter-spacing: 0.03em;
-      display: inline-block;
     }
 
     .begin-btn:hover {
       opacity: 0.88;
       transform: translateY(-2px);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.12);
     }
 
     .begin-hint {
       display: block;
-      margin-top: 12px;
+      margin-top: 10px;
       font-size: 10px;
       color: var(--text-s);
       font-style: italic;
@@ -275,7 +367,7 @@
     }
 
     /* ─────────────────────────────────────
-       APP CONTENT — hidden until begin
+       APP CONTENT
     ───────────────────────────────────── */
     #appContent {
       display: none;
@@ -284,22 +376,136 @@
 
     #appContent.visible { display: block; }
 
-    /* small greeting strip at top of content */
-    .greeting-strip {
+    /* ─────────────────────────────────────
+       ANGEL BANNER
+    ───────────────────────────────────── */
+    .angel-banner {
+      border-radius: 18px;
+      padding: 20px 20px 16px;
+      margin-bottom: 12px;
       background: var(--bg-band);
-      border-radius: 14px;
-      padding: 12px 20px;
-      margin-bottom: 16px;
-      text-align: center;
       transition: background 0.5s;
+      animation: fadeUp 0.5s ease both;
     }
 
-    .greeting-strip p {
-      font-size: 13px;
+    .angel-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .angel-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 1.5px solid var(--accent-line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      transition: border-color 0.5s;
+    }
+
+    .angel-info { flex: 1; }
+
+    .angel-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-s);
+      margin-bottom: 3px;
+      transition: color 0.5s;
+    }
+
+    .angel-name-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2px;
+    }
+
+    .angel-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 500;
       color: var(--text-h);
+      line-height: 1;
+      transition: color 0.5s;
+    }
+
+    .speak-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-line);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: var(--text-m);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .speak-btn:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .angel-tagline {
+      font-size: 12px;
       font-style: italic;
+      color: var(--text-m);
+      font-weight: 300;
+      transition: color 0.5s;
+    }
+
+    .angel-greeting {
+      font-size: 12px;
+      color: var(--text-b);
+      background: rgba(255,255,255,0.5);
+      border-radius: 8px;
+      padding: 7px 12px;
       font-weight: 400;
       transition: color 0.5s;
+    }
+
+    /* ─────────────────────────────────────
+       MODE TOGGLE
+    ───────────────────────────────────── */
+    .mode-toggle {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      animation: fadeUp 0.5s ease 0.05s both;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 24px;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s,
+                  border-color 0.25s, box-shadow 0.25s;
+      text-align: center;
+      border: 1.5px solid var(--accent-line);
+      background: var(--bg-card);
+      color: var(--text-m);
+    }
+
+    .mode-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: var(--shadow);
     }
 
     /* ─────────────────────────────────────
@@ -349,7 +555,8 @@
       font-size: 12px;
       font-style: italic;
       font-weight: 400;
-      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, color 0.5s;
+      transition: background 0.5s, border-color 0.5s,
+                  box-shadow 0.5s, color 0.5s;
     }
 
     /* ─────────────────────────────────────
@@ -374,68 +581,50 @@
     }
 
     /* ─────────────────────────────────────
-       DIVIDER
-    ───────────────────────────────────── */
-    .divider {
-      border: none;
-      border-top: 0.5px solid var(--accent-line);
-      margin: 24px 0;
-      transition: border-color 0.5s;
-    }
-
-    /* ─────────────────────────────────────
-       ABOUT
-    ───────────────────────────────────── */
-    .about { margin-bottom: 32px; }
-
-    .about-heading {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--text-h);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      transition: color 0.5s;
-    }
-
-    .about-heading .spark {
-      color: var(--accent);
-      font-size: 0.65em;
-      opacity: 0.7;
-      transition: color 0.5s;
-    }
-
-    .about p {
-      font-size: 13px;
-      color: var(--text-b);
-      line-height: 1.8;
-      font-weight: 400;
-      transition: color 0.5s;
-    }
-
-    /* ─────────────────────────────────────
        FOOTER
     ───────────────────────────────────── */
-    footer {
+    .site-footer {
       text-align: center;
-      padding-top: 18px;
+      padding-top: 16px;
       border-top: 0.5px solid var(--accent-line);
       transition: border-color 0.5s;
     }
 
-    footer p {
-      font-size: 11px;
-      color: var(--text-m);
-      letter-spacing: 0.04em;
+    .site-footer p {
+      font-size: 10px;
+      color: var(--text-s);
+      letter-spacing: 0.03em;
       transition: color 0.5s;
     }
 
-    footer .spark {
+    .site-footer .spark {
       color: var(--accent);
-      opacity: 0.6;
-      margin: 0 6px;
+      opacity: 0.55;
+      margin: 0 5px;
+      font-size: 0.8em;
+      transition: color 0.5s;
+    }
+
+    /* welcome page footer */
+    #welcomeFooter {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 0.5px solid var(--accent-line);
+      margin-top: 28px;
+      transition: border-color 0.5s;
+    }
+
+    #welcomeFooter p {
+      font-size: 10px;
+      color: var(--text-s);
+      letter-spacing: 0.03em;
+      transition: color 0.5s;
+    }
+
+    #welcomeFooter .spark {
+      color: var(--accent);
+      opacity: 0.55;
+      margin: 0 5px;
       font-size: 0.8em;
       transition: color 0.5s;
     }
@@ -448,24 +637,52 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
   </style>
 </head>
 <body>
 
-<!-- STICKY TOP BAR -->
+<!-- ══════════════════════════════════════
+     ABOUT MODAL
+══════════════════════════════════════ -->
+<div class="about-overlay" id="aboutOverlay">
+  <div class="about-modal">
+    <button class="about-modal-close" id="aboutClose" aria-label="Close">✕</button>
+    <h2>
+      <span class="spark">✦</span> About
+    </h2>
+    <p>
+      My MagicWand is a daily magical companion for expecting moms.
+      An angel appears every day with three curated cards —
+      for you and your little sunshine.
+      Each angel is named after a real star or celestial wonder,
+      bringing a little magic to your day, every single day.
+      Made with love for moms everywhere.
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     STICKY TOP BAR
+══════════════════════════════════════ -->
 <div class="top-bar">
   <div class="top-bar-left">
     <div class="top-bar-name">
       <span class="spark">✦</span> My MagicWand
     </div>
-    <button class="restart-btn" id="restartBtn">↺ Restart the magic</button>
+    <button class="about-link" id="aboutLink">About</button>
+    <button class="restart-btn" id="restartBtn">↺ Restart</button>
   </div>
   <div class="top-bar-right">
     <div class="theme-dots">
       <button class="theme-dot peach"  data-theme="peach"
               title="Bloom"     aria-label="Bloom"></button>
-      <button class="theme-dot purple" data-theme="purple"
-              title="Celestial" aria-label="Celestial"></button>
+      <button class="theme-dot blue"   data-theme="blue"
+              title="Dreamy"    aria-label="Dreamy blue"></button>
       <button class="theme-dot golden" data-theme="golden"
               title="Sunshine"  aria-label="Sunshine"></button>
       <button class="theme-dot green"  data-theme="green"
@@ -475,7 +692,9 @@
   </div>
 </div>
 
-<!-- MAIN PAGE -->
+<!-- ══════════════════════════════════════
+     MAIN PAGE
+══════════════════════════════════════ -->
 <div class="page">
 
   <!-- WELCOME PANEL -->
@@ -485,57 +704,69 @@
     <p class="welcome-tagline">A little magic, every single day</p>
     <p class="welcome-subtitle">For you and your little sunshine</p>
     <p class="welcome-desc">
-      A fairy angel appears every day with three curated cards —
+      An angel appears every day with three curated cards —
       joyful discoveries for you and the little one on the way.
     </p>
     <button class="begin-btn" id="beginBtn">Begin the magic ✦</button>
-    <span class="begin-hint">choose your mood colour above ✦ then tap to begin</span>
+    <span class="begin-hint">choose your mood color above ✦ then tap to begin</span>
+
+    <div id="welcomeFooter">
+      <p>
+        <span class="spark">✦</span>
+        © 2026 Madhu Devi · mymagicwand.app
+        <span class="spark">✦</span>
+      </p>
+    </div>
   </div>
 
   <!-- APP CONTENT -->
   <div id="appContent">
 
-    <div class="greeting-strip">
-      <p>Your fairy is waiting ✦ a little magic just for you</p>
+    <!-- ANGEL BANNER -->
+    <div class="angel-banner" id="angelBanner">
+      <div class="angel-top">
+        <div class="angel-circle" id="angelEmoji">✨</div>
+        <div class="angel-info">
+          <div class="angel-label">Your angel today</div>
+          <div class="angel-name-row">
+            <div class="angel-name" id="angelName">—</div>
+            <button class="speak-btn" id="speakBtn" aria-label="Hear angel name">
+              🔊 Hear her name
+            </button>
+          </div>
+          <div class="angel-tagline" id="angelTagline">—</div>
+        </div>
+      </div>
+      <div class="angel-greeting" id="angelGreeting">—</div>
     </div>
 
-    <div class="placeholder tall">
-      Your fairy of the day — Step 3
+    <!-- MODE TOGGLE -->
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="modeForMom"
+              data-mode="mom">✦ For Mom</button>
+      <button class="mode-btn" id="modeMyAngel"
+              data-mode="angel">✦ My Angel</button>
     </div>
 
-    <div class="placeholder">
-      For my baby &nbsp;·&nbsp; Just for me — Step 3
-    </div>
-
+    <!-- CARDS PLACEHOLDER — Step 4 -->
     <div class="cards-grid">
-      <div class="card-placeholder">Card 1</div>
-      <div class="card-placeholder">Card 2</div>
-      <div class="card-placeholder">Card 3</div>
+      <div class="card-placeholder">Card 1 — Step 4</div>
+      <div class="card-placeholder">Card 2 — Step 4</div>
+      <div class="card-placeholder">Card 3 — Step 4</div>
     </div>
 
+    <!-- RE-ROLL PLACEHOLDER — Step 4 -->
     <div class="reroll-wrap">
       <div class="reroll-ghost">✨ Show me something else — Step 4</div>
     </div>
 
+    <!-- ANGEL INFO PLACEHOLDER — Step 5 -->
     <div class="placeholder">
-      Fairy info — Step 5
+      Angel info — Step 5
     </div>
 
-    <hr class="divider" />
-
-    <section class="about">
-      <h2 class="about-heading">
-        <span class="spark">✦</span> About
-      </h2>
-      <p>
-        My MagicWand is a daily magical companion for expecting moms.
-        A fairy angel appears every day with three curated cards —
-        for you and your little sunshine.
-        Made with love for moms everywhere.
-      </p>
-    </section>
-
-    <footer>
+    <!-- FOOTER -->
+    <footer class="site-footer">
       <p>
         <span class="spark">✦</span>
         © 2026 Madhu Devi · mymagicwand.app
@@ -544,27 +775,116 @@
     </footer>
 
   </div>
-
-  <!-- WELCOME FOOTER — visible on landing page only -->
-  <footer id="welcomeFooter">
-    <p>
-      <span class="spark">✦</span>
-      © 2026 Madhu Devi · mymagicwand.app
-      <span class="spark">✦</span>
-    </p>
-  </footer>
-
 </div>
 
-<!-- JAVASCRIPT -->
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
 <script>
 
-  /* ── THEME ENGINE ── */
+  /* ─────────────────────────────────────
+     SEVEN ANGELS
+  ───────────────────────────────────── */
+  const ANGELS = {
+    1: { name:'Neel',  emoji:'🌌', tagline:'Blue as the infinite sky',           color:'#534AB7' },
+    2: { name:'Nova',  emoji:'💫', tagline:'Born from a burst of new light',      color:'#D4900A' },
+    3: { name:'Stella',emoji:'⭐', tagline:'Pure and radiant, a true star',       color:'#1D9E75' },
+    4: { name:'Lyra',  emoji:'🎵', tagline:'The celestial harp, always in harmony', color:'#639922' },
+    5: { name:'Zara',  emoji:'🌸', tagline:'Blooming and shining, just for you',  color:'#D4537E' },
+    6: { name:'Aura',  emoji:'✨', tagline:'The warm glow that surrounds the stars', color:'#378ADD' },
+    0: { name:'Mira',  emoji:'🌟', tagline:'Wonderful, bright, and full of grace', color:'#C45C2A' }
+  };
+
+  /* ─────────────────────────────────────
+     TIME-OF-DAY GREETING
+  ───────────────────────────────────── */
+  function getGreeting(name) {
+    const h   = new Date().getHours();
+    const day = new Date().getDay();
+    if (day === 0 || day === 6)
+      return `Happy weekend — ${name} is feeling playful today`;
+    if (h >= 6  && h < 12)
+      return `Good morning — ${name} has something bright for you`;
+    if (h >= 12 && h < 17)
+      return `Good afternoon — ${name} has something dreamy for you`;
+    if (h >= 17 && h < 22)
+      return `Good evening — ${name} brought something warm for you`;
+    return `It's late — ${name} has something soft and cozy for you`;
+  }
+
+  /* ─────────────────────────────────────
+     RENDER ANGEL BANNER
+  ───────────────────────────────────── */
+  function renderAngel() {
+    const day   = new Date().getDay();
+    const angel = ANGELS[day];
+    document.getElementById('angelEmoji').textContent    = angel.emoji;
+    document.getElementById('angelName').textContent     = angel.name;
+    document.getElementById('angelTagline').textContent  = angel.tagline;
+    document.getElementById('angelGreeting').textContent = getGreeting(angel.name);
+    // tint banner with angel accent color
+    document.getElementById('angelBanner').style.background =
+      angel.color + '18'; // 18 = ~10% opacity hex
+  }
+
+  /* ─────────────────────────────────────
+     VOICE — American female first,
+             Indian English fallback
+  ───────────────────────────────────── */
+  let voicesLoaded = false;
+
+  function loadVoices() {
+    return new Promise(resolve => {
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length) { voicesLoaded = true; resolve(voices); return; }
+      window.speechSynthesis.onvoiceschanged = () => {
+        voicesLoaded = true;
+        resolve(window.speechSynthesis.getVoices());
+      };
+    });
+  }
+
+  async function speak(text) {
+    if (!window.speechSynthesis) return;
+    const voices = await loadVoices();
+
+    const voice =
+      voices.find(v => v.name === 'Samantha') ||
+      voices.find(v => v.name === 'Zira') ||
+      voices.find(v => v.name.includes('Google US English')) ||
+      voices.find(v => v.lang === 'en-US' &&
+                       v.name.toLowerCase().includes('female')) ||
+      voices.find(v => v.lang === 'en-US') ||
+      voices.find(v => v.name === 'Raveena') ||
+      voices.find(v => v.name === 'Heera') ||
+      voices.find(v => v.lang === 'en-IN' &&
+                       v.name.toLowerCase().includes('female')) ||
+      voices.find(v => v.lang === 'en-IN') ||
+      null;
+
+    const u = new SpeechSynthesisUtterance(text);
+    if (voice) u.voice = voice;
+    u.rate   = 0.82;
+    u.pitch  = 1.1;
+    u.volume = 1.0;
+    u.lang   = 'en-US';
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+  }
+
+  document.getElementById('speakBtn').addEventListener('click', () => {
+    const name = document.getElementById('angelName').textContent;
+    if (name && name !== '—') speak(name);
+  });
+
+  /* ─────────────────────────────────────
+     THEME ENGINE
+  ───────────────────────────────────── */
   const themeMeta = {
-    peach:  { attr: null,     label: '🍑 Bloom'     },
-    purple: { attr: 'purple', label: '🌙 Celestial' },
-    golden: { attr: 'golden', label: '☀️ Sunshine'  },
-    green:  { attr: 'green',  label: '🌿 Meadow'    }
+    peach:  { attr: null,    label: '🍑 Bloom'   },
+    blue:   { attr: 'blue',  label: '💙 Dreamy'  },
+    golden: { attr: 'golden',label: '☀️ Sunshine' },
+    green:  { attr: 'green', label: '🌿 Meadow'  }
   };
 
   function applyTheme(key) {
@@ -583,17 +903,47 @@
   document.querySelectorAll('.theme-dot')
     .forEach(d => d.addEventListener('click', () => applyTheme(d.dataset.theme)));
 
-  /* ── SHOW APP ── */
+  /* ─────────────────────────────────────
+     MODE TOGGLE
+  ───────────────────────────────────── */
+  const modeForMom   = document.getElementById('modeForMom');
+  const modeMyAngel  = document.getElementById('modeMyAngel');
+
+  function setMode(mode) {
+    modeForMom.classList.toggle('active',  mode === 'mom');
+    modeMyAngel.classList.toggle('active', mode === 'angel');
+    localStorage.setItem('mmw-mode', mode);
+  }
+
+  modeForMom.addEventListener('click',  () => setMode('mom'));
+  modeMyAngel.addEventListener('click', () => setMode('angel'));
+
+  /* ─────────────────────────────────────
+     ABOUT MODAL
+  ───────────────────────────────────── */
+  const overlay    = document.getElementById('aboutOverlay');
+  const aboutLink  = document.getElementById('aboutLink');
+  const aboutClose = document.getElementById('aboutClose');
+
+  aboutLink.addEventListener('click',  () => overlay.classList.add('open'));
+  aboutClose.addEventListener('click', () => overlay.classList.remove('open'));
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+
+  /* ─────────────────────────────────────
+     SHOW / RESTART APP
+  ───────────────────────────────────── */
   function showApp() {
     document.getElementById('welcomePanel').classList.add('hidden');
     document.getElementById('welcomeFooter').style.display = 'none';
     document.getElementById('appContent').classList.add('visible');
     document.getElementById('restartBtn').style.display = 'inline-block';
     localStorage.setItem('mmw-started', 'true');
+    renderAngel();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  /* ── RESTART ── */
   function restartMagic() {
     localStorage.removeItem('mmw-started');
     document.getElementById('appContent').classList.remove('visible');
@@ -606,15 +956,15 @@
   document.getElementById('beginBtn').addEventListener('click', showApp);
   document.getElementById('restartBtn').addEventListener('click', restartMagic);
 
-  /* ── INIT ── */
+  /* ─────────────────────────────────────
+     INIT
+  ───────────────────────────────────── */
   (function init() {
     applyTheme(localStorage.getItem('mmw-theme') || 'peach');
-    if (localStorage.getItem('mmw-started') === 'true') {
-      showApp();
-    }
+    setMode(localStorage.getItem('mmw-mode') || 'mom');
+    if (localStorage.getItem('mmw-started') === 'true') showApp();
   })();
 
 </script>
-
 </body>
 </html>
