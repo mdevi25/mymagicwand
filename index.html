@@ -833,6 +833,75 @@
       box-shadow: var(--shadow);
     }
 
+    /* ─────────────────────────────────────
+       CARD 2 — DREAM GATEWAY
+    ───────────────────────────────────── */
+    .destination-box {
+      background: var(--bg-band);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      animation: fadeUp 0.35s ease both;
+      transition: background 0.5s;
+    }
+
+    .dest-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-h);
+      margin-bottom: 2px;
+      transition: color 0.5s;
+    }
+
+    .dest-country {
+      font-size: 10px;
+      color: var(--text-s);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+      transition: color 0.5s;
+    }
+
+    .dest-desc {
+      font-size: 12px;
+      color: var(--text-b);
+      line-height: 1.6;
+      margin-bottom: 10px;
+      font-weight: 400;
+      transition: color 0.5s;
+    }
+
+    .dest-links {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .dest-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-family: 'Lato', sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      text-decoration: none;
+      background: var(--bg-card);
+      border: 1px solid var(--accent-line);
+      color: var(--accent-deep);
+      transition: background 0.2s, border-color 0.2s,
+                  color 0.2s, transform 0.15s;
+    }
+
+    .dest-link:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
   </style>
 </head>
 <body>
@@ -975,10 +1044,33 @@
 
     </div>
 
-    <!-- CARDS 2 & 3 PLACEHOLDERS — next steps -->
+    <!-- CARDS 2 & 3 — Card 2 Dream Gateway, Card 3 placeholder -->
     <div class="cards-grid-remaining">
-      <div class="card-placeholder">Card 2 — coming soon</div>
+
+      <!-- CARD 2 — DREAM GATEWAY -->
+      <div class="card" id="card2">
+        <div class="card-header">
+          <span class="card-emoji" id="card2Emoji">✈️</span>
+          <div class="card-header-text">
+            <div class="card-category" id="card2Season">Dream Gateway</div>
+            <div class="card-title" id="card2Title">Where would you go?</div>
+          </div>
+        </div>
+        <div class="card-intro" id="card2Intro">—</div>
+        <div class="genre-label">Pick a place that calls to you</div>
+        <div class="genre-grid" id="placeGrid"></div>
+        <div class="destination-box" id="destinationBox" style="display:none;">
+          <div class="dest-name" id="destName">—</div>
+          <div class="dest-country" id="destCountry">—</div>
+          <div class="dest-desc" id="destDesc">—</div>
+          <div class="dest-links" id="destLinks"></div>
+        </div>
+        <div class="genre-hint" id="placeHint"></div>
+      </div>
+
+      <!-- CARD 3 PLACEHOLDER -->
       <div class="card-placeholder">Card 3 — coming soon</div>
+
     </div>
 
     <!-- RE-ROLL -->
@@ -1275,25 +1367,376 @@
      RE-ROLL — refreshes card intro & clears genre
   ───────────────────────────────────── */
   document.getElementById('rerollBtn').addEventListener('click', () => {
-    const mode = localStorage.getItem('mmw-mode') || 'mom';
-    // clear saved genre for fresh pick
+    const mode  = localStorage.getItem('mmw-mode') || 'mom';
+    const place = localStorage.getItem('mmw-place-' + mode);
+
+    // re-roll Card 1 — clear genre
     localStorage.removeItem('mmw-genre-' + mode);
     renderCard1(mode);
-    // animate card
-    const card = document.getElementById('card1');
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(8px)';
+    const card1 = document.getElementById('card1');
+    card1.style.opacity = '0';
+    card1.style.transform = 'translateY(8px)';
     setTimeout(() => {
-      card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      card.style.opacity = '1';
-      card.style.transform = 'translateY(0)';
+      card1.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      card1.style.opacity = '1';
+      card1.style.transform = 'translateY(0)';
     }, 50);
+
+    // re-roll Card 2 — next destination
+    if (place) {
+      const season = getSeason().name.split(' ')[0];
+      const key    = mode + place;
+      currentDestIndex[key] = ((currentDestIndex[key] || 0) + 1);
+      showDestination(place, mode, season, currentDestIndex[key]);
+    }
   });
+
+  /* ─────────────────────────────────────
+     CARD 2 — DREAM GATEWAY
+  ───────────────────────────────────── */
+  function getSeason() {
+    const m = new Date().getMonth();
+    if (m >= 2  && m <= 4)  return { name:'Spring 🌸', emoji:'🌸' };
+    if (m >= 5  && m <= 7)  return { name:'Summer ☀️', emoji:'☀️' };
+    if (m >= 8  && m <= 10) return { name:'Autumn 🍂', emoji:'🍂' };
+    return                          { name:'Winter ❄️', emoji:'❄️' };
+  }
+
+  const PLACE_TYPES = {
+    mom: [
+      { emoji:'🏔️', label:'Mountains'      },
+      { emoji:'🌊', label:'Coast & Sea'    },
+      { emoji:'🌆', label:'City & Culture' },
+      { emoji:'🌿', label:'Nature & Calm'  },
+      { emoji:'☕', label:'Cozy & Slow'    },
+      { emoji:'🌸', label:'Garden & Bloom' }
+    ],
+    angel: [
+      { emoji:'🏖️', label:'Beach & Ocean'    },
+      { emoji:'🏡', label:'Countryside'       },
+      { emoji:'🌿', label:'Nature & Forests'  },
+      { emoji:'🏰', label:'Historic Towns'    },
+      { emoji:'🌍', label:'World Wonder'      },
+      { emoji:'🎪', label:'Playful & Colorful'}
+    ]
+  };
+
+  const DESTINATIONS = {
+    mom: {
+      'Mountains': {
+        Spring: [
+          { name:'Hallstatt', country:'Austria', desc:'Mirror lake, pastel houses, wildflowers on mountain paths — the quietest spring in Europe.', lp:'https://www.lonelyplanet.com/austria/hallstatt', ao:'https://www.atlasobscura.com/places/hallstatt' },
+          { name:'Shimla', country:'India', desc:'Colonial hill station with cedar forests, cool mists, and the most peaceful spring escape.', lp:'https://www.lonelyplanet.com/india/shimla', ao:'https://www.atlasobscura.com/things-to-do/shimla-india' }
+        ],
+        Summer: [
+          { name:'Interlaken', country:'Switzerland', desc:'Two turquoise lakes, the Eiger overhead, and warm summer air that feels like pure freedom.', lp:'https://www.lonelyplanet.com/switzerland/interlaken', ao:'https://www.atlasobscura.com/things-to-do/interlaken-switzerland' },
+          { name:'Manali', country:'India', desc:'Snow-capped peaks, wildflower meadows, and the coolest summer air in the Himalayas.', lp:'https://www.lonelyplanet.com/india/manali', ao:'https://www.atlasobscura.com/things-to-do/manali-india' }
+        ],
+        Autumn: [
+          { name:'Kyoto Mountains', country:'Japan', desc:'Maple red trails, cedar forests turning gold — autumn in the mountains above Kyoto is pure wonder.', lp:'https://www.lonelyplanet.com/japan/kyoto', ao:'https://www.atlasobscura.com/things-to-do/kyoto-japan' },
+          { name:'Darjeeling', country:'India', desc:'Tea gardens turning gold, the Kanchenjunga at dawn, and the most beautiful autumn in Bengal.', lp:'https://www.lonelyplanet.com/india/darjeeling', ao:'https://www.atlasobscura.com/things-to-do/darjeeling-india' }
+        ],
+        Winter: [
+          { name:'Tromsø', country:'Norway', desc:'Northern lights, snow-covered peaks, and the coziest wooden cabins in the Arctic Circle.', lp:'https://www.lonelyplanet.com/norway/tromso', ao:'https://www.atlasobscura.com/things-to-do/tromso-norway' },
+          { name:'Auli', country:'India', desc:'Snow-blanketed Himalayan peaks, pine forests, and the most serene winter in Uttarakhand.', lp:'https://www.lonelyplanet.com/india/auli', ao:'https://www.atlasobscura.com/things-to-do/auli-india' }
+        ]
+      },
+      'Coast & Sea': {
+        Spring: [
+          { name:'Amalfi Coast', country:'Italy', desc:'Lemon trees, turquoise water, pastel villages spilling down cliffsides — spring before the crowds.', lp:'https://www.lonelyplanet.com/italy/amalfi-coast', ao:'https://www.atlasobscura.com/things-to-do/amalfi-coast-italy' },
+          { name:'Varkala', country:'India', desc:'Clifftop cafes above the Arabian Sea, red laterite cliffs, and the gentlest spring ocean breeze.', lp:'https://www.lonelyplanet.com/india/varkala', ao:'https://www.atlasobscura.com/things-to-do/varkala-india' }
+        ],
+        Summer: [
+          { name:'Zanzibar', country:'Tanzania', desc:'Turquoise water so clear you can see the bottom, spice markets, and warm ocean air.', lp:'https://www.lonelyplanet.com/tanzania/zanzibar-archipelago', ao:'https://www.atlasobscura.com/things-to-do/zanzibar-tanzania' },
+          { name:'Goa', country:'India', desc:'Warm seas, golden sand, and the most welcoming coast in India — summer before the monsoon.', lp:'https://www.lonelyplanet.com/india/goa', ao:'https://www.atlasobscura.com/things-to-do/goa-india' }
+        ],
+        Autumn: [
+          { name:'Faroe Islands', country:'Denmark', desc:'Dramatic cliffs over the North Atlantic, wildflowers fading to gold — wild and breathtaking.', lp:'https://www.lonelyplanet.com/faroe-islands', ao:'https://www.atlasobscura.com/things-to-do/faroe-islands' },
+          { name:'Goa in October', country:'India', desc:'After the monsoon, Goa is perfect — green, quiet, warm, with the sea all to yourself.', lp:'https://www.lonelyplanet.com/india/goa', ao:'https://www.atlasobscura.com/things-to-do/goa-india' }
+        ],
+        Winter: [
+          { name:'Maldives', country:'Indian Ocean', desc:'Overwater bungalows, glass-clear lagoons, and the warmest winter sun on earth.', lp:'https://www.lonelyplanet.com/maldives', ao:'https://www.atlasobscura.com/things-to-do/maldives' },
+          { name:'Lakshadweep', country:'India', desc:'36 coral islands, untouched reefs, and the bluest water in India.', lp:'https://www.lonelyplanet.com/india/lakshadweep', ao:'https://www.atlasobscura.com/things-to-do/lakshadweep-india' }
+        ]
+      },
+      'City & Culture': {
+        Spring: [
+          { name:'Kyoto', country:'Japan', desc:'Cherry blossoms lining every canal, temple gardens in full bloom — spring in Kyoto is the world at its most beautiful.', lp:'https://www.lonelyplanet.com/japan/kyoto', ao:'https://www.atlasobscura.com/things-to-do/kyoto-japan' },
+          { name:'Jaipur', country:'India', desc:'The Pink City in spring — forts, palaces, and a warmth that feels golden rather than fierce.', lp:'https://www.lonelyplanet.com/india/jaipur', ao:'https://www.atlasobscura.com/things-to-do/jaipur-india' }
+        ],
+        Summer: [
+          { name:'Porto', country:'Portugal', desc:'Azulejo tiles, port wine cellars, bookshops with spiral staircases — the most charming city in Europe.', lp:'https://www.lonelyplanet.com/portugal/porto', ao:'https://www.atlasobscura.com/things-to-do/porto-portugal' },
+          { name:'Mysore', country:'India', desc:'Silk, sandalwood, the grandest palace in India lit by 97,000 bulbs — a city of quiet majesty.', lp:'https://www.lonelyplanet.com/india/mysore', ao:'https://www.atlasobscura.com/things-to-do/mysore-india' }
+        ],
+        Autumn: [
+          { name:'Oaxaca', country:'Mexico', desc:'Craft markets, mole negro, murals on every wall — autumn is when Oaxaca is most itself.', lp:'https://www.lonelyplanet.com/mexico/oaxaca', ao:'https://www.atlasobscura.com/things-to-do/oaxaca-mexico' },
+          { name:'Varanasi', country:'India', desc:'The oldest living city in the world — ghats, diyas on the Ganga, and a beauty that defies words.', lp:'https://www.lonelyplanet.com/india/varanasi', ao:'https://www.atlasobscura.com/things-to-do/varanasi-india' }
+        ],
+        Winter: [
+          { name:'Bruges', country:'Belgium', desc:'Medieval canals laced with frost, hot chocolate in cobblestone cafes — a fairy tale city in winter.', lp:'https://www.lonelyplanet.com/belgium/bruges', ao:'https://www.atlasobscura.com/things-to-do/bruges-belgium' },
+          { name:'Udaipur', country:'India', desc:'The City of Lakes in perfect winter light — palaces shimmering on Pichola, soft and golden.', lp:'https://www.lonelyplanet.com/india/udaipur', ao:'https://www.atlasobscura.com/things-to-do/udaipur-india' }
+        ]
+      },
+      'Nature & Calm': {
+        Spring: [
+          { name:'Keukenhof', country:'Netherlands', desc:'Seven million tulips in bloom across 32 hectares — the world in full, joyful color.', lp:'https://www.lonelyplanet.com/netherlands/lisse', ao:'https://www.atlasobscura.com/places/keukenhof-gardens' },
+          { name:'Valley of Flowers', country:'India', desc:'A Himalayan valley that erupts in wildflowers every spring — UNESCO World Heritage and pure wonder.', lp:'https://www.lonelyplanet.com/india/valley-of-flowers', ao:'https://www.atlasobscura.com/places/valley-of-flowers-national-park' }
+        ],
+        Summer: [
+          { name:'Lake Bled', country:'Slovenia', desc:'A church on a tiny island in a glacial lake — the most peaceful summer scene in all of Europe.', lp:'https://www.lonelyplanet.com/slovenia/bled', ao:'https://www.atlasobscura.com/things-to-do/lake-bled-slovenia' },
+          { name:'Coorg', country:'India', desc:'Coffee plantations, misty valleys, waterfalls, and the coolest summer air in South India.', lp:'https://www.lonelyplanet.com/india/coorg', ao:'https://www.atlasobscura.com/things-to-do/coorg-india' }
+        ],
+        Autumn: [
+          { name:'Black Forest', country:'Germany', desc:'Ancient woodland turning amber and red, cuckoo clocks, and the coziest guesthouses in Europe.', lp:'https://www.lonelyplanet.com/germany/black-forest', ao:'https://www.atlasobscura.com/things-to-do/black-forest-germany' },
+          { name:'Munnar', country:'India', desc:'Tea gardens stretching to every horizon, cool mist, and a green so deep it feels unreal.', lp:'https://www.lonelyplanet.com/india/munnar', ao:'https://www.atlasobscura.com/things-to-do/munnar-india' }
+        ],
+        Winter: [
+          { name:'Rann of Kutch', country:'India', desc:'The great white salt desert under a full moon — one of the most extraordinary winter landscapes on earth.', lp:'https://www.lonelyplanet.com/india/rann-of-kutch', ao:'https://www.atlasobscura.com/things-to-do/rann-of-kutch-india' },
+          { name:'Bialowieza Forest', country:'Poland', desc:'Europe\'s last primeval forest under snow — ancient oaks, European bison, and deep winter silence.', lp:'https://www.lonelyplanet.com/poland/bialowieza', ao:'https://www.atlasobscura.com/places/bialowieza-forest' }
+        ]
+      },
+      'Cozy & Slow': {
+        Spring: [
+          { name:'Colmar', country:'France', desc:'Half-timbered houses along flower-lined canals — the most storybook town in all of Alsace.', lp:'https://www.lonelyplanet.com/france/colmar', ao:'https://www.atlasobscura.com/things-to-do/colmar-france' },
+          { name:'Pondicherry', country:'India', desc:'French Quarter streets, bougainvillea walls, slow cafes, and the gentlest ocean breeze.', lp:'https://www.lonelyplanet.com/india/pondicherry', ao:'https://www.atlasobscura.com/things-to-do/pondicherry-india' }
+        ],
+        Summer: [
+          { name:'Luang Prabang', country:'Laos', desc:'Golden temples, river mist at dawn, monks in saffron — the most unhurried city on earth.', lp:'https://www.lonelyplanet.com/laos/luang-prabang', ao:'https://www.atlasobscura.com/things-to-do/luang-prabang-laos' },
+          { name:'Hampi', country:'India', desc:'Ancient boulders, banana groves, and ruins so beautiful they feel like a slow dream.', lp:'https://www.lonelyplanet.com/india/hampi', ao:'https://www.atlasobscura.com/things-to-do/hampi-india' }
+        ],
+        Autumn: [
+          { name:'Kyoto in November', country:'Japan', desc:'Maple red, quiet temple gardens, the softest light of the year — Kyoto at its most tender.', lp:'https://www.lonelyplanet.com/japan/kyoto', ao:'https://www.atlasobscura.com/things-to-do/kyoto-japan' },
+          { name:'Alleppey', country:'India', desc:'Houseboat on the Kerala backwaters as the rains ease — coconut palms, still water, total peace.', lp:'https://www.lonelyplanet.com/india/alleppey', ao:'https://www.atlasobscura.com/things-to-do/alleppey-india' }
+        ],
+        Winter: [
+          { name:'Giethoorn', country:'Netherlands', desc:'A village with no roads — only canals, wooden bridges, and thatched cottages in winter quiet.', lp:'https://www.lonelyplanet.com/netherlands/giethoorn', ao:'https://www.atlasobscura.com/places/giethoorn' },
+          { name:'Alleppey in Winter', country:'India', desc:'Houseboat on the backwaters in perfect winter weather — the most peaceful slow travel in India.', lp:'https://www.lonelyplanet.com/india/alleppey', ao:'https://www.atlasobscura.com/things-to-do/alleppey-india' }
+        ]
+      },
+      'Garden & Bloom': {
+        Spring: [
+          { name:'Chelsea Physic Garden', country:'England', desc:'London\'s oldest botanical garden in spring bloom — medicinal herbs, rare flowers, and deep calm.', lp:'https://www.lonelyplanet.com/england/london', ao:'https://www.atlasobscura.com/places/chelsea-physic-garden' },
+          { name:'Ooty Botanical Gardens', country:'India', desc:'150 years of botanical history at 7,000 feet — roses, dahlias, and the cool Nilgiri air.', lp:'https://www.lonelyplanet.com/india/ooty', ao:'https://www.atlasobscura.com/things-to-do/ooty-india' }
+        ],
+        Summer: [
+          { name:'Butchart Gardens', country:'Canada', desc:'A sunken garden in a former quarry — 55 acres of summer flowers in extraordinary bloom.', lp:'https://www.lonelyplanet.com/canada/victoria', ao:'https://www.atlasobscura.com/places/butchart-gardens' },
+          { name:'Shalimar Bagh', country:'India', desc:'A Mughal garden on Dal Lake — cascading terraces, fountains, and Himalayan views.', lp:'https://www.lonelyplanet.com/india/srinagar', ao:'https://www.atlasobscura.com/places/shalimar-bagh-srinagar' }
+        ],
+        Autumn: [
+          { name:'Kenroku-en', country:'Japan', desc:'One of Japan\'s three great gardens in autumn — maples reflected in still ponds.', lp:'https://www.lonelyplanet.com/japan/kanazawa', ao:'https://www.atlasobscura.com/places/kenroku-en' },
+          { name:'Brindavan Gardens', country:'India', desc:'Terraced Mughal gardens below the Krishnaraja Sagar dam — fountains and evening lights.', lp:'https://www.lonelyplanet.com/india/mysore', ao:'https://www.atlasobscura.com/places/brindavan-gardens' }
+        ],
+        Winter: [
+          { name:'Longwood Gardens', country:'USA', desc:'Winter garden conservatories in full bloom — 4,600 orchids, tropical plants, and warm light.', lp:'https://www.lonelyplanet.com/usa/pennsylvania', ao:'https://www.atlasobscura.com/places/longwood-gardens' },
+          { name:'Lalbagh Botanical Garden', country:'India', desc:'Bangalore\'s 240-year-old garden in winter — the glass house flower show is pure magic.', lp:'https://www.lonelyplanet.com/india/bangalore', ao:'https://www.atlasobscura.com/places/lalbagh-botanical-garden' }
+        ]
+      }
+    },
+    angel: {
+      'Beach & Ocean': {
+        Spring: [
+          { name:'Phuket', country:'Thailand', desc:'Emerald water, gentle waves, and the warmest spring welcome — perfect for dreaming of tiny feet in the sand.', lp:'https://www.lonelyplanet.com/thailand/phuket', ao:'https://www.atlasobscura.com/things-to-do/phuket-thailand' },
+          { name:'Goa', country:'India', desc:'Warm, shallow, safe — imagine little hands splashing in the calm spring waters.', lp:'https://www.lonelyplanet.com/india/goa', ao:'https://www.atlasobscura.com/things-to-do/goa-india' }
+        ],
+        Summer: [
+          { name:'Maldives', country:'Indian Ocean', desc:'Crystal lagoons so clear and shallow — imagine your little one discovering the ocean for the first time.', lp:'https://www.lonelyplanet.com/maldives', ao:'https://www.atlasobscura.com/things-to-do/maldives' },
+          { name:'Andaman Islands', country:'India', desc:'Untouched beaches, glass-clear water, and some of the most beautiful coral in the world.', lp:'https://www.lonelyplanet.com/india/andaman-islands', ao:'https://www.atlasobscura.com/things-to-do/andaman-islands-india' }
+        ],
+        Autumn: [
+          { name:'Algarve', country:'Portugal', desc:'Golden cliffs, calm autumn seas, and hidden sea caves — a storybook coast for little explorers.', lp:'https://www.lonelyplanet.com/portugal/algarve', ao:'https://www.atlasobscura.com/things-to-do/algarve-portugal' },
+          { name:'Kovalam', country:'India', desc:'Three crescent beaches, a lighthouse, and the warmest October water in Kerala.', lp:'https://www.lonelyplanet.com/india/kovalam', ao:'https://www.atlasobscura.com/things-to-do/kovalam-india' }
+        ],
+        Winter: [
+          { name:'Zanzibar', country:'Tanzania', desc:'Turquoise water and white sand in warm winter sunshine — a paradise to dream of sharing.', lp:'https://www.lonelyplanet.com/tanzania/zanzibar-archipelago', ao:'https://www.atlasobscura.com/things-to-do/zanzibar-tanzania' },
+          { name:'Lakshadweep', country:'India', desc:'Pristine coral lagoons with the clearest water in India — winter is the perfect time to visit.', lp:'https://www.lonelyplanet.com/india/lakshadweep', ao:'https://www.atlasobscura.com/things-to-do/lakshadweep-india' }
+        ]
+      },
+      'Countryside': {
+        Spring: [
+          { name:'Cotswolds', country:'England', desc:'Honey-stone villages, wildflower meadows, and country lanes — England\'s gentlest countryside.', lp:'https://www.lonelyplanet.com/england/the-cotswolds', ao:'https://www.atlasobscura.com/things-to-do/cotswolds-england' },
+          { name:'Coorg', country:'India', desc:'Coffee plantations in bloom, waterfalls, and the greenest rolling hills in all of South India.', lp:'https://www.lonelyplanet.com/india/coorg', ao:'https://www.atlasobscura.com/things-to-do/coorg-india' }
+        ],
+        Summer: [
+          { name:'Provence', country:'France', desc:'Lavender fields stretching to the horizon, farmhouses, and the warmest summer light in France.', lp:'https://www.lonelyplanet.com/france/provence', ao:'https://www.atlasobscura.com/things-to-do/provence-france' },
+          { name:'Himachal Pradesh', country:'India', desc:'Apple orchards, pine forests, and Himalayan villages — the most beautiful summer countryside.', lp:'https://www.lonelyplanet.com/india/himachal-pradesh', ao:'https://www.atlasobscura.com/things-to-do/himachal-pradesh-india' }
+        ],
+        Autumn: [
+          { name:'Tuscany', country:'Italy', desc:'Rolling golden hills, cypress trees, vineyards in harvest — autumn in Tuscany is pure joy.', lp:'https://www.lonelyplanet.com/italy/tuscany', ao:'https://www.atlasobscura.com/things-to-do/tuscany-italy' },
+          { name:'Chikmagalur', country:'India', desc:'Coffee estates, misty valleys, and waterfalls — the most peaceful autumn in Karnataka.', lp:'https://www.lonelyplanet.com/india/chikmagalur', ao:'https://www.atlasobscura.com/things-to-do/chikmagalur-india' }
+        ],
+        Winter: [
+          { name:'Lake District', country:'England', desc:'Beatrix Potter\'s world in winter quiet — stone walls, still lakes, and cozy farmhouse teas.', lp:'https://www.lonelyplanet.com/england/lake-district', ao:'https://www.atlasobscura.com/things-to-do/lake-district-england' },
+          { name:'Coonoor', country:'India', desc:'Nilgiri toy train, tea estates, and the most peaceful winter air in Tamil Nadu.', lp:'https://www.lonelyplanet.com/india/coonoor', ao:'https://www.atlasobscura.com/things-to-do/coonoor-india' }
+        ]
+      },
+      'Nature & Forests': {
+        Spring: [
+          { name:'Arashiyama Bamboo Grove', country:'Japan', desc:'Walking through towering bamboo in spring light — one of the most magical places on earth.', lp:'https://www.lonelyplanet.com/japan/kyoto/arashiyama', ao:'https://www.atlasobscura.com/places/arashiyama-bamboo-grove' },
+          { name:'Kaziranga', country:'India', desc:'One-horned rhinos, wild elephants, and Assam in spring green — a UNESCO wonder to share.', lp:'https://www.lonelyplanet.com/india/kaziranga', ao:'https://www.atlasobscura.com/things-to-do/kaziranga-india' }
+        ],
+        Summer: [
+          { name:'Amazon Rainforest', country:'Brazil', desc:'The lungs of the earth — imagine your little one discovering what a real jungle sounds like.', lp:'https://www.lonelyplanet.com/brazil/amazon', ao:'https://www.atlasobscura.com/things-to-do/amazon-brazil' },
+          { name:'Jim Corbett', country:'India', desc:'India\'s oldest national park — tigers, leopards, and the Ramganga river in summer green.', lp:'https://www.lonelyplanet.com/india/jim-corbett', ao:'https://www.atlasobscura.com/things-to-do/jim-corbett-india' }
+        ],
+        Autumn: [
+          { name:'Black Forest', country:'Germany', desc:'Fairy tale forest in autumn — the trees that inspired Hansel and Gretel, Rapunzel, and Cinderella.', lp:'https://www.lonelyplanet.com/germany/black-forest', ao:'https://www.atlasobscura.com/things-to-do/black-forest-germany' },
+          { name:'Pench National Park', country:'India', desc:'The forest from The Jungle Book — imagine your little one hearing about Mowgli here one day.', lp:'https://www.lonelyplanet.com/india/pench', ao:'https://www.atlasobscura.com/things-to-do/pench-india' }
+        ],
+        Winter: [
+          { name:'Sundarbans', country:'India', desc:'The world\'s largest mangrove forest in perfect winter weather — a wonder to discover together.', lp:'https://www.lonelyplanet.com/india/sundarbans', ao:'https://www.atlasobscura.com/things-to-do/sundarbans-india' },
+          { name:'Tadoba', country:'India', desc:'Maharashtra\'s tiger reserve in winter — the best chance to see a tiger in the wild.', lp:'https://www.lonelyplanet.com/india/tadoba', ao:'https://www.atlasobscura.com/things-to-do/tadoba-india' }
+        ]
+      },
+      'Historic Towns': {
+        Spring: [
+          { name:'Hallstatt', country:'Austria', desc:'5,000 years of history on a lakeside — a UNESCO town so beautiful it inspired a city in China.', lp:'https://www.lonelyplanet.com/austria/hallstatt', ao:'https://www.atlasobscura.com/places/hallstatt' },
+          { name:'Hampi', country:'India', desc:'A lost city of boulders and temples — imagine telling your little one stories of the Vijayanagara Empire.', lp:'https://www.lonelyplanet.com/india/hampi', ao:'https://www.atlasobscura.com/things-to-do/hampi-india' }
+        ],
+        Summer: [
+          { name:'Dubrovnik', country:'Croatia', desc:'White marble streets inside ancient walls above the Adriatic — a city out of a fairy tale.', lp:'https://www.lonelyplanet.com/croatia/dubrovnik', ao:'https://www.atlasobscura.com/things-to-do/dubrovnik-croatia' },
+          { name:'Jaisalmer', country:'India', desc:'A golden sandstone fort rising from the Thar desert — a city that has stood for 900 years.', lp:'https://www.lonelyplanet.com/india/jaisalmer', ao:'https://www.atlasobscura.com/things-to-do/jaisalmer-india' }
+        ],
+        Autumn: [
+          { name:'Bruges', country:'Belgium', desc:'Medieval canals and chocolate shops in a city frozen in time — perfect for little explorers.', lp:'https://www.lonelyplanet.com/belgium/bruges', ao:'https://www.atlasobscura.com/things-to-do/bruges-belgium' },
+          { name:'Chettinad', country:'India', desc:'Ancient mansions, 17 types of pickles, and the most extraordinary architecture in Tamil Nadu.', lp:'https://www.lonelyplanet.com/india/chettinad', ao:'https://www.atlasobscura.com/things-to-do/chettinad-india' }
+        ],
+        Winter: [
+          { name:'Prague', country:'Czech Republic', desc:'Medieval old town under a dusting of snow — cobblestones, spires, and fairy tale warmth.', lp:'https://www.lonelyplanet.com/czech-republic/prague', ao:'https://www.atlasobscura.com/things-to-do/prague-czech-republic' },
+          { name:'Agra', country:'India', desc:'The Taj Mahal in winter morning mist — the most beautiful building in the world at its most magical.', lp:'https://www.lonelyplanet.com/india/agra', ao:'https://www.atlasobscura.com/things-to-do/agra-india' }
+        ]
+      },
+      'World Wonder': {
+        Spring: [
+          { name:'Angkor Wat', country:'Cambodia', desc:'The largest religious monument on earth — imagine your little one\'s eyes seeing this one day.', lp:'https://www.lonelyplanet.com/cambodia/angkor', ao:'https://www.atlasobscura.com/places/angkor-wat' },
+          { name:'Ajanta Caves', country:'India', desc:'2,000-year-old Buddhist cave paintings — one of the world\'s great wonders, right here in India.', lp:'https://www.lonelyplanet.com/india/ajanta-caves', ao:'https://www.atlasobscura.com/places/ajanta-caves' }
+        ],
+        Summer: [
+          { name:'Northern Lights', country:'Iceland', desc:'The sky dancing in green and purple — a wonder to see at any age, magical to share with a child.', lp:'https://www.lonelyplanet.com/iceland', ao:'https://www.atlasobscura.com/things-to-do/iceland' },
+          { name:'Great Rann of Kutch', country:'India', desc:'The world\'s largest salt desert in monsoon bloom — a landscape unlike anything else on earth.', lp:'https://www.lonelyplanet.com/india/rann-of-kutch', ao:'https://www.atlasobscura.com/things-to-do/rann-of-kutch-india' }
+        ],
+        Autumn: [
+          { name:'Machu Picchu', country:'Peru', desc:'The lost city of the Incas in autumn mist — one of the greatest wonders ever built.', lp:'https://www.lonelyplanet.com/peru/machu-picchu', ao:'https://www.atlasobscura.com/places/machu-picchu' },
+          { name:'Khajuraho', country:'India', desc:'Medieval temples with extraordinary stone carvings — a UNESCO wonder in perfect autumn light.', lp:'https://www.lonelyplanet.com/india/khajuraho', ao:'https://www.atlasobscura.com/things-to-do/khajuraho-india' }
+        ],
+        Winter: [
+          { name:'Pyramids of Giza', country:'Egypt', desc:'The last of the Seven Wonders of the Ancient World — cool winter air, golden stone, endless sky.', lp:'https://www.lonelyplanet.com/egypt/giza', ao:'https://www.atlasobscura.com/places/great-pyramid-of-giza' },
+          { name:'Ellora Caves', country:'India', desc:'34 rock-cut temples spanning 1,500 years of Buddhist, Hindu, and Jain art — a wonder in stone.', lp:'https://www.lonelyplanet.com/india/ellora-caves', ao:'https://www.atlasobscura.com/places/ellora-caves' }
+        ]
+      },
+      'Playful & Colorful': {
+        Spring: [
+          { name:'Holi in Vrindavan', country:'India', desc:'The world\'s most joyful festival — imagine bringing your little one to the birthplace of Holi one day.', lp:'https://www.lonelyplanet.com/india/vrindavan', ao:'https://www.atlasobscura.com/things-to-do/vrindavan-india' },
+          { name:'Keukenhof', country:'Netherlands', desc:'Seven million tulips in every color — a garden that makes everyone feel like a child again.', lp:'https://www.lonelyplanet.com/netherlands/lisse', ao:'https://www.atlasobscura.com/places/keukenhof-gardens' }
+        ],
+        Summer: [
+          { name:'Edinburgh Festival', country:'Scotland', desc:'The world\'s greatest arts festival — street performers, puppets, stories on every corner.', lp:'https://www.lonelyplanet.com/scotland/edinburgh', ao:'https://www.atlasobscura.com/things-to-do/edinburgh-scotland' },
+          { name:'Pushkar Fair', country:'India', desc:'Camels, color, folk music, and the most joyful fair in Rajasthan — a feast for every sense.', lp:'https://www.lonelyplanet.com/india/pushkar', ao:'https://www.atlasobscura.com/things-to-do/pushkar-india' }
+        ],
+        Autumn: [
+          { name:'Oaxaca Day of the Dead', country:'Mexico', desc:'Marigold altars, candlelit cemeteries, and a celebration of life so beautiful it moves you to tears.', lp:'https://www.lonelyplanet.com/mexico/oaxaca', ao:'https://www.atlasobscura.com/things-to-do/oaxaca-mexico' },
+          { name:'Mysore Dasara', country:'India', desc:'The grandest royal procession in India — elephants, lights, and a palace lit by 97,000 bulbs.', lp:'https://www.lonelyplanet.com/india/mysore', ao:'https://www.atlasobscura.com/things-to-do/mysore-india' }
+        ],
+        Winter: [
+          { name:'Christmas Markets, Strasbourg', country:'France', desc:'The oldest Christmas market in Europe — lights, gingerbread, and total magic for little eyes.', lp:'https://www.lonelyplanet.com/france/strasbourg', ao:'https://www.atlasobscura.com/things-to-do/strasbourg-france' },
+          { name:'Kutch Rann Utsav', country:'India', desc:'A festival of folk art, music, and crafts on the white salt desert under a full moon.', lp:'https://www.lonelyplanet.com/india/rann-of-kutch', ao:'https://www.atlasobscura.com/things-to-do/rann-of-kutch-india' }
+        ]
+      }
+    }
+  };
+
+  const GATEWAY_INTROS = {
+    mom: {
+      1:'Neel found a place as infinite as the sky…',
+      2:'Nova discovered somewhere that sparks with new wonder…',
+      3:'Stella chose a destination that shines just for you…',
+      4:'Lyra found a place that hums with quiet beauty…',
+      5:'Zara found somewhere blooming and full of life…',
+      6:'Aura wrapped a warm destination around you…',
+      0:'Mira found somewhere wonderful, waiting just for you…'
+    },
+    angel: {
+      1:'Neel dreamed of a place your little one will love…',
+      2:'Nova found a world of wonder to discover together…',
+      3:'Stella chose a destination to share with your angel…',
+      4:'Lyra found somewhere your little one will remember forever…',
+      5:'Zara discovered a colorful world for your little sunshine…',
+      6:'Aura wrapped a magical place around your angel…',
+      0:'Mira found somewhere wonderful for you both…'
+    }
+  };
+
+  let currentDestIndex = {};
+
+  function renderCard2(mode) {
+    const day    = new Date().getDay();
+    const season = getSeason();
+    const types  = PLACE_TYPES[mode];
+    const saved  = localStorage.getItem('mmw-place-' + mode);
+
+    document.getElementById('card2Season').textContent =
+      'Dream Gateway · ' + season.name;
+    document.getElementById('card2Title').textContent =
+      mode === 'mom' ? 'Where would you escape to?' : 'Where will you take your angel?';
+    document.getElementById('card2Intro').textContent =
+      GATEWAY_INTROS[mode][day] || GATEWAY_INTROS[mode][0];
+
+    const grid = document.getElementById('placeGrid');
+    grid.innerHTML = '';
+    types.forEach(t => {
+      const btn = document.createElement('button');
+      btn.className = 'genre-btn' + (saved === t.label ? ' selected' : '');
+      btn.innerHTML = `${t.emoji} ${t.label}`;
+      btn.addEventListener('click', () => selectPlace(t.label, mode));
+      grid.appendChild(btn);
+    });
+
+    if (saved) {
+      showDestination(saved, mode, season.name.split(' ')[0], 0);
+    } else {
+      document.getElementById('destinationBox').style.display = 'none';
+      document.getElementById('placeHint').textContent = '';
+    }
+  }
+
+  function selectPlace(placeLabel, mode) {
+    document.querySelectorAll('#placeGrid .genre-btn').forEach(b => {
+      b.classList.toggle('selected',
+        b.textContent.trim().replace(/^[\S\s]\s/,'').startsWith(placeLabel.substring(0,4)));
+    });
+    localStorage.setItem('mmw-place-' + mode, placeLabel);
+    currentDestIndex[mode + placeLabel] = 0;
+    const season = getSeason().name.split(' ')[0];
+    showDestination(placeLabel, mode, season, 0);
+  }
+
+  function showDestination(placeLabel, mode, season, index) {
+    const modeData = DESTINATIONS[mode];
+    if (!modeData || !modeData[placeLabel]) return;
+    const seasonData = modeData[placeLabel][season];
+    if (!seasonData || !seasonData.length) return;
+    const dest = seasonData[index % seasonData.length];
+
+    document.getElementById('destName').textContent    = dest.name;
+    document.getElementById('destCountry').textContent = dest.country;
+    document.getElementById('destDesc').textContent    = dest.desc;
+
+    document.getElementById('destLinks').innerHTML = `
+      <a class="dest-link" href="${dest.lp}" target="_blank" rel="noopener">🗺️ Lonely Planet</a>
+      <a class="dest-link" href="${dest.ao}" target="_blank" rel="noopener">🔭 Atlas Obscura</a>`;
+
+    document.getElementById('destinationBox').style.display = 'block';
+    document.getElementById('placeHint').textContent =
+      'Tap ✨ Show me something else for another destination';
+  }
+
+  /* ─────────────────────────────────────
+     THEME ENGINE
+  ───────────────────────────────────── */
   const themeMeta = {
-    peach:  { attr: null,    label: '🍑 Bloom'   },
-    blue:   { attr: 'blue',  label: '💙 Dreamy'  },
-    golden: { attr: 'golden',label: '☀️ Sunshine' },
-    green:  { attr: 'green', label: '🌿 Meadow'  }
+    peach:  { attr: null,     label: "🍑 Bloom"    },
+    blue:   { attr: 'blue',   label: "💙 Dreamy"   },
+    golden: { attr: 'golden', label: "☀️ Sunshine" },
+    green:  { attr: 'green',  label: "🌿 Meadow"   }
   };
 
   function applyTheme(key) {
@@ -1323,6 +1766,7 @@
     modeMyAngel.classList.toggle('active', mode === 'angel');
     localStorage.setItem('mmw-mode', mode);
     renderCard1(mode);
+    renderCard2(mode);
   }
 
   modeForMom.addEventListener('click',  () => setMode('mom'));
@@ -1352,6 +1796,7 @@
     localStorage.setItem('mmw-started', 'true');
     renderAngel();
     renderCard1(localStorage.getItem('mmw-mode') || 'mom');
+    renderCard2(localStorage.getItem('mmw-mode') || 'mom');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
