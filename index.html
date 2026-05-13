@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="My MagicWand — a little magic, every single day. For you and your little sunshine." />
-  <title>My MagicWand</title>
+  <meta name="description" content="Noor — a little light, every single day. A peaceful corner for your thoughts, dreams, and little moments of wonder." />
+  <title>Noor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lato:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
@@ -1098,6 +1098,89 @@
       transition: color 0.5s;
     }
 
+    /* ─────────────────────────────────────
+       CARD 3 — CLASSIC STORIES
+    ───────────────────────────────────── */
+    .card-intro {
+      font-size: 12px;
+      font-style: italic;
+      color: var(--text-m);
+      margin-bottom: 12px;
+      line-height: 1.5;
+      transition: color 0.5s;
+    }
+
+    .story-box {
+      background: var(--bg-band);
+      border-radius: 12px;
+      padding: 13px 15px;
+      margin-bottom: 10px;
+      animation: fadeUp 0.35s ease both;
+      transition: background 0.5s;
+    }
+
+    .story-badge-row { margin-bottom: 7px; }
+
+    .story-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-h);
+      margin-bottom: 2px;
+      transition: color 0.5s;
+    }
+
+    .story-author {
+      font-size: 10px;
+      color: var(--text-s);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 7px;
+      transition: color 0.5s;
+    }
+
+    .story-desc {
+      font-size: 12px;
+      color: var(--text-b);
+      line-height: 1.6;
+      margin-bottom: 10px;
+      transition: color 0.5s;
+    }
+
+    .story-links {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .story-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .story-link:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    .story-link.read {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-line);
+      color: var(--accent-deep);
+    }
+
+    .story-link.listen {
+      background: #1DB954;
+      color: #fff;
+    }
+
   </style>
 </head>
 <body>
@@ -1112,10 +1195,9 @@
       <span class="spark">✦</span> About
     </h2>
     <p>
-      My MagicWand is a peaceful corner for your thoughts, dreams,
-      and little moments of wonder. A new angel arrives every day —
-      named after a real star — bringing something to feel, discover,
-      or dream about. Made with love for expecting moms everywhere.
+      Noor means light — the quiet, warm kind that arrives before you even notice it.
+      A new angel arrives every day with something to feel, discover, or dream about.
+      A peaceful corner for expecting moms, made with love.
     </p>
   </div>
 </div>
@@ -1126,7 +1208,7 @@
 <div class="top-bar">
   <div class="top-bar-left">
     <div class="top-bar-name">
-      <span class="spark">✦</span> My MagicWand
+      <span class="spark">✦</span> Noor
     </div>
     <button class="about-link" id="aboutLink">About</button>
     <button class="restart-btn" id="restartBtn">↺ Restart</button>
@@ -1154,8 +1236,8 @@
   <!-- WELCOME PANEL -->
   <div id="welcomePanel">
     <span class="welcome-sparkle">✨</span>
-    <h1 class="welcome-title">My MagicWand</h1>
-    <p class="welcome-tagline">A little magic, every single day</p>
+    <h1 class="welcome-title">Noor</h1>
+    <p class="welcome-tagline">A little Noor, every single day</p>
     <p class="welcome-subtitle">A peaceful corner for your thoughts, dreams, and little moments of wonder</p>
     <p class="welcome-desc">
       A new angel arrives every day with something to feel,
@@ -1167,7 +1249,7 @@
     <div id="welcomeFooter">
       <p>
         <span class="spark">✦</span>
-        © 2026 Madhu Devi · mymagicwand.app
+        © 2026 Madhu Devi · noor.app
         <span class="spark">✦</span>
       </p>
     </div>
@@ -1275,16 +1357,30 @@
       </div>
 
       <!-- CARD 3 — CLASSIC STORIES (placeholder) -->
+      <!-- CARD 3 — CLASSIC STORIES -->
       <div class="card" id="card3">
         <div class="card-header">
           <span class="card-emoji">📖</span>
           <div class="card-header-text">
             <div class="card-category">Classic Stories</div>
-            <div class="card-title" id="card3Title">Something to read or listen to</div>
+            <div class="card-title" id="card3Title">—</div>
           </div>
         </div>
-        <div class="card-intro" style="font-size:12px; font-style:italic; color:var(--text-m); margin-top:8px; line-height:1.6;">
-          A story, a poem, or a moment of quiet reading — coming soon.
+        <div class="card-intro" id="card3Intro">—</div>
+        <div class="genre-label">Select a genre</div>
+        <div class="genre-grid" id="storyGrid"></div>
+        <div class="story-box" id="storyBox" style="display:none;">
+          <div class="story-badge-row">
+            <span class="gift-type-badge" id="storyBadge">—</span>
+          </div>
+          <div class="story-title" id="storyTitle">—</div>
+          <div class="story-author" id="storyAuthor">—</div>
+          <div class="story-desc" id="storyDesc">—</div>
+          <div class="story-links" id="storyLinks"></div>
+        </div>
+        <div class="genre-hint" id="storyHint"></div>
+        <div class="card2-reset-wrap" id="card3ResetWrap" style="display:none;">
+          <button class="gift-another-btn" id="card3ResetBtn">↺ Choose a different genre</button>
         </div>
       </div>
 
@@ -1299,7 +1395,7 @@
     <footer class="site-footer">
       <p>
         <span class="spark">✦</span>
-        © 2026 Madhu Devi · mymagicwand.app
+        © 2026 Madhu Devi · noor.app
         <span class="spark">✦</span>
       </p>
     </footer>
@@ -2047,8 +2143,241 @@
   });
 
   /* ─────────────────────────────────────
-     RE-ROLL BUTTON
+     CARD 3 — CLASSIC STORIES
   ───────────────────────────────────── */
+
+  const STORY_GENRES = {
+    mom: [
+      { emoji:'📖', label:'Fiction'       },
+      { emoji:'📚', label:'Non-Fiction'   },
+      { emoji:'💛', label:'Affirmations'  },
+      { emoji:'🌍', label:'About Places'  },
+      { emoji:'🌿', label:'Mindfulness'   }
+    ],
+    angel: [
+      { emoji:'🐰', label:'Animal Tales'    },
+      { emoji:'🌟', label:'Fairy Tales'     },
+      { emoji:'🌙', label:'Lullaby Stories' },
+      { emoji:'🌿', label:'Nature Stories'  },
+      { emoji:'👶', label:'First Words'     },
+      { emoji:'🎵', label:'Nursery Rhymes'  }
+    ]
+  };
+
+  /* Stories: [mode][genre][index] — 2 per genre for re-roll */
+  const STORIES = {
+    mom: {
+      'Fiction': [
+        { badge:'Short Fiction', title:'The Gift of the Magi', author:'O. Henry',
+          desc:'A tender story of love and sacrifice — one of the most beloved short stories ever written.',
+          read:'https://librivox.org/the-gift-of-the-magi-by-o-henry/',
+          listen:'https://open.spotify.com/search/gift%20of%20the%20magi%20audiobook' },
+        { badge:'Short Fiction', title:'The Happy Prince', author:'Oscar Wilde',
+          desc:'A golden statue and a small swallow — a story of kindness and beauty that stays with you.',
+          read:'https://librivox.org/the-happy-prince-and-other-tales-by-oscar-wilde/',
+          listen:'https://open.spotify.com/search/happy%20prince%20oscar%20wilde%20audiobook' }
+      ],
+      'Non-Fiction': [
+        { badge:'Essay', title:'On Keeping a Notebook', author:'Joan Didion',
+          desc:'A beautiful reflection on why we write things down and what memory really means.',
+          read:'https://librivox.org/search?q=essays+women+short&search_form=advanced',
+          listen:'https://open.spotify.com/search/joan%20didion%20essays%20spoken' },
+        { badge:'Essay', title:'Brains and Machines', author:'Bertrand Russell',
+          desc:'A short, elegant essay about thought, wonder, and what it means to be human.',
+          read:'https://librivox.org/search?q=bertrand+russell&search_form=advanced',
+          listen:'https://open.spotify.com/search/bertrand%20russell%20essays%20audiobook' }
+      ],
+      'Affirmations': [
+        { badge:'Affirmations', title:'You Are Enough', author:'Curated for you',
+          desc:'A gentle Spotify session of spoken affirmations — warm, unhurried, and quietly powerful.',
+          read:'https://librivox.org/search?q=affirmations+women&search_form=advanced',
+          listen:'https://open.spotify.com/playlist/37i9dQZF1E8AiVxiot45Ta' },
+        { badge:'Affirmations', title:'Morning Intentions', author:'Curated for you',
+          desc:'Soft spoken affirmations to begin the day with presence and calm.',
+          read:'https://librivox.org/search?q=affirmations+women&search_form=advanced',
+          listen:'https://open.spotify.com/search/morning+affirmations+women' }
+      ],
+      'About Places': [
+        { badge:'Travel Writing', title:'Italian Hours', author:'Henry James',
+          desc:'Luminous essays about Venice, Rome, and Florence — travel writing at its most beautiful.',
+          read:'https://librivox.org/italian-hours-by-henry-james/',
+          listen:'https://open.spotify.com/search/travel%20essays%20spoken%20word' },
+        { badge:'Travel Writing', title:'Wanderings in India', author:'John Lang',
+          desc:'A vivid, curious journey through 19th century India — culture, landscape, and wonder.',
+          read:'https://librivox.org/search?q=india+travel&search_form=advanced',
+          listen:'https://open.spotify.com/search/india%20travel%20narrative%20audiobook' }
+      ],
+      'Mindfulness': [
+        { badge:'Mindfulness', title:'Still Mind', author:'Curated for you',
+          desc:'A Spotify session of guided mindfulness — gentle breathing, soft music, quiet presence.',
+          read:'https://librivox.org/search?q=mindfulness+meditation&search_form=advanced',
+          listen:'https://open.spotify.com/search/guided+mindfulness+meditation+calm' },
+        { badge:'Mindfulness', title:'Breathing Into Calm', author:'Curated for you',
+          desc:'Short guided breathing and reflection for moments when you need to return to yourself.',
+          read:'https://librivox.org/search?q=mindfulness+meditation&search_form=advanced',
+          listen:'https://open.spotify.com/search/mindfulness+breathing+relaxation' }
+      ]
+    },
+    angel: {
+      'Animal Tales': [
+        { badge:'Classic Tale', title:'The Velveteen Rabbit', author:'Margery Williams',
+          desc:'About love making things real — the most tender children\'s story ever written.',
+          read:'https://librivox.org/the-velveteen-rabbit-by-margery-williams/',
+          listen:'https://open.spotify.com/search/velveteen%20rabbit%20audiobook%20children' },
+        { badge:'Classic Tale', title:'The Story of Ferdinand', author:'Munro Leaf',
+          desc:'A gentle bull who just wants to sit and smell flowers — a story of peaceful nonconformity.',
+          read:'https://librivox.org/search?q=animal+stories+children&search_form=advanced',
+          listen:'https://open.spotify.com/search/ferdinand%20bull%20story%20children%20audiobook' }
+      ],
+      'Fairy Tales': [
+        { badge:'Fairy Tale', title:'Thumbelina', author:'Hans Christian Andersen',
+          desc:'A tiny girl born from a flower — a magical journey full of wonder and heart.',
+          read:'https://librivox.org/search?q=hans+christian+andersen&search_form=advanced',
+          listen:'https://open.spotify.com/search/thumbelina%20fairy%20tale%20audiobook%20children' },
+        { badge:'Fairy Tale', title:'The Wild Swans', author:'Hans Christian Andersen',
+          desc:'A story of silent love and courage — one of Andersen\'s most beautiful and poetic tales.',
+          read:'https://librivox.org/search?q=hans+christian+andersen&search_form=advanced',
+          listen:'https://open.spotify.com/search/wild%20swans%20fairy%20tale%20audiobook' }
+      ],
+      'Lullaby Stories': [
+        { badge:'Bedtime Story', title:'Goodnight Moon', author:'Margaret Wise Brown',
+          desc:'The most beloved bedtime book in the world — say goodnight to everything, gently.',
+          read:'https://librivox.org/search?q=bedtime+stories+children&search_form=advanced',
+          listen:'https://open.spotify.com/search/goodnight%20moon%20read%20aloud%20children' },
+        { badge:'Bedtime Story', title:'The Sleepy Little Owl', author:'Traditional',
+          desc:'A soft, dreamy story about an owl who teaches the forest how to sleep.',
+          read:'https://librivox.org/search?q=bedtime+stories+children&search_form=advanced',
+          listen:'https://open.spotify.com/search/sleepy%20bedtime%20stories%20children%20calm' }
+      ],
+      'Nature Stories': [
+        { badge:'Nature Tale', title:'The Acorn and the Oak', author:'Traditional',
+          desc:'A tiny acorn\'s journey to becoming the tallest tree — a story about patience and becoming.',
+          read:'https://librivox.org/search?q=animal+stories+children&search_form=advanced',
+          listen:'https://open.spotify.com/search/nature%20stories%20for%20children%20audiobook' },
+        { badge:'Nature Tale', title:'The Brook', author:'Alfred Lord Tennyson',
+          desc:'A gentle poem about a little brook\'s journey — full of movement, life, and song.',
+          read:'https://librivox.org/search?q=tennyson+brook+poem&search_form=advanced',
+          listen:'https://open.spotify.com/search/tennyson%20brook%20poem%20read%20aloud' }
+      ],
+      'First Words': [
+        { badge:'First Words', title:'Pat the Bunny', author:'Dorothy Kunhardt',
+          desc:'The original touch-and-feel book — simple, sensory, full of warmth.',
+          read:'https://librivox.org/search?q=bedtime+stories+children&search_form=advanced',
+          listen:'https://open.spotify.com/search/first%20words%20baby%20audiobook%20children' },
+        { badge:'First Words', title:'Brown Bear, Brown Bear', author:'Bill Martin Jr',
+          desc:'Simple, rhythmic, colorful — a book that teaches seeing and naming the world.',
+          read:'https://librivox.org/search?q=bedtime+stories+children&search_form=advanced',
+          listen:'https://open.spotify.com/search/brown%20bear%20brown%20bear%20read%20aloud' }
+      ],
+      'Nursery Rhymes': [
+        { badge:'Nursery Rhymes', title:'Mother Goose Collection', author:'Traditional',
+          desc:'The complete collection of nursery rhymes — Twinkle Twinkle, Jack and Jill, and more.',
+          read:'https://librivox.org/tales-of-mother-goose-by-charles-perrault/',
+          listen:'https://open.spotify.com/search/nursery%20rhymes%20collection%20children' },
+        { badge:'Nursery Rhymes', title:'A Child\'s Garden of Verses', author:'Robert Louis Stevenson',
+          desc:'Gentle poems about childhood wonder — shadows, swings, and the land of counterpane.',
+          read:'https://librivox.org/a-childs-garden-of-verses-by-robert-louis-stevenson/',
+          listen:'https://open.spotify.com/search/child%20garden%20verses%20stevenson%20audiobook' }
+      ]
+    }
+  };
+
+  const STORY_INTROS = {
+    mom: {
+      1:'Neel found something worth reading today…',
+      2:'Nova discovered a story with new light in it…',
+      3:'Stella chose something quietly luminous for you…',
+      4:'Lyra found words that flow like music…',
+      5:'Zara brought you something blooming with meaning…',
+      6:'Aura wrapped a warm story around your afternoon…',
+      0:'Mira found something wonderful and wise…'
+    },
+    angel: {
+      1:'Neel found a story for your little one…',
+      2:'Nova discovered something bright and new…',
+      3:'Stella chose a story full of gentle light…',
+      4:'Lyra found words that sing softly…',
+      5:'Zara brought a story full of bloom and joy…',
+      6:'Aura wrapped a bedtime story around you both…',
+      0:'Mira found something wonderful to share…'
+    }
+  };
+
+  let currentStoryIndex = {};
+
+  function renderCard3(mode) {
+    const day   = new Date().getDay();
+    const angel = ANGELS[day];
+    const saved = localStorage.getItem('mmw-story-' + mode);
+
+    document.getElementById('card3Title').textContent =
+      mode === 'mom' ? 'Something to read or listen to' : 'A story for your little one';
+    document.getElementById('card3Intro').textContent =
+      STORY_INTROS[mode][day] || STORY_INTROS[mode][0];
+
+    // Build genre buttons
+    const grid = document.getElementById('storyGrid');
+    grid.innerHTML = '';
+    STORY_GENRES[mode].forEach(g => {
+      const btn = document.createElement('button');
+      btn.className = 'genre-btn' + (saved === g.label ? ' selected' : '');
+      btn.innerHTML = `${g.emoji} ${g.label}`;
+      btn.addEventListener('click', () => selectStoryGenre(g.label, mode));
+      grid.appendChild(btn);
+    });
+
+    if (saved) {
+      showStory(saved, mode, 0);
+    } else {
+      document.getElementById('storyBox').style.display      = 'none';
+      document.getElementById('card3ResetWrap').style.display = 'none';
+      document.getElementById('storyHint').textContent        = '';
+    }
+  }
+
+  function selectStoryGenre(genre, mode) {
+    document.querySelectorAll('#storyGrid .genre-btn').forEach(b => {
+      b.classList.toggle('selected',
+        b.textContent.trim().includes(genre.substring(0, 4)));
+    });
+    localStorage.setItem('mmw-story-' + mode, genre);
+    currentStoryIndex[mode + genre] = 0;
+    showStory(genre, mode, 0);
+  }
+
+  function showStory(genre, mode, index) {
+    const list = STORIES[mode]?.[genre];
+    if (!list || !list.length) return;
+    const story = list[index % list.length];
+
+    document.getElementById('storyBadge').textContent  = story.badge;
+    document.getElementById('storyTitle').textContent  = story.title;
+    document.getElementById('storyAuthor').textContent = story.author;
+    document.getElementById('storyDesc').textContent   = story.desc;
+
+    document.getElementById('storyLinks').innerHTML = `
+      <a class="story-link read" href="${story.read}" target="_blank" rel="noopener">
+        📖 Read · LibriVox
+      </a>
+      <a class="story-link listen" href="${story.listen}" target="_blank" rel="noopener">
+        🎵 Listen · Spotify
+      </a>`;
+
+    document.getElementById('storyBox').style.display       = 'block';
+    document.getElementById('card3ResetWrap').style.display = 'block';
+    document.getElementById('storyHint').textContent        = 'Tap ✨ Something else for another title';
+  }
+
+  // Card 3 reset
+  document.getElementById('card3ResetBtn').addEventListener('click', () => {
+    const mode = localStorage.getItem('mmw-mode') || 'mom';
+    localStorage.removeItem('mmw-story-' + mode);
+    document.getElementById('storyBox').style.display       = 'none';
+    document.getElementById('card3ResetWrap').style.display = 'none';
+    document.getElementById('storyHint').textContent        = '';
+    document.querySelectorAll('#storyGrid .genre-btn')
+      .forEach(b => b.classList.remove('selected'));
+  });
   document.getElementById('rerollBtn').addEventListener('click', () => {
     const mode  = localStorage.getItem('mmw-mode') || 'mom';
     const place = localStorage.getItem('mmw-place-' + mode);
@@ -2065,6 +2394,14 @@
       const key    = mode + place;
       currentDestIndex[key] = ((currentDestIndex[key] || 0) + 1);
       showDestination(place, mode, season, currentDestIndex[key]);
+    }
+
+    // re-roll Card 3 — next story in same genre
+    const savedStory = localStorage.getItem('mmw-story-' + mode);
+    if (savedStory) {
+      const key3 = mode + savedStory;
+      currentStoryIndex[key3] = ((currentStoryIndex[key3] || 0) + 1);
+      showStory(savedStory, mode, currentStoryIndex[key3]);
     }
   });
 
@@ -2106,6 +2443,7 @@
     localStorage.setItem('mmw-mode', mode);
     renderCard1(mode);
     renderCard2(mode);
+    renderCard3(mode);
   }
 
   modeForMom.addEventListener('click',  () => setMode('mom'));
@@ -2136,6 +2474,7 @@
     renderAngel();
     renderCard1(localStorage.getItem('mmw-mode') || 'mom');
     renderCard2(localStorage.getItem('mmw-mode') || 'mom');
+    renderCard3(localStorage.getItem('mmw-mode') || 'mom');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
