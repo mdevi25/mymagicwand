@@ -642,6 +642,197 @@
       to   { opacity: 1; }
     }
 
+    /* ─────────────────────────────────────
+       CARD 1 — PLAYLIST
+    ───────────────────────────────────── */
+    .card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      border: 0.5px solid var(--accent-line);
+      box-shadow: var(--shadow);
+      padding: 20px 18px 16px;
+      margin-bottom: 12px;
+      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .card-emoji {
+      font-size: 28px;
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: var(--bg-band);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.5s;
+    }
+
+    .card-category {
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-s);
+      margin-bottom: 3px;
+      transition: color 0.5s;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text-h);
+      line-height: 1.2;
+      transition: color 0.5s;
+    }
+
+    .card-intro {
+      font-size: 12px;
+      font-style: italic;
+      color: var(--text-m);
+      font-weight: 300;
+      margin-bottom: 14px;
+      line-height: 1.5;
+      transition: color 0.5s;
+    }
+
+    .genre-label {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--text-s);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      transition: color 0.5s;
+    }
+
+    .genre-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .genre-btn {
+      background: var(--bg);
+      border: 1.5px solid var(--accent-line);
+      border-radius: 24px;
+      padding: 7px 14px;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-b);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s,
+                  color 0.2s, transform 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .genre-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent-deep);
+      transform: translateY(-1px);
+    }
+
+    .genre-btn.selected {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .open-in {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+      animation: fadeUp 0.3s ease both;
+    }
+
+    .open-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .open-btn:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    .open-btn.spotify {
+      background: #1DB954;
+      color: #fff;
+    }
+
+    .open-btn.apple {
+      background: #FC3C44;
+      color: #fff;
+    }
+
+    .genre-hint {
+      font-size: 10px;
+      color: var(--text-s);
+      font-style: italic;
+      min-height: 14px;
+      transition: color 0.5s;
+    }
+
+    /* remaining cards placeholder */
+    .cards-grid-remaining {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .cards-grid-remaining { grid-template-columns: 1fr; }
+    }
+
+    /* re-roll button — now real */
+    .reroll-btn {
+      background: var(--bg-card);
+      border: 1.5px solid var(--accent-line);
+      border-radius: 30px;
+      padding: 10px 28px;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--accent-deep);
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s,
+                  color 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .reroll-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
   </style>
 </head>
 <body>
@@ -748,16 +939,51 @@
               data-mode="angel">✦ My Angel</button>
     </div>
 
-    <!-- CARDS PLACEHOLDER — Step 4 -->
-    <div class="cards-grid">
-      <div class="card-placeholder">Card 1 — Step 4</div>
-      <div class="card-placeholder">Card 2 — Step 4</div>
-      <div class="card-placeholder">Card 3 — Step 4</div>
+    <!-- CARD 1 — PLAYLIST -->
+    <div class="card" id="card1">
+
+      <!-- CARD HEADER -->
+      <div class="card-header">
+        <span class="card-emoji">🎶</span>
+        <div class="card-header-text">
+          <div class="card-category">Playlist</div>
+          <div class="card-title" id="card1Title">Your music, your mood</div>
+        </div>
+      </div>
+
+      <!-- ANGEL INTRO -->
+      <div class="card-intro" id="card1Intro">—</div>
+
+      <!-- GENRE PICKER -->
+      <div class="genre-label">Pick your mood</div>
+      <div class="genre-grid" id="genreGrid">
+        <!-- filled by JS based on active mode -->
+      </div>
+
+      <!-- OPEN IN LINKS — shown after genre selected -->
+      <div class="open-in" id="openIn" style="display:none;">
+        <a class="open-btn spotify" id="spotifyLink" href="#" target="_blank" rel="noopener">
+          🎵 Open in Spotify
+        </a>
+        <a class="open-btn apple" id="appleLink" href="#" target="_blank" rel="noopener">
+          🍎 Open in Apple Music
+        </a>
+      </div>
+
+      <!-- SELECTED GENRE HINT -->
+      <div class="genre-hint" id="genreHint"></div>
+
     </div>
 
-    <!-- RE-ROLL PLACEHOLDER — Step 4 -->
+    <!-- CARDS 2 & 3 PLACEHOLDERS — next steps -->
+    <div class="cards-grid-remaining">
+      <div class="card-placeholder">Card 2 — coming soon</div>
+      <div class="card-placeholder">Card 3 — coming soon</div>
+    </div>
+
+    <!-- RE-ROLL -->
     <div class="reroll-wrap">
-      <div class="reroll-ghost">✨ Show me something else — Step 4</div>
+      <button class="reroll-btn" id="rerollBtn">✨ Show me something else</button>
     </div>
 
     <!-- ANGEL INFO PLACEHOLDER — Step 5 -->
@@ -878,8 +1104,165 @@
   });
 
   /* ─────────────────────────────────────
-     THEME ENGINE
+     CARD 1 — PLAYLIST GENRE DATA
   ───────────────────────────────────── */
+  const GENRES = {
+    mom: [
+      { emoji:'🎹', label:'Soft Piano',
+        spotify:'https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO',
+        apple:'https://music.apple.com/us/playlist/peaceful-piano/pl.f4d106fed2bd41149ecdac57774e4af',
+        hint:'Gentle piano, no words — perfect for a quiet moment' },
+      { emoji:'🌊', label:'Ambient',
+        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWTwnEm1IYyoj',
+        apple:'https://music.apple.com/us/playlist/pure-focus/pl.f906f6c9b44c4c318e5e3ef0ec3c0b1b',
+        hint:'Soft soundscapes that fill the room with calm' },
+      { emoji:'🎷', label:'Jazz',
+        spotify:'https://open.spotify.com/playlist/37i9dQZF1DXbITWG1ZJKYt',
+        apple:'https://music.apple.com/us/playlist/jazz-classics/pl.f90d0d5a2cb549028038fb20cfe25ffe',
+        hint:'Warm, unhurried jazz for a gentle afternoon' },
+      { emoji:'🪕', label:'Indian Classical',
+        spotify:'https://open.spotify.com/playlist/37i9dQZF1DXdLEN7aqioXM',
+        apple:'https://music.apple.com/us/playlist/indian-classical/pl.6bf4415b83ce4f3789e2ac602a80b2af',
+        hint:'Ragas that carry centuries of calm and beauty' },
+      { emoji:'🌿', label:'Lo-Fi Chill',
+        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn',
+        apple:'https://music.apple.com/us/playlist/lofi-beats/pl.d3d10ea5b5d64d23b4279c7a5c14b4c1',
+        hint:'Soft lo-fi beats — cozy and unhurried' },
+      { emoji:'🎻', label:'Neoclassical',
+        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWVFeEut75IAL',
+        apple:'https://music.apple.com/us/playlist/calming-classical/pl.f4d106fed2bd41149ecdac57774e4af',
+        hint:'Modern classical — Ólafur Arnalds, Max Richter, Einaudi' }
+    ],
+    angel: [
+      { emoji:'🎵', label:'Lullabies',
+        spotify:'https://open.spotify.com/playlist/37i9dQZF1DXbADqT0j1Cxt',
+        apple:'https://music.apple.com/us/playlist/lullabies/pl.d3d10ea5b5d64d23b4279c7a5c14b4c1',
+        hint:'The most beloved lullabies from around the world' },
+      { emoji:'🌍', label:'World Songs',
+        spotify:'https://open.spotify.com/playlist/62n7TtrAWY1BeNg54yigFe',
+        apple:'https://music.apple.com/us/playlist/world-lullabies/pl.6bf4415b83ce4f3789e2ac602a80b2af',
+        hint:'Lullabies from every corner of the world — Māori, Swedish, Indian, French' },
+      { emoji:'🎹', label:'Piano Dreams',
+        spotify:'https://open.spotify.com/playlist/0L9fxWT1x3902wyRH9YfML',
+        apple:'https://music.apple.com/us/playlist/piano-lullabies/pl.f4d106fed2bd41149ecdac57774e4af',
+        hint:'Soft piano melodies and music box — gentle and dreamy' },
+      { emoji:'🌿', label:'Nature Sounds',
+        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWTwnEm1IYyoj',
+        apple:'https://music.apple.com/us/playlist/nature-sounds/pl.f906f6c9b44c4c318e5e3ef0ec3c0b1b',
+        hint:'Rain, ocean waves, gentle wind — nature as a lullaby' },
+      { emoji:'🎻', label:'Classical',
+        spotify:'https://open.spotify.com/playlist/76KISV91ZXzaHdLi3GQoix',
+        apple:'https://music.apple.com/us/playlist/classical-lullaby/pl.f4d106fed2bd41149ecdac57774e4af',
+        hint:'Brahms, Mozart, Chopin — timeless and pure' },
+      { emoji:'🎶', label:'Folk & Gentle',
+        spotify:'https://open.spotify.com/playlist/37i9dQZF1DWTl4y3vgJOXW',
+        apple:'https://music.apple.com/us/playlist/acoustic-morning/pl.d3d10ea5b5d64d23b4279c7a5c14b4c1',
+        hint:'Acoustic folk songs — warm, simple, and full of heart' }
+    ]
+  };
+
+  /* angel intros for playlist card */
+  const PLAYLIST_INTROS = {
+    mom: {
+      1: 'Neel found music that feels like the sky at dusk…',
+      2: 'Nova brought something that sparks and glows…',
+      3: 'Stella curated the most radiant sounds for you…',
+      4: 'Lyra — the harp angel — has music in her soul…',
+      5: 'Zara found something blooming and beautiful…',
+      6: 'Aura wrapped the warmest sounds around you…',
+      0: 'Mira chose something wonderful, just for you…'
+    },
+    angel: {
+      1: 'Neel found the softest sounds for your little one…',
+      2: 'Nova brought bright and gentle melodies…',
+      3: 'Stella gathered the most beautiful lullabies…',
+      4: 'Lyra — the harp angel — sings for your little sunshine…',
+      5: 'Zara found the sweetest songs from around the world…',
+      6: 'Aura wrapped your little one in glowing sound…',
+      0: 'Mira chose something wonderful for your angel…'
+    }
+  };
+
+  /* ─────────────────────────────────────
+     RENDER CARD 1
+  ───────────────────────────────────── */
+  function renderCard1(mode) {
+    const day     = new Date().getDay();
+    const genres  = GENRES[mode];
+    const intros  = PLAYLIST_INTROS[mode];
+    const saved   = localStorage.getItem('mmw-genre-' + mode);
+
+    // angel intro
+    document.getElementById('card1Intro').textContent =
+      intros[day] || intros[0];
+
+    // card title
+    document.getElementById('card1Title').textContent =
+      mode === 'mom' ? 'Your music, your mood' : 'Music for your little one';
+
+    // build genre buttons
+    const grid = document.getElementById('genreGrid');
+    grid.innerHTML = '';
+    genres.forEach((g, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'genre-btn' + (saved === String(i) ? ' selected' : '');
+      btn.innerHTML = `${g.emoji} ${g.label}`;
+      btn.addEventListener('click', () => selectGenre(i, mode));
+      grid.appendChild(btn);
+    });
+
+    // restore saved selection
+    if (saved !== null) {
+      showOpenIn(parseInt(saved), mode);
+    } else {
+      document.getElementById('openIn').style.display = 'none';
+      document.getElementById('genreHint').textContent = '';
+    }
+  }
+
+  function selectGenre(index, mode) {
+    const genres = GENRES[mode];
+    const g = genres[index];
+
+    // highlight selected
+    document.querySelectorAll('.genre-btn').forEach((b, i) => {
+      b.classList.toggle('selected', i === index);
+    });
+
+    // save choice
+    localStorage.setItem('mmw-genre-' + mode, String(index));
+
+    showOpenIn(index, mode);
+  }
+
+  function showOpenIn(index, mode) {
+    const g = GENRES[mode][index];
+    if (!g) return;
+
+    document.getElementById('spotifyLink').href = g.spotify;
+    document.getElementById('appleLink').href   = g.apple;
+    document.getElementById('openIn').style.display = 'flex';
+    document.getElementById('genreHint').textContent = g.hint;
+  }
+
+  /* ─────────────────────────────────────
+     RE-ROLL — refreshes card intro & clears genre
+  ───────────────────────────────────── */
+  document.getElementById('rerollBtn').addEventListener('click', () => {
+    const mode = localStorage.getItem('mmw-mode') || 'mom';
+    // clear saved genre for fresh pick
+    localStorage.removeItem('mmw-genre-' + mode);
+    renderCard1(mode);
+    // animate card
+    const card = document.getElementById('card1');
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(8px)';
+    setTimeout(() => {
+      card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, 50);
+  });
   const themeMeta = {
     peach:  { attr: null,    label: '🍑 Bloom'   },
     blue:   { attr: 'blue',  label: '💙 Dreamy'  },
@@ -913,6 +1296,7 @@
     modeForMom.classList.toggle('active',  mode === 'mom');
     modeMyAngel.classList.toggle('active', mode === 'angel');
     localStorage.setItem('mmw-mode', mode);
+    renderCard1(mode);
   }
 
   modeForMom.addEventListener('click',  () => setMode('mom'));
@@ -941,6 +1325,7 @@
     document.getElementById('restartBtn').style.display = 'inline-block';
     localStorage.setItem('mmw-started', 'true');
     renderAngel();
+    renderCard1(localStorage.getItem('mmw-mode') || 'mom');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
