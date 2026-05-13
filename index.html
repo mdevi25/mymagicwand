@@ -936,7 +936,7 @@
       <button class="mode-btn active" id="modeForMom"
               data-mode="mom">✦ For Mom</button>
       <button class="mode-btn" id="modeMyAngel"
-              data-mode="angel">✦ My Angel</button>
+              data-mode="angel">✦ For Angel</button>
     </div>
 
     <!-- CARD 1 — PLAYLIST -->
@@ -1074,24 +1074,50 @@
     if (!window.speechSynthesis) return;
     const voices = await loadVoices();
 
-    const voice =
-      voices.find(v => v.name === 'Samantha') ||
-      voices.find(v => v.name === 'Zira') ||
-      voices.find(v => v.name.includes('Google US English')) ||
-      voices.find(v => v.lang === 'en-US' &&
-                       v.name.toLowerCase().includes('female')) ||
-      voices.find(v => v.lang === 'en-US') ||
-      voices.find(v => v.name === 'Raveena') ||
-      voices.find(v => v.name === 'Heera') ||
-      voices.find(v => v.lang === 'en-IN' &&
-                       v.name.toLowerCase().includes('female')) ||
-      voices.find(v => v.lang === 'en-IN') ||
-      null;
+    // Known female voice names across all platforms
+    const femaleNames = [
+      'Samantha',           // iOS / macOS — warm American female
+      'Zira',               // Windows — American female
+      'Karen',              // macOS Australian female
+      'Moira',              // macOS Irish female
+      'Tessa',              // macOS South African female
+      'Allison',            // macOS American female
+      'Ava',                // macOS American female
+      'Susan',              // macOS American female
+      'Victoria',           // macOS American female
+      'Raveena',            // Indian English female
+      'Heera',              // Windows Indian female
+      'Google US English Female',
+      'Microsoft Zira',
+      'Microsoft Aria',     // Windows 11 American female
+      'Microsoft Jenny',    // Windows 11 American female
+    ];
+
+    // Try exact name matches first
+    let voice = null;
+    for (const name of femaleNames) {
+      voice = voices.find(v => v.name === name ||
+                               v.name.includes(name));
+      if (voice) break;
+    }
+
+    // If no named match, search for 'female' in name
+    if (!voice) {
+      voice = voices.find(v =>
+        v.name.toLowerCase().includes('female') &&
+        (v.lang.startsWith('en-US') || v.lang.startsWith('en-IN'))
+      );
+    }
+
+    // Last resort — any en-US voice, but boost pitch to sound more feminine
+    if (!voice) {
+      voice = voices.find(v => v.lang.startsWith('en-US')) || null;
+    }
 
     const u = new SpeechSynthesisUtterance(text);
     if (voice) u.voice = voice;
     u.rate   = 0.82;
-    u.pitch  = 1.1;
+    u.pitch  = voice ? 1.1 : 1.4;  // higher pitch if forced fallback
     u.volume = 1.0;
     u.lang   = 'en-US';
     window.speechSynthesis.cancel();
@@ -1198,7 +1224,7 @@
 
     // card title
     document.getElementById('card1Title').textContent =
-      mode === 'mom' ? 'Your music, your mood' : 'Music for your little one';
+      mode === 'mom' ? 'Your music, your mood' : 'Music for your angel';
 
     // build genre buttons
     const grid = document.getElementById('genreGrid');
