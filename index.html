@@ -121,21 +121,7 @@
       transition: color 0.5s;
     }
 
-    /* About link in top bar */
-    .about-link {
-      background: none;
-      border: none;
-      font-family: 'Lato', sans-serif;
-      font-size: 11px;
-      color: var(--text-m);
-      cursor: pointer;
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      padding: 0;
-      transition: color 0.3s;
-    }
-
-    .about-link:hover { color: var(--accent-deep); }
+    
 
     .restart-btn {
       background: none;
@@ -195,74 +181,7 @@
     /* ─────────────────────────────────────
        ABOUT MODAL OVERLAY
     ───────────────────────────────────── */
-    .about-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-      z-index: 200;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      animation: fadeIn 0.25s ease both;
-    }
-
-    .about-overlay.open { display: flex; }
-
-    .about-modal {
-      background: var(--bg-card);
-      border-radius: 20px;
-      padding: 28px 24px;
-      max-width: 480px;
-      width: 100%;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
-      position: relative;
-      animation: slideUp 0.3s ease both;
-      transition: background 0.5s;
-    }
-
-    .about-modal-close {
-      position: absolute;
-      top: 16px;
-      right: 18px;
-      background: none;
-      border: none;
-      font-size: 18px;
-      color: var(--text-s);
-      cursor: pointer;
-      line-height: 1;
-      padding: 0;
-      transition: color 0.2s;
-    }
-
-    .about-modal-close:hover { color: var(--accent-deep); }
-
-    .about-modal h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--text-h);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      transition: color 0.5s;
-    }
-
-    .about-modal h2 .spark {
-      color: var(--accent);
-      font-size: 0.6em;
-      opacity: 0.8;
-      transition: color 0.5s;
-    }
-
-    .about-modal p {
-      font-size: 13px;
-      color: var(--text-b);
-      line-height: 1.85;
-      font-weight: 400;
-      transition: color 0.5s;
-    }
+    
 
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -340,6 +259,18 @@
       max-width: 360px;
       margin: 0 auto 28px;
       transition: color 0.5s;
+    }
+
+    .welcome-about {
+      font-size: 12px;
+      color: var(--text-m);
+      line-height: 1.85;
+      font-weight: 400;
+      max-width: 360px;
+      margin: 0 auto 28px;
+      transition: color 0.5s;
+      border-top: 0.5px solid var(--accent-line);
+      padding-top: 16px;
     }
 
     .begin-btn {
@@ -567,23 +498,7 @@
     /* ─────────────────────────────────────
        RE-ROLL GHOST
     ───────────────────────────────────── */
-    .reroll-wrap {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-
-    .reroll-ghost {
-      border: 1.5px dashed var(--accent-line);
-      border-radius: 30px;
-      padding: 9px 28px;
-      color: var(--text-m);
-      font-size: 12px;
-      font-style: italic;
-      font-weight: 400;
-      background: none;
-      transition: border-color 0.5s, color 0.5s;
-    }
+    
 
     /* ─────────────────────────────────────
        FOOTER
@@ -808,31 +723,6 @@
       flex-direction: column;
       gap: 12px;
       margin-bottom: 12px;
-    }
-
-    /* re-roll button — now real */
-    .reroll-btn {
-      background: var(--bg-card);
-      border: 1.5px solid var(--accent-line);
-      border-radius: 30px;
-      padding: 10px 28px;
-      font-family: 'Lato', sans-serif;
-      font-size: 12px;
-      font-weight: 400;
-      color: var(--accent-deep);
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s,
-                  color 0.2s, transform 0.15s, box-shadow 0.2s;
-      display: block;
-      margin: 0 auto;
-    }
-
-    .reroll-btn:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-      transform: translateY(-1px);
-      box-shadow: var(--shadow);
     }
 
     /* ─────────────────────────────────────
@@ -1188,20 +1078,6 @@
 <!-- ══════════════════════════════════════
      ABOUT MODAL
 ══════════════════════════════════════ -->
-<div class="about-overlay" id="aboutOverlay">
-  <div class="about-modal">
-    <button class="about-modal-close" id="aboutClose" aria-label="Close">✕</button>
-    <h2>
-      <span class="spark">✦</span> About
-    </h2>
-    <p>
-      Noor means light — the quiet, warm kind that arrives before you even notice it.
-      A new angel arrives every day with something to feel, discover, or dream about.
-      A peaceful corner for expecting moms, made with love.
-    </p>
-  </div>
-</div>
-
 <!-- ══════════════════════════════════════
      STICKY TOP BAR
 ══════════════════════════════════════ -->
@@ -1210,7 +1086,6 @@
     <div class="top-bar-name">
       <span class="spark">✦</span> Noor
     </div>
-    <button class="about-link" id="aboutLink">About</button>
     <button class="restart-btn" id="restartBtn">↺ Restart</button>
   </div>
   <div class="top-bar-right">
@@ -1240,11 +1115,15 @@
     <p class="welcome-tagline">A little Noor, every single day</p>
     <p class="welcome-subtitle">A peaceful corner for your thoughts, dreams, and little moments of wonder</p>
     <p class="welcome-desc">
-      A new angel arrives every day with something to feel,
-      discover, or dream about — just for you.
+      Something to feel, discover, or dream about — every single day.
     </p>
-    <button class="begin-btn" id="beginBtn">Begin the magic ✦</button>
-    <span class="begin-hint">choose your mood color above ✦ then tap to begin</span>
+    <p class="welcome-about">
+      Noor means light — the quiet, warm kind that arrives before you even notice it.
+      Every day brings something new to feel, discover, or dream about.
+      A peaceful space to slow down, breathe, and return to what matters most.
+      Made with love, for anyone who needs a moment of stillness.
+    </p>
+    <button class="begin-btn" id="beginBtn">Enter your space ✦</button>
 
     <div id="welcomeFooter">
       <p>
@@ -1385,12 +1264,6 @@
       </div>
 
     </div>
-
-    <!-- RE-ROLL -->
-    <div class="reroll-wrap">
-      <button class="reroll-btn" id="rerollBtn">✨ Something else</button>
-    </div>
-
     <!-- FOOTER -->
     <footer class="site-footer">
       <p>
@@ -2378,32 +2251,6 @@
     document.querySelectorAll('#storyGrid .genre-btn')
       .forEach(b => b.classList.remove('selected'));
   });
-  document.getElementById('rerollBtn').addEventListener('click', () => {
-    const mode  = localStorage.getItem('mmw-mode') || 'mom';
-    const place = localStorage.getItem('mmw-place-' + mode);
-
-    // re-roll Card 1 — reset to mood selection
-    selectedMood = null;
-    document.getElementById('keepBtn').classList.remove('saved');
-    document.getElementById('keepBtn').textContent = '🤍 Keep this gift';
-    renderCard1(mode);
-
-    // re-roll Card 2 — next destination
-    if (place) {
-      const season = getSeason().name.split(' ')[0];
-      const key    = mode + place;
-      currentDestIndex[key] = ((currentDestIndex[key] || 0) + 1);
-      showDestination(place, mode, season, currentDestIndex[key]);
-    }
-
-    // re-roll Card 3 — next story in same genre
-    const savedStory = localStorage.getItem('mmw-story-' + mode);
-    if (savedStory) {
-      const key3 = mode + savedStory;
-      currentStoryIndex[key3] = ((currentStoryIndex[key3] || 0) + 1);
-      showStory(savedStory, mode, currentStoryIndex[key3]);
-    }
-  });
 
   /* ─────────────────────────────────────
      THEME ENGINE
@@ -2448,19 +2295,6 @@
 
   modeForMom.addEventListener('click',  () => setMode('mom'));
   modeMyAngel.addEventListener('click', () => setMode('angel'));
-
-  /* ─────────────────────────────────────
-     ABOUT MODAL
-  ───────────────────────────────────── */
-  const overlay    = document.getElementById('aboutOverlay');
-  const aboutLink  = document.getElementById('aboutLink');
-  const aboutClose = document.getElementById('aboutClose');
-
-  aboutLink.addEventListener('click',  () => overlay.classList.add('open'));
-  aboutClose.addEventListener('click', () => overlay.classList.remove('open'));
-  overlay.addEventListener('click', e => {
-    if (e.target === overlay) overlay.classList.remove('open');
-  });
 
   /* ─────────────────────────────────────
      SHOW / RESTART APP
